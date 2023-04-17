@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="navBar dsc">
+    <div class="info">
+      Cryptos: <span>22,423</span> Market Cap:
+      <span> $1,080,810,844,422 </span> 24h Vol:
+      <span> $54,256,403,756 </span> Dominance:
+      <span> BTC: 41.7% ETH: 18.7% </span>
+    </div>
+    <div class="dc">
+      <nz-select
+        [(ngModel)]="selectedLanguage"
+        nzBorderless
+        class="select"
+        [nzOptions]="LanguageOptions"
+      >
+      </nz-select>
+      <img src="../../../../../assets/kzt.svg" alt="" />
+      <nz-select
+        [(ngModel)]="selectedCurrency"
+        nzBorderless
+        class="select"
+        [nzOptions]="CurrencyOptions"
+      >
+      </nz-select>
+      <!-- <button > -->
+      <img class="moon" src="../../../../../assets/moon.svg" alt="" />
+      <!-- </button> -->
+
+      <ng-container *ngIf="isLoggedIn$ | async; else anonymous">
+        <span nz-icon nzType="bell" nzTheme="outline"></span>
+        <a [routerLink]="['/profiles', (currentUser$ | async).username]">
+          <button>
+            <span
+              nz-icon
+              nzType="user"
+              nzTheme="outline"
+              *ngIf="!(currentUser$ | async).image; else imgUser"
+            ></span>
+            <ng-template #imgUser>
+              <img [src]="(currentUser$ | async).image" alt="" />
+            </ng-template>
+          </button>
+        </a>
+      </ng-container>
+      <ng-template #anonymous>
+        <div class="anonymous dc">
+          <a [routerLink]="['/login']"
+            ><button class="sign-in">Sign in</button>
+          </a>
+          <a [routerLink]="['/register']">
+            <button class="sign-up">Sign up</button>
+          </a>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <nav class="dc">
+    <a [routerLink]="['/']" class="logo">
+      <img src="../../../../../assets/logo.svg" alt="" />
+    </a>
+    <div class="dsc menu">
+      <ul class="df">
+        <li>Cryptocurrencies <span>•</span></li>
+        <li>Community</li>
+        <li>Products</li>
+        <li>Learn</li>
+      </ul>
+      <div class="dsc">
+        <a [routerLink]="['/watchlist']" class="dsc watch-port">
+          <img src="../../../../../assets/star.svg" alt="" />
+          Watchlist
+        </a>
+        <a [routerLink]="['/portfolio']" class="dsc watch-port">
+          <img src="../../../../../assets/portfolio.svg" alt="" />
+          Portfolio
+        </a>
+        <nz-input-group
+          [nzSuffix]="suffixIconSearch"
+          class="search"
+          nzTrigger="click"
+          nz-dropdown
+          [nzDropdownMenu]="menu4"
+        >
+          <input type="text" nz-input placeholder="Search" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+        <nz-dropdown-menu #menu4="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>menu1 1st menu item</li>
+            <li nz-menu-item>menu1 2nd menu item</li>
+            <li nz-menu-item>menu1 3rd menu item</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+    </div>
+  </nav>
+</div>

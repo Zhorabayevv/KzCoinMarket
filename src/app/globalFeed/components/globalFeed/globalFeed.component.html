@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="todays">
+    <div class="dsc">
+      <h1>Today's Cryptocurrency Prices by Market Cap</h1>
+      <div class="highlights">
+        <span>Highlights</span>
+        <nz-switch
+          [(ngModel)]="switchValue"
+          [nzControl]="true"
+          (click)="clickSwitch()"
+          [nzLoading]="loading"
+        ></nz-switch>
+      </div>
+    </div>
+    <p>
+      The global crypto market cap is
+      <span class="t"> $1.28T </span>
+      , a
+      <span
+        nz-icon
+        nzType="caret-up"
+        style="color: #16c784"
+        nzTheme="outline"
+      ></span>
+      <span class="procent"> 0.42% </span>
+      increase over the last day.
+    </p>
+  </div>
+  <mc-banner></mc-banner>
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-9">
+        <mc-feed-toggler></mc-feed-toggler>
+        <mc-feed [apiUrl]="apiUrl"></mc-feed>
+      </div>
+      <div class="col-md-3">
+        <mc-popular-tags></mc-popular-tags>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+.container {
+  width: 1370px;
+  margin: 0 auto;
+  .navBar {
+    height: 53px;
+    border-bottom: 1px solid #eff2f5;
+    .info {
+      font-size: 11px;
+      font-style: Medium;
+      line-height: 169%;
+      color: #58667e;
+      span {
+        color: #3861fb;
+        cursor: pointer;
+      }
+    }
+    .dc {
+      .select {
+        font-size: 12px;
+        line-height: 155%;
+        font-weight: 700;
+        margin-right: 10px;
+      }
+      .moon {
+        background-color: transparent;
+        padding-right: 10px;
+        border-right: 1px solid #eff2f5;
+      }
+      .anonymous {
+        width: 203px;
+        height: 34px;
+        justify-content: right;
+        .sign-in {
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 700;
+          color: #3861fb;
+          border: 1px solid #3861fb;
+          border-radius: 8px;
+          background-color: #ffffff;
+          margin-right: 10px;
+          padding: 7px 16px 8px 17px;
+          text-align: center;
+        }
+        .sign-up {
+          font-size: 12px;
+          line-height: 18px;
+          font-weight: 700;
+          color: #ffffff;
+          border-radius: 8px;
+          border: 1px solid #3861fb;
+          background-color: #3861fb;
+          padding: 7px 16px 8px 17px;
+        }
+      }
+    }
+  }
+  nav {
+    border-bottom: 1px solid #eff2f5;
+    height: 71px;
+    .logo {
+      margin-right: 49px;
+      border: 1px solid #000000;
+      border-radius: 8px;
+    }
+    .menu {
+      width: 100%;
+      ul {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 124%;
+        li {
+          margin-right: 32px;
+          cursor: pointer;
+          span {
+            color: #ea3943;
+          }
+        }
+      }
+      .watch-port {
+        width: 87px;
+        height: 36px;
+        margin-right: 16px;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .watch-port:hover {
+        background-color: #eff2f5;
+        color: #000000;
+        border-radius: 8px;
+      }
+      .search {
+        width: 256px;
+        height: 38.5px;
+        background-color: #eff2f5;
+        color: #a6b0c3;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 12px;
+        font-family: "Times New Roman", Times, serif;
+        line-height: 155%;
+        cursor: pointer;
+        input {
+          background-color: #eff2f5;
+        }
+      }
+    }
+  }
+}
+::ng-deep .ant-select-single.ant-select-show-arrow .ant-select-selection-item {
+  font-weight: 700;
+}

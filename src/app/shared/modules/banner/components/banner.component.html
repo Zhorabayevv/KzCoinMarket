@@ -1,0 +1,82 @@
+<div class="dc">
+  <div class="banner" *ngFor="let banner of banners">
+    <div class="dsc">
+      <div class="dc">
+        <img [src]="banner.image" class="fire" alt="" />
+        <span class="title">{{ banner.title }}</span>
+      </div>
+      <div class="more">
+        <a [routerLink]="['/']"
+          >More <span nz-icon nzType="right" nzTheme="outline"></span
+        ></a>
+      </div>
+    </div>
+
+    <div class="banner-body">
+      <div class="dc infos" *ngFor="let coin of banner?.coins">
+        <p class="number">{{ coin.id }}</p>
+        <div class="dc text-coin">
+          <img [src]="coin.img" alt="" />
+          <p>
+            {{ coin.title }}
+            <span>{{ coin.symbol }}</span>
+          </p>
+        </div>
+        <ng-container *ngIf="coin.procent; else price">
+          <div
+            class="dc procent df"
+            [ngClass]="{
+              'color-red': coin.procent < 1,
+              'color-green': coin.procent > 1
+            }"
+          >
+            <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+            <p>{{ coin.procent }}%</p>
+          </div>
+        </ng-container>
+        <ng-template #price>
+          <div class="dc procent df">₸ {{ coin.price }}</div>
+        </ng-template>
+      </div>
+      <ng-container *ngIf="!banner.coins">
+        <nz-carousel style="height: 155px" nzAutoPlay>
+          <div nz-carousel-content *ngFor="let item of carousel">
+            <div class="df third">
+              <img [src]="item.image" alt="" />
+              <div class="title">
+                <div class="dc">
+                  <img [src]="item.logo" alt="" />
+                  <p>{{ item.title }}</p>
+                </div>
+                <p class="des">
+                  {{ item.desc }}
+                </p>
+                <div class="dc footer-ban">
+                  <span class="data">{{ item.date }}</span
+                  >•
+                  <span
+                    nz-icon
+                    nzType="eye"
+                    class="icon"
+                    [nzTheme]="'twotone'"
+                    [nzTwotoneColor]="'#808a9d'"
+                  ></span>
+                  <span class="data">&nbsp; {{ item.watch }}</span>
+                  •
+                  <span
+                    nz-icon
+                    nzType="heart"
+                    class="icon"
+                    [nzTheme]="'twotone'"
+                    [nzTwotoneColor]="'#808a9d'"
+                  ></span>
+                  {{ item.like }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </nz-carousel>
+      </ng-container>
+    </div>
+  </div>
+</div>

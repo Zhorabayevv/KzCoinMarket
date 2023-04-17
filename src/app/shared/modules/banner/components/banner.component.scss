@@ -1,0 +1,130 @@
+.banner {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 16px;
+  border-radius: 24px;
+  width: 448px;
+  height: 200px;
+  margin-right: 13px;
+  .fire {
+    width: 20px;
+    margin-right: 10px;
+  }
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .more {
+    a {
+      color: #3861fb;
+      font-size: 12px;
+      line-height: 155%;
+      font-weight: 700;
+    }
+  }
+  .banner-body {
+    .infos {
+      width: 416px;
+      height: 40px;
+      .number {
+        color: #808a9d;
+        font-size: 12px;
+        line-height: 124%;
+        width: 24px;
+        text-align: center;
+      }
+      .text-coin {
+        width: 340px;
+        img {
+          width: 16px;
+          margin-right: 10px;
+        }
+        p {
+          font-size: 12px;
+          line-height: 165%;
+          font-weight: 700;
+          span {
+            color: #808a9d;
+            font-size: 12px;
+            line-height: 124%;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  .procent {
+    font-size: 12px;
+    line-height: 155%;
+    width: 65px;
+    justify-content: end;
+    span {
+      margin-right: 5px;
+    }
+  }
+  .color-red {
+    color: #ea3943;
+  }
+  .color-green {
+    color: #00c48c;
+  }
+  .third {
+    margin-top: 16px;
+    align-items: flex-start;
+    img {
+      margin-right: 16px;
+    }
+    .title {
+      .dc {
+        img {
+          width: 18px;
+          margin-right: 5px;
+        }
+        p {
+          color: #58667e;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 21px;
+        }
+      }
+      .des {
+        width: 277px;
+        height: 70px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        margin-top: 9px;
+      }
+      .footer-ban {
+        color: #808a9d;
+        font-size: 12px;
+        line-height: 155%;
+        margin-top: 8px;
+        .data {
+          margin-right: 7px;
+        }
+        .icon {
+          margin: 0 5px 0 7px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .ant-carousel .slick-dots {
+  top: 147px;
+}
+::ng-deep .ant-carousel .slick-dots li {
+  background-color: #eff2f5;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+}
+::ng-deep .ant-carousel .slick-dots li.slick-active,
+::ng-deep .ant-carousel .slick-dots li.slick-active button {
+  background-color: #3861fb !important;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+}

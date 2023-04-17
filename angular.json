@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "realWorldAngular": {
+    "KzCoinMarket": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,18 +20,19 @@
             "outputPath": "dist/real-world-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/theme.less", "src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -65,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "realWorldAngular:build:production"
+              "browserTarget": "KzCoinMarket:build:production"
             },
             "development": {
-              "browserTarget": "realWorldAngular:build:development"
+              "browserTarget": "KzCoinMarket:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,29 +77,24 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "realWorldAngular:build"
+            "browserTarget": "KzCoinMarket:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c37ba5cb-cdf9-4ec4-9591-abc393b11824"
   }
 }
