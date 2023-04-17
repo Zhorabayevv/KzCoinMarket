@@ -1,0 +1,58 @@
+.table-coins {
+  margin-top: 21px;
+  border-top: 1px solid #eff2f5;
+  .head {
+  }
+  tr {
+    th {
+      border-bottom: 1px solid #eff2f5;
+      height: 47px;
+    }
+    .first {
+      width: 33px;
+    }
+    .second {
+      width: 44px;
+      padding: 12px;
+    }
+    .name {
+      width: 193px;
+      padding: 12px;
+    }
+    .price {
+      width: 128px;
+      padding-left: 72px;
+    }
+    .one-procent {
+      width: 77px;
+      padding-left: 23px;
+    }
+    .day-procent {
+      width: 81px;
+      padding-left: 23px;
+    }
+    .week-procent {
+      width: 85px;
+      padding-left: 31px;
+    }
+    .cap {
+      width: 143.5px;
+      padding-left: 46px;
+    }
+    .volume {
+      width: 166px;
+      padding-left: 59px;
+    }
+    .supply {
+      width: 201px;
+      padding-left: 61px;
+    }
+    .days {
+      width: 219px;
+      padding-left: 106px;
+    }
+    .paddin {
+      padding: 12px 12px 12px 0;
+    }
+  }
+}

@@ -1,29 +1,76 @@
-<mc-loading *ngIf="(isLoading$ | async) || !(feed$ | async)"></mc-loading>
-<mc-error-message *ngIf="error$ | async"></mc-error-message>
-<div *ngIf="feed$ | async">
-  <div class="article-preview" *ngFor="let article of (feed$ | async).articles">
-    <div class="artile-meta">
-      <a [routerLink]="['/profiles', article.author.username]">
-        <img [src]="article.author.image" alt="" />
-      </a>
-      <div class="info">
+<div class="table-coins">
+  <mc-loading *ngIf="(isLoading$ | async) || !(feed$ | async)"></mc-loading>
+  <mc-error-message *ngIf="error$ | async"></mc-error-message>
+  <div *ngIf="feed$ | async">
+    <!-- <div class="article-preview" *ngFor="let article of (feed$ | async).articles">
+      <div class="artile-meta">
         <a [routerLink]="['/profiles', article.author.username]">
-          {{ article.author.username }}
+          <img [src]="article.author.image" alt="" />
         </a>
-        <span class="date">{{ article.createdAt | date }}</span>
+        <div class="info">
+          <a [routerLink]="['/profiles', article.author.username]">
+            {{ article.author.username }}
+          </a>
+          <span class="date">{{ article.createdAt | date }}</span>
+        </div>
+        <div class="pull-xs-right">Add to favorites</div>
       </div>
-      <div class="pull-xs-right">Add to favorites</div>
-    </div>
-    <a [routerLink]="['/articles', article.slug]" class="preview-link">
-      <h1>{{ article.title }}</h1>
-      <p>{{ article.description }}</p>
-      <mc-tag-list [tags]="article.tagList" ></mc-tag-list>
-    </a>
+      <a [routerLink]="['/articles', article.slug]" class="preview-link">
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.description }}</p>
+        <mc-tag-list [tags]="article.tagList" ></mc-tag-list>
+      </a>
+    </div> -->
+    <tbody>
+      <tr class="head">
+        <th class="first"></th>
+        <th class="dc second">
+          <b># &nbsp;</b>
+        </th>
+        <th class="name">Name</th>
+        <th class="price paddin">Price</th>
+        <th class="one-procent paddin">1h %</th>
+        <th class="day-procent paddin">24h %</th>
+        <th class="week-procent paddin">7d %</th>
+        <th class="cap paddin">
+          <div class="dc">
+            <p>
+              Market Cap
+              <span
+                nz-icon
+                nzType="info-circle"
+                [nzTheme]="'twotone'"
+                [nzTwotoneColor]="'#808a9d'"
+              ></span>
+            </p>
+          </div>
+        </th>
+        <th class="volume paddin">
+          <div class="dc">
+            <p>
+              Volume(24h)
+              <span
+                nz-icon
+                nzType="info-circle"
+                [nzTheme]="'twotone'"
+                [nzTwotoneColor]="'#808a9d'"
+              ></span>
+            </p>
+          </div>
+        </th>
+        <th class="supply paddin">
+          <div class="dc">
+            <p>Circulating Supply</p>
+          </div>
+        </th>
+        <th class="days paddin">Last 7 days</th>
+      </tr>
+    </tbody>
+    <mc-pagination
+      [totalCount]="(feed$ | async)?.articlesCount"
+      [limitArticles]="limitArticles"
+      [currentPage]="currentPage"
+      [url]="baseUrl"
+    ></mc-pagination>
   </div>
-  <mc-pagination
-  [totalCount]="(feed$ | async)?.articlesCount"
-  [limitArticles]="limitArticles"
-  [currentPage]="currentPage"
-  [url]="baseUrl"
-  ></mc-pagination>
 </div>

@@ -1,0 +1,104 @@
+.toggler {
+  margin-top: 23px;
+  height: 64px;
+  .links {
+    padding-right: 4px;
+    align-items: center;
+    height: 16px;
+    border-right: 1px solid #cfd6e4;
+    .watch-port {
+      background-color: #eff2f5;
+      color: #000000;
+    }
+    .watch-port:hover {
+      background-color: #f0f6ff;
+      color: #3861fb;
+    }
+  }
+
+  .active {
+    background-color: #f0f6ff;
+    color: #3861fb;
+  }
+  .btn {
+    min-width: 87px;
+    height: 36px;
+    margin-right: 16px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 124%;
+    font-weight: 700;
+  }
+  .btn2 {
+    width: 130px;
+    margin-left: 16px;
+  }
+  .coins {
+    color: #58667e;
+    font-size: 12px;
+    line-height: 124%;
+    font-weight: 700;
+  }
+  .coins:hover {
+    background-color: #eff2f5;
+  }
+  .right {
+    .rows {
+      margin-right: 100px;
+      span {
+        font-size: 12px;
+        line-height: 124%;
+        font-weight: 400;
+        color: #58667e;
+        margin-right: 6px;
+      }
+      ::ng-deep
+        .ant-select:not(.ant-select-customize-input)
+        .ant-select-selector {
+        background-color: #eff2f5;
+        border-radius: 8px;
+        width: 60px;
+        height: 32px;
+        border: none;
+      }
+    }
+    .tenge {
+      width: 80px;
+      height: 32px;
+      margin-right: 5px;
+      background-color: #eff2f5;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+      line-height: 124%;
+      font-weight: 700;
+      cursor: pointer;
+      span {
+        color: #a6b0c3;
+        margin-right: 10px;
+      }
+    }
+    .btn-togg {
+      background-color: #eff2f5;
+      border-radius: 8px;
+      width: 66px;
+      height: 32px;
+      cursor: pointer;
+      span {
+        font-size: 16px;
+        padding: 5px;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+// ::ng-deep.ant-select-selector, ::ng-deep.ng-tns-c35-3 {
+//   background-color: #eff2f5;
+//   border-radius: 8px;
+//   width: 52px;
+//   height: 32px;
+//   border: none;
+// }

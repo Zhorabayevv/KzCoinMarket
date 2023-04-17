@@ -11,7 +11,7 @@ import { GlobalFeedComponent } from 'src/app/globalFeed/components/globalFeed/gl
 import { FeedModule } from 'src/app/shared/modules/feed/feed.module';
 import { BannerModule } from 'src/app/shared/modules/banner/banner.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { FeedTogglerModule } from '../shared/modules/feedToggler/feedToggler.module';
+import { FeedTogglerModule } from '../shared/modules/feedToggler/coinToggler.module';
 
 const routes = [
   {
@@ -32,7 +32,7 @@ const icons: IconDefinition[] = [SearchOutline];
     FormsModule,
     ReactiveFormsModule,
     NzIconModule.forRoot(icons),
-    FeedTogglerModule
+    FeedTogglerModule,
   ],
   declarations: [GlobalFeedComponent],
 })
