@@ -1,11 +1,10 @@
 <div class="table-coins">
   <!-- <mc-loading *ngIf="(isLoading$ | async) || !(feed$ | async)"></mc-loading> -->
   <mc-error-message *ngIf="error$ | async"></mc-error-message>
-  <nz-spin
-    [nzSpinning]="(isLoading$ | async) || !(feed$ | async)"
-    style="min-height: 400px"
-  >
-    <div *ngIf="feed$ | async">
+  <!-- [nzSpinning]="(isLoading$ | async) || !(feed$ | async)" -->
+  <nz-spin style="min-height: 400px" [nzSpinning]="false">
+    <!-- *ngIf="feed$ | async" -->
+    <div>
       <!-- <div class="article-preview" *ngFor="let article of (feed$ | async).articles">
       <div class="artile-meta">
         <a [routerLink]="['/profiles', article.author.username]">
@@ -90,7 +89,7 @@
             {{ coin.id }}
           </td>
           <td class="">
-            <div class="dc">
+            <a class="dc" [routerLink]="['/articles', coin.coinSymbol]">
               <img
                 class="coin-icon"
                 [src]="'../../../../../../assets/' + coin.coinIcon + '.png'"
@@ -100,7 +99,7 @@
               <span class="coin-symbol">
                 {{ coin.coinSymbol }}
               </span>
-            </div>
+            </a>
           </td>
           <td class="paddin">₸ {{ coin.price }}</td>
           <td class="paddin">
@@ -167,7 +166,7 @@
         </tr>
       </tbody>
       <mc-pagination
-        [totalCount]="(feed$ | async)?.articlesCount"
+        [totalCount]="(feed$ | async)?.count"
         [limitArticles]="limitArticles"
         [currentPage]="currentPage"
         [url]="baseUrl"

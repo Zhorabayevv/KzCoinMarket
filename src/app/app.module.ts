@@ -23,6 +23,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { FooterModule } from './shared/modules/footer/footer.module';
+import { ArticleModule } from './article/article.module';
 
 registerLocaleData(en);
 
@@ -46,7 +47,8 @@ registerLocaleData(en);
     PopularTagsModule,
     StoreRouterConnectingModule.forRoot(),
     YourFeedModule,
-    FooterModule
+    FooterModule,
+    ArticleModule
   ],
   providers: [
     PersistanceService,

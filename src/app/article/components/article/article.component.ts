@@ -1,37 +1,55 @@
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import queryString from 'query-string';
-
+import { getArticleAction } from 'src/app/article/store/actions/getArticle.action';
+import { ActivatedRoute } from '@angular/router';
+import { IArticle } from 'src/app/shared/types/article.interface';
+import { Subscription, Observable, combineLatest } from 'rxjs';
 import {
-  addToFavoritesAction,
-  getFeedAction,
-} from 'src/app/shared/modules/feed/store/actions/getFeed.action';
-import { IGetFeedResponse } from 'src/app/shared/modules/feed/types/getFeedResponse.interface';
-import {
+  articleSelector,
   isLoadingSelector,
   errorSelector,
-  feedSelector,
-} from 'src/app/shared/modules/feed/store/selectors';
-import { ICoinsTr } from 'src/app/shared/modules/feed/types/coinsTr.interface';
+} from 'src/app/article/store/selectors';
+import { currentUserSelector } from 'src/app/auth/store/selectors';
+import { map } from 'rxjs/operators';
+import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
+import { deleteArticleAction } from 'src/app/article/store/actions/deleteArticle.action';
 
 @Component({
-  selector: 'mc-feed',
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss'],
+  selector: 'mc-article',
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.scss'],
 })
-export class FeedComponent implements OnInit, OnDestroy {
-  @Input('apiUrl') apiUrlProps: string;
-  @Input('watchList') watchListProps: boolean;
-
+export class ArticleComponent implements OnInit, OnDestroy {
+  slug: string;
+  article: IArticle;
+  articleSubscription: Subscription;
   isLoading$: Observable<boolean>;
   error$: Observable<string | null>;
-  feed$: Observable<IGetFeedResponse | null>;
-  limitArticles = 10;
-  baseUrl: string;
-  queryParamsSubscription: Subscription;
-  currentPage: number;
+  isAuthor$: Observable<boolean>;
+
+  links = [
+    {
+      icon: 'link',
+      name: 'bitcoin.org',
+    },
+    {
+      icon: 'search',
+      name: 'Explorers',
+    },
+    {
+      icon: 'user',
+      name: 'Community',
+    },
+    {
+      icon: 'code',
+      name: 'Source code',
+    },
+    {
+      icon: 'file-text',
+      name: 'Whitepaper',
+    },
+  ];
+
   coinsTr = [
     {
       id: '1',
@@ -288,52 +306,48 @@ export class FeedComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(
-    private store: Store,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initializeValues();
     this.initializeListeners();
-    console.log('this.watchListProps', this.watchListProps);
+    this.fetchData();
   }
+
   ngOnDestroy(): void {
-    this.queryParamsSubscription.unsubscribe();
+    this.articleSubscription.unsubscribe();
   }
 
   initializeValues(): void {
+    this.slug = this.route.snapshot.paramMap.get('slug');
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorSelector));
-    this.feed$ = this.store.pipe(select(feedSelector));
-    this.baseUrl = this.router.url.split('?')[0];
-  }
-
-  initializeListeners(): void {
-    this.queryParamsSubscription = this.route.queryParams.subscribe(
-      (params: Params) => {
-        this.currentPage = Number(params['page'] || '1');
-        this.fetchFeeds();
-      }
+    this.isAuthor$ = combineLatest(
+      this.store.pipe(select(articleSelector)),
+      this.store.pipe(select(currentUserSelector))
+    ).pipe(
+      map(([article, currentUser]: [IArticle | null, ICurrentUser | null]) => {
+        if (!article || !currentUser) {
+          return false;
+        }
+        return currentUser.username === article.author.username;
+      })
     );
   }
 
-  fetchFeeds(): void {
-    const offset = this.currentPage * this.limitArticles - this.limitArticles;
-    const parsedUrl = queryString.parseUrl(this.apiUrlProps);
-    const stringifiedParams = queryString.stringify({
-      limit: this.limitArticles,
-      offset,
-      ...parsedUrl.query,
-    });
-    const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
-    console.log(apiUrlWithParams);
-
-    this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
+  initializeListeners(): void {
+    this.articleSubscription = this.store
+      .pipe(select(articleSelector))
+      .subscribe((article: IArticle | null) => {
+        this.article = article;
+      });
   }
 
-  addFavorite(id: string, isFavorited: boolean): void {
-    this.store.dispatch(addToFavoritesAction({ id, isFavorited }));
+  fetchData(): void {
+    this.store.dispatch(getArticleAction({ slug: this.slug }));
+  }
+
+  deleteArticle(): void {
+    this.store.dispatch(deleteArticleAction({ slug: this.slug }));
   }
 }

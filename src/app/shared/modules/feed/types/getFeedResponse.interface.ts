@@ -1,6 +1,6 @@
-import { IArticle } from "src/app/shared/types/article.interface";
+import { ICoinsTr } from './coinsTr.interface';
 
 export interface IGetFeedResponse {
-  articles: IArticle[];
-  articlesCount: number;
+  countDto: ICoinsTr[];
+  count: number;
 }

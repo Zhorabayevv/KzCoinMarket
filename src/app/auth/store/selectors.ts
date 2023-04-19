@@ -27,3 +27,8 @@ export const currentUserSelector = createSelector(
   authFeatureSelector,
   (authState: IAuthState) => authState.currentUser
 );
+
+export const modalSelector = createSelector(
+  authFeatureSelector,
+  (authState: IAuthState) => authState.modal
+);

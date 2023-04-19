@@ -6,6 +6,6 @@ import {Component} from '@angular/core'
   styleUrls: ['./yourFeed.component.scss']
 })
 export class YourFeedComponent {
-  apiUrl: string = '/articles';
+  apiUrl: string = '/user/watchlist';
   watchList: boolean = true;
 }

@@ -7,4 +7,5 @@ export interface IAuthState {
   isLoggedIn: boolean | null;
   validationErrors: IBackendErrors | null;
   isLoading: boolean;
+  modal: boolean;
 }

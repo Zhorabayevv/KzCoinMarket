@@ -22,6 +22,7 @@ export class RegisterEffect {
         return this.authService.register(request).pipe(
           map((message: string) => {
             // this.persistanService.set('accessToken', currentUser.accessToken);
+            console.log('message', message);
             return registerSuccessAction({ message });
           }),
           catchError((errorResponse: HttpErrorResponse) => {

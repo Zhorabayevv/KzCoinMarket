@@ -20,17 +20,15 @@ export class LoginEffect {
     this.actions$.pipe(
       ofType(loginAction),
       switchMap(({ request }) => {
-        console.log('request', request);
         return this.authService.login(request).pipe(
           map((currentUser: ICurrentUser) => {
-            this.persistanService.set('accessToken', currentUser.accessToken);
             console.log('currentUser', currentUser);
+            // this.persistanService.set('accessToken', currentUser.accessToken);
             return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            return of(
-              loginFailureAction({ errors: errorResponse.error.errors })
-            );
+            console.log('errorResponse', errorResponse);
+            return of(loginFailureAction());
           })
         );
       })

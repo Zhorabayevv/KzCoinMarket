@@ -13,6 +13,7 @@ const initialState: IAuthState = {
   isLoggedIn: null,
   validationErrors: null,
   isLoading: false,
+  modal: false
 };
 
 const authReducer = createReducer(
@@ -30,6 +31,7 @@ const authReducer = createReducer(
     (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
+      modal: true,
       currentUser: null,
     })
   ),
@@ -63,7 +65,7 @@ const authReducer = createReducer(
     (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
-      validationErrors: action.errors,
+      // validationErrors: action.errors,
     })
   ),
   on(

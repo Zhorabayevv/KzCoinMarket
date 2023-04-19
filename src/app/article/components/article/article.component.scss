@@ -1,0 +1,74 @@
+.container {
+  width: 1370px;
+  margin: 0 auto;
+  ul {
+    li {
+      color: #58667e;
+      font-size: 12px;
+      line-height: 124%;
+      margin-right: 28px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    li:last-child {
+      margin-right: 0;
+      color: #000000;
+    }
+  }
+  .main-div {
+    height: 367px;
+    .title-div {
+      margin: 12px 0 17px 0;
+      img {
+        width: 32px;
+        margin-right: 12px;
+      }
+      h1 {
+        color: #222531;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 108%;
+        margin-right: 12px;
+      }
+      span {
+        padding: 2px 6px;
+        color: #58667e;
+        background-color: #eff2f5;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 4px;
+      }
+    }
+    .second-div {
+      margin-bottom: 22px;
+      span {
+        padding: 2px 6px;
+        font-size: 11px;
+        font-weight: 500;
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+      .rank {
+        background-color: #808a9d;
+        color: #ffffff;
+      }
+      .coin {
+        color: #58667e;
+        background-color: #eff2f5;
+      }
+    }
+    .main-links {
+      width: 306px;
+      flex-wrap: wrap;
+      p {
+        padding: 6px 8px;
+        color: #000000;
+        background-color: #eff2f5;
+        font-size: 11px;
+        font-weight: 600;
+        border-radius: 4px;
+        margin: 0 4px 4px 0;
+      }
+    }
+  }
+}

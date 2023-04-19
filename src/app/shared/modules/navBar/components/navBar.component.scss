@@ -113,6 +113,28 @@
     }
   }
 }
+.search-ul {
+  li:hover{
+    background-color: #F8FAFD;
+    border-radius: 8px;
+  }
+  img {
+    width: 20px;
+    margin-right: 10px;
+  }
+  .name {
+    color: #222531;
+    font-size: 14px;
+    line-height: 83%;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  .symbol {
+    color: #58667e;
+    font-size: 12px;
+    font-weight: 83%;
+  }
+}
 ::ng-deep .ant-select-single.ant-select-show-arrow .ant-select-selection-item {
   font-weight: 700;
 }

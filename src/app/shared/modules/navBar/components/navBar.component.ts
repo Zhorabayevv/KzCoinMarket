@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
   currentUser$: Observable<ICurrentUser | null>;
   selectedCurrency = 'USD';
   selectedLanguage = 'kz';
-  LanguageOptions: ISelect[] = [
+  languageOptions: ISelect[] = [
     {
       value: 'kz',
       label: 'Қазақ',
@@ -35,7 +35,7 @@ export class NavBarComponent implements OnInit {
       label: 'English',
     },
   ];
-  CurrencyOptions: ISelect[] = [
+  currencyOptions: ISelect[] = [
     {
       value: 'USD',
       label: 'USD',
@@ -49,6 +49,14 @@ export class NavBarComponent implements OnInit {
       label: 'RUB',
     },
   ];
+  searchOptions = [
+    { img: 'btc', title: 'Bitcoin', symbol: 'BTC', number: 1 },
+    { img: 'eth', title: 'Ethereum', symbol: 'ETH', number: 2 },
+    { img: 'xrp', title: 'Ripple', symbol: 'XRP', number: 3 },
+    { img: 'iota', title: 'IOTA', symbol: 'MIOTA', number: 4 },
+    { img: 'solana', title: 'Solana', symbol: 'SOL', number: 5 },
+    { img: 'cardano', title: 'Cardano', symbol: 'ADA', number: 6 },
+  ];
 
   constructor(private store: Store, private modal: NzModalService) {}
 
@@ -57,12 +65,14 @@ export class NavBarComponent implements OnInit {
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
   }
 
-  signIn(): void {
+  signIn(sign: string): void {
     this.modal.create({
       nzContent: LoginComponent,
+      nzComponentParams: {
+        sign: sign,
+      },
       nzWidth: 496,
-      nzFooter: null
+      nzFooter: null,
     });
   }
-  signUp(): void {}
 }

@@ -11,7 +11,7 @@
         [(ngModel)]="selectedLanguage"
         nzBorderless
         class="select"
-        [nzOptions]="LanguageOptions"
+        [nzOptions]="languageOptions"
       >
       </nz-select>
       <img src="../../../../../assets/kzt.svg" alt="" />
@@ -19,7 +19,7 @@
         [(ngModel)]="selectedCurrency"
         nzBorderless
         class="select"
-        [nzOptions]="CurrencyOptions"
+        [nzOptions]="currencyOptions"
       >
       </nz-select>
       <!-- <button > -->
@@ -30,14 +30,9 @@
         <span nz-icon nzType="bell" nzTheme="outline"></span>
         <a [routerLink]="['/profiles', (currentUser$ | async).username]">
           <button>
-            <span
-              nz-icon
-              nzType="user"
-              nzTheme="outline"
-              *ngIf="!(currentUser$ | async).image; else imgUser"
-            ></span>
+            <span nz-icon nzType="user" nzTheme="outline"></span>
             <ng-template #imgUser>
-              <img [src]="(currentUser$ | async).image" alt="" />
+              <!-- <img [src]="(currentUser$ | async).image" alt="" /> -->
             </ng-template>
           </button>
         </a>
@@ -45,9 +40,11 @@
       <ng-template #anonymous>
         <div class="anonymous dc">
           <!-- [routerLink]="['/login']" -->
-          <a (click)="signIn()"><button class="sign-in">Sign in</button> </a>
+          <a (click)="signIn('in')"
+            ><button class="sign-in">Sign in</button>
+          </a>
           <!-- [routerLink]="['/register']"> -->
-          <a (click)="signUp()">
+          <a (click)="signIn('up')">
             <button class="sign-up">Sign up</button>
           </a>
         </div>
@@ -87,10 +84,18 @@
           <span nz-icon nzType="search"></span>
         </ng-template>
         <nz-dropdown-menu #menu4="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item>menu1 1st menu item</li>
-            <li nz-menu-item>menu1 2nd menu item</li>
-            <li nz-menu-item>menu1 3rd menu item</li>
+          <ul nz-menu class="search-ul">
+            <li nz-menu-item class="dsc" *ngFor="let item of searchOptions">
+              <div class="dc">
+                <img
+                  [src]="'../../../../../assets/' + item.img + '.png'"
+                  alt=""
+                />
+                <span class="name">{{ item.title }}</span>
+                <span class="symbol">{{ item.symbol }}</span>
+              </div>
+              <p class="symbol">#{{ item.number }}</p>
+            </li>
           </ul>
         </nz-dropdown-menu>
       </div>

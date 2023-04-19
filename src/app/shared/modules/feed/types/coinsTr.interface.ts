@@ -1,17 +1,14 @@
 export interface ICoinsTr {
   id: string;
-  coinName: string;
-  coinSymbol: string;
-  coinIcon: string;
-  hRate: number;
-  dRate: number;
-  wRate: number;
+  fullName: string;
+  symbol: string;
+  logoUrl: string;
   price: string;
   marketCapValue: string;
   volumeCryptoValue: string;
   volumeValue: string;
-  procent?: number;
+  percent?: string;
   circulatingSupply: string;
-  grap: number;
-  isFavorited: boolean;
+  priceUsd: string;
+  priceKzt: string;
 }

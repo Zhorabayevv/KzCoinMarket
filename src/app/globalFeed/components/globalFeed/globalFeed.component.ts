@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./globalFeed.component.scss'],
 })
 export class GlobalFeedComponent {
-  apiUrl: string = '/articles';
+  apiUrl: string = '/coin/full';
   switchValue: boolean = false;
   loading: boolean = false;
 
