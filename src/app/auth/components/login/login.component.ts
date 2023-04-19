@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   isSubmitting$: Observable<boolean>;
   backendErrors$: Observable<IBackendErrors | null>;
 
+  passwordVisible: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private store: Store
@@ -31,20 +33,16 @@ export class LoginComponent implements OnInit {
   initioalizeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
-    console.log(this.isSubmitting$);
   }
   initionalizeForm(): void {
     this.form = this.fb.group({
       username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
   onSubmit(): void {
     console.log(this.form.value);
-    const request: ILoginRequest = {
-      user: this.form.value
-    }
+    const request: ILoginRequest =  this.form.value
     this.store.dispatch(loginAction({request}));
   }
 }

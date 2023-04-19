@@ -16,3 +16,8 @@ export const getFeedSuccessAction = createAction(
 export const getFeedFailureAction = createAction(
   ActionTypes.GET_FEED_FAILURE
 );
+
+export const addToFavoritesAction = createAction(
+  ActionTypes.ADD_TO_FAVORITES,
+  props<{ isFavorited: boolean; id: string }>()
+);

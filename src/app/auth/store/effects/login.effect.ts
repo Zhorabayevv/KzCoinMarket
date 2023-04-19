@@ -8,8 +8,11 @@ import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { PersistanceService } from 'src/app/shared/services/persistance.service';
 import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
-import { loginSuccessAction, loginAction, loginFailureAction } from 'src/app/auth/store/actions/login.action';
-
+import {
+  loginSuccessAction,
+  loginAction,
+  loginFailureAction,
+} from 'src/app/auth/store/actions/login.action';
 
 @Injectable()
 export class LoginEffect {
@@ -17,9 +20,11 @@ export class LoginEffect {
     this.actions$.pipe(
       ofType(loginAction),
       switchMap(({ request }) => {
+        console.log('request', request);
         return this.authService.login(request).pipe(
           map((currentUser: ICurrentUser) => {
-            this.persistanService.set('accessToken', currentUser.token);
+            this.persistanService.set('accessToken', currentUser.accessToken);
+            console.log('currentUser', currentUser);
             return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {

@@ -44,10 +44,10 @@
       </ng-container>
       <ng-template #anonymous>
         <div class="anonymous dc">
-          <a [routerLink]="['/login']"
-            ><button class="sign-in">Sign in</button>
-          </a>
-          <a [routerLink]="['/register']">
+          <!-- [routerLink]="['/login']" -->
+          <a (click)="signIn()"><button class="sign-in">Sign in</button> </a>
+          <!-- [routerLink]="['/register']"> -->
+          <a (click)="signUp()">
             <button class="sign-up">Sign up</button>
           </a>
         </div>

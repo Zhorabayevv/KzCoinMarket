@@ -1,0 +1,44 @@
+form {
+  .item {
+    min-width: 432px;
+    min-height: 84px;
+    label {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 179%;
+    }
+    .email {
+      border-radius: 8px;
+      border: 1px solid #cfd6e4;
+      height: 56px;
+      text-align: center;
+      max-width: 432px;
+      margin-left: 2px;
+    }
+    .password-icon {
+      cursor: pointer;
+      font-size: 25px;
+      color: #808a9d;
+    }
+  }
+  button {
+    background-color: #3861fb;
+    border-radius: 8px;
+    width: 432px;
+    height: 48px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    margin: 32px auto 20px auto;
+    cursor: pointer;
+  }
+  button:disable {
+    background-color: #3861FB80;
+    color: #FFFFFF80;
+  }
+}
+::ng-deep .ant-modal-content {
+  border-radius: 20px;
+}

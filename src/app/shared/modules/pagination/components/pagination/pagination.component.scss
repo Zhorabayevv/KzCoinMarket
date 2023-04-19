@@ -1,0 +1,27 @@
+.dsc {
+  p{
+    color: #222531;
+    font-size: 14px;
+    line-height: 124%;
+    font-weight: 400;
+  }
+  .rows {
+    margin-right: 100px;
+    span {
+      font-size: 12px;
+      line-height: 124%;
+      font-weight: 400;
+      color: #58667e;
+      margin-right: 6px;
+    }
+    ::ng-deep
+      .ant-select:not(.ant-select-customize-input)
+      .ant-select-selector {
+      background-color: #eff2f5;
+      border-radius: 8px;
+      width: 60px;
+      height: 32px;
+      border: none;
+    }
+  }
+}

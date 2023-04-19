@@ -1,4 +1,4 @@
-<ul class="pagination">
+<!-- <ul class="pagination">
   <li *ngFor="let page of pages" class="page-item" [ngClass]="{active: page === currentPageProps}">
     <a
       class="page-link"
@@ -8,4 +8,14 @@
       {{ page }}
     </a>
   </li>
-</ul>
+</ul> -->
+
+<div class="dsc" style="margin-top: 55px; padding-bottom: 81px">
+  <p>Барлык криптовалюталардн саны {{ totalProps }}</p>
+  <nz-pagination [nzPageIndex]="1" [nzTotal]="pagesCount"></nz-pagination>
+  <div class="rows">
+    <span>Show rows</span>
+    <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
+    </nz-select>
+  </div>
+</div>

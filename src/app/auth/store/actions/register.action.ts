@@ -12,7 +12,7 @@ export const registerAction = createAction(
 
 export const registerSuccessAction = createAction(
   ActionTypes.REGISTER_SUCCESS,
-  props<{ currentUser: ICurrentUser }>()
+  props<{ message: string }>()
 );
 
 export const registerFailedAction = createAction(

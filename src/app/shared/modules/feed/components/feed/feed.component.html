@@ -21,10 +21,10 @@
         <mc-tag-list [tags]="article.tagList" ></mc-tag-list>
       </a>
     </div> -->
-    <tbody>
+    <thead>
       <tr class="head">
         <th class="first"></th>
-        <th class="dc second">
+        <th class="second">
           <b># &nbsp;</b>
         </th>
         <th class="name">Name</th>
@@ -64,6 +64,98 @@
           </div>
         </th>
         <th class="days paddin">Last 7 days</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coin of coinsTr">
+        <td>
+          <span
+            nz-icon
+            nzType="star"
+            [nzTheme]="'twotone'"
+            [nzTwotoneColor]="coin.isFavorited || watchListProps ? '#F6B87E' : '#808a9d'"
+            style="font-size: 16px"
+            (click)="addFavorite(coin.id, coin.isFavorited)"
+          ></span>
+        </td>
+        <td class="id">
+          {{ coin.id }}
+        </td>
+        <td class="">
+          <div class="dc">
+            <img
+              class="coin-icon"
+              [src]="'../../../../../../assets/' + coin.coinIcon + '.png'"
+              alt=""
+            />
+            <span>&nbsp; {{ coin.coinName }}&nbsp;&nbsp;</span>
+            <span class="coin-symbol">
+              {{ coin.coinSymbol }}
+            </span>
+          </div>
+        </td>
+        <td class="paddin">₸ {{ coin.price }}</td>
+        <td class="paddin">
+          <div
+            class="dc procent df"
+            [ngClass]="{
+              'color-red': coin.hRate < 1,
+              'color-green': coin.hRate > 1
+            }"
+          >
+            <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+            <p>{{ coin.hRate }}%</p>
+          </div>
+        </td>
+        <td class="paddin">
+          <div
+            class="dc procent df"
+            [ngClass]="{
+              'color-red': coin.dRate < 1,
+              'color-green': coin.dRate > 1
+            }"
+          >
+            <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+            <p>{{ coin.dRate }}%</p>
+          </div>
+        </td>
+        <td class="paddin">
+          <div
+            class="dc procent df"
+            [ngClass]="{
+              'color-red': coin.wRate < 1,
+              'color-green': coin.wRate > 1
+            }"
+          >
+            <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+            <p>{{ coin.wRate }}%</p>
+          </div>
+        </td>
+        <td class="paddin">₸ {{ coin.marketCapValue }}</td>
+        <td class="paddin">
+          <p>₸ {{ coin.volumeCryptoValue }}</p>
+          <p class="value">{{ coin.volumeValue }} {{ coin.coinSymbol }}</p>
+        </td>
+        <td class="paddin">
+          <p>{{ coin.circulatingSupply }} {{ coin.coinSymbol }}</p>
+          <nz-progress
+            *ngIf="coin.procent"
+            [nzPercent]="coin.procent"
+            nzStrokeColor="#808a9d"
+            nzStrokeWidth="6"
+            [nzShowInfo]="false"
+          ></nz-progress>
+        </td>
+        <td class="paddin">
+          <img
+            [src]="
+              'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/' +
+              coin.grap +
+              '.svg'
+            "
+            alt=""
+          />
+        </td>
       </tr>
     </tbody>
     <mc-pagination

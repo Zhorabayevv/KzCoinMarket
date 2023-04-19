@@ -1,44 +1,62 @@
-<div class="auth-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Sign up</h1>
-        <p class="text-xs-center">
-          <a [routerLink]="['/login']"> Have an account? </a>
-        </p>
-        <mc-backend-error-messages *ngIf="backendErrors$ | async" [backendErrors]="backendErrors$ | async"></mc-backend-error-messages>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <fieldset>
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="text"
-                placeholder="Username"
-                formControlName="username"
-              />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="text"
-                placeholder="Email"
-                formControlName="email"
-              />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                class="form-control form-control-lg"
-                type="password"
-                placeholder="Password"
-                formControlName="password"
-              />
-            </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right" type="submit" [disabled]="isSubmitting$ | async">
-              Sign up
-            </button>
-          </fieldset>
-        </form>
-      </div>
-    </div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="item">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+        <label>{{ "Username" }}</label>
+        <input
+          class="email"
+          nz-input
+          placeholder="Enter your username..."
+          nzSize="large"
+          formControlName="username"
+          maxlength="70"
+        />
+      </nz-form-control>
+    </nz-form-item>
   </div>
-</div>
+  <div class="item">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+        <label>{{ "Email Address" }}</label>
+        <input
+          class="email"
+          nz-input
+          placeholder="Enter your email address..."
+          nzSize="large"
+          formControlName="email"
+          maxlength="70"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="item">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+        <div class="dsc">
+          <label class="iece90">{{ "Password" }}</label>
+          <a [routerLink]="['/']">Forgot password?</a>
+        </div>
+        <nz-input-group [nzSuffix]="suffixTemplate" class="email">
+          <input
+            [type]="passwordVisible ? 'text' : 'password'"
+            nz-input
+            formControlName="password"
+            placeholder="Enter your password..."
+            style="text-align: center"
+          />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span
+            nz-icon
+            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"
+            class="password-icon"
+          ></span>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <button type="submit" [disabled]="(isSubmitting$ | async) || form.invalid">
+    Sign Up
+  </button>
+</form>

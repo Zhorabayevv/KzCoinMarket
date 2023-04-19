@@ -1,0 +1,62 @@
+.container {
+  width: 1370px;
+  margin: 0 auto;
+  .watchlist {
+    margin: 22px auto 32px auto;
+    .main {
+      background-color: #3861fb;
+      width: 40px;
+      height: 21px;
+      border-radius: 4px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .dc {
+      p {
+        color: #222531;
+        font-size: 24px;
+        line-height: 117%;
+        font-weight: 700;
+        margin-right: 10px;
+      }
+      .edit {
+        background-color: #eff2f5;
+        border-radius: 8px;
+        width: 26px;
+        height: 30px;
+        span {
+          color: #808a9d;
+          font-size: 9px;
+        }
+      }
+    }
+  }
+  .links {
+    align-items: center;
+    height: 16px;
+    .watch-port {
+      background-color: #eff2f5;
+      color: #000000;
+    }
+    .watch-port:hover {
+      background-color: #f0f6ff;
+      color: #3861fb;
+    }
+  }
+
+  .active {
+    background-color: #f0f6ff !important;
+    color: #3861fb !important;
+  }
+  .btn {
+    min-width: 87px;
+    height: 36px;
+    margin-right: 16px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 124%;
+    font-weight: 700;
+  }
+}

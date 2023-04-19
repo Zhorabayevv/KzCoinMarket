@@ -8,6 +8,8 @@ import {
 
 import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
 import { ISelect } from '../types/select.interface';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { LoginComponent } from 'src/app/auth/components/login/login.component';
 
 @Component({
   selector: 'mc-navBar',
@@ -48,10 +50,19 @@ export class NavBarComponent implements OnInit {
     },
   ];
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private modal: NzModalService) {}
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
   }
+
+  signIn(): void {
+    this.modal.create({
+      nzContent: LoginComponent,
+      nzWidth: 496,
+      nzFooter: null
+    });
+  }
+  signUp(): void {}
 }

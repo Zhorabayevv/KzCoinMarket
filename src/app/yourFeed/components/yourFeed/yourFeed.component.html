@@ -1,4 +1,4 @@
-<div class="home-page">
+<!-- <div class="home-page">
   <mc-banner></mc-banner>
   <div class="container page">
     <div class="row">
@@ -8,6 +8,57 @@
       </div>
       <div class="col-md-3">
         <mc-popular-tags></mc-popular-tags>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="watchlist">
+    <div class="dcc main">Main</div>
+    <div>
+      <div class="dc">
+        <p>My First Watchlist</p>
+        <div class="dcc edit">
+          <span nz-icon nzType="edit" nzTheme="outline"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dsc">
+    <div class="links df">
+      <a
+        [routerLink]="['/watchlist']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="dec watch-port btn"
+      >
+        <img src="../../../../../assets/star.svg" alt="" />
+        Watchlist
+      </a>
+      <a [routerLink]="['/portfolio']" class="dec watch-port btn">
+        <img src="../../../../../assets/portfolio.svg" alt="" />
+        Portfolio
+      </a>
+    </div>
+    <div class="links df">
+      <a [routerLink]="['/add-coins']" class="dec watch-port btn">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+        Add Coins
+      </a>
+      <a [routerLink]="['/edit']" class="dec watch-port btn">
+        <span nz-icon nzType="edit" nzTheme="outline"></span>
+        Edit
+      </a>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>
+        <mc-feed [apiUrl]="apiUrl" [watchList]="watchList"></mc-feed>
+      </div>
+      <div>
+        <!-- <mc-popular-tags></mc-popular-tags> -->
       </div>
     </div>
   </div>

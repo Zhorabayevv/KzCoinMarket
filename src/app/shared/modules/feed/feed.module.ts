@@ -15,6 +15,7 @@ import { reducers } from 'src/app/shared/modules/feed/store/reducers';
 import { ErrorMessageModule } from 'src/app/shared/modules/errorMessage/errorMessage.module';
 import { LoadingModule } from 'src/app/shared/modules/loading/loading.module';
 import { PaginationModule } from 'src/app/shared/modules/pagination/pagination.module';
+import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 
 const icons: IconDefinition[] = [SearchOutline];
 @NgModule({
@@ -27,6 +28,7 @@ const icons: IconDefinition[] = [SearchOutline];
     LoadingModule,
     PaginationModule,
     TagListModule,
+    NgAntModule,
     NzIconModule.forRoot(icons),
   ],
   declarations: [FeedComponent],

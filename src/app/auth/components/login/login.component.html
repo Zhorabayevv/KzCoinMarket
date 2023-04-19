@@ -1,4 +1,4 @@
-<div class="auth-page">
+<!-- <div class="auth-page">
   <div class="container page">
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
@@ -33,4 +33,58 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div style="border-radius: 20px">
+  <nz-tabset nzCentered>
+    <nz-tab nzTitle="Log In">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="item">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+              <label>{{ "Username" }}</label>
+              <input
+                class="email"
+                nz-input
+                placeholder="Enter your username..."
+                nzSize="large"
+                formControlName="username"
+                maxlength="70"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="item">
+          <nz-form-item>
+            <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+              <div class="dsc">
+                <label class="iece90">{{ "Password" }}</label>
+                <a [routerLink]="['/']">Forgot password?</a>
+              </div>
+              <nz-input-group [nzSuffix]="suffixTemplate" class="email">
+                <input
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  nz-input
+                  formControlName="password"
+                  placeholder="Enter your password..."
+                />
+              </nz-input-group>
+              <ng-template #suffixTemplate>
+                <span
+                  nz-icon
+                  [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                  (click)="passwordVisible = !passwordVisible"
+                  class="password-icon"
+                ></span>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <button type="submit" [disabled]="isSubmitting$ | async">
+          Sign in
+        </button>
+      </form>
+    </nz-tab>
+    <nz-tab nzTitle="Sign Up"><mc-register></mc-register> </nz-tab>
+  </nz-tabset>
 </div>
