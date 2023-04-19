@@ -1,0 +1,25 @@
+.footer {
+  padding: 48px 56px;
+  .logo {
+    border: 1px solid #000000;
+    border-radius: 8px;
+    margin-right: 510px;
+  }
+  .rows{
+      .title{
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 155%;
+        color: #000000;
+        margin-bottom: 16px;
+      }
+      .link{
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 155%;
+        color: #000000;
+        margin-bottom: 16px;
+        cursor: pointer;
+      }
+    }
+  }

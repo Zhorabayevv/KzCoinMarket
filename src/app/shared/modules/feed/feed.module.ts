@@ -16,6 +16,7 @@ import { ErrorMessageModule } from 'src/app/shared/modules/errorMessage/errorMes
 import { LoadingModule } from 'src/app/shared/modules/loading/loading.module';
 import { PaginationModule } from 'src/app/shared/modules/pagination/pagination.module';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
+import { HttpClientModule } from '@angular/common/http';
 
 const icons: IconDefinition[] = [SearchOutline];
 @NgModule({
@@ -30,6 +31,7 @@ const icons: IconDefinition[] = [SearchOutline];
     TagListModule,
     NgAntModule,
     NzIconModule.forRoot(icons),
+    HttpClientModule,
   ],
   declarations: [FeedComponent],
   exports: [FeedComponent],

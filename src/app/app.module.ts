@@ -22,6 +22,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { YourFeedModule } from './yourFeed/yourFeed.module';
+import { FooterModule } from './shared/modules/footer/footer.module';
 
 registerLocaleData(en);
 
@@ -44,7 +45,8 @@ registerLocaleData(en);
     GlobalFeedModule,
     PopularTagsModule,
     StoreRouterConnectingModule.forRoot(),
-    YourFeedModule
+    YourFeedModule,
+    FooterModule
   ],
   providers: [
     PersistanceService,

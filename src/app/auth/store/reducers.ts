@@ -30,7 +30,6 @@ const authReducer = createReducer(
     (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
-      isLoggedIn: true,
       currentUser: null,
     })
   ),
