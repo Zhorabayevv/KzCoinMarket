@@ -8,6 +8,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { NavBarComponent } from 'src/app/shared/modules/navBar/components/navBar.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 const icons: IconDefinition[] = [SearchOutline];
 
@@ -18,6 +19,7 @@ const icons: IconDefinition[] = [SearchOutline];
     NgAntModule,
     FormsModule,
     NzIconModule.forRoot(icons),
+    TranslateModule
   ],
   declarations: [NavBarComponent],
   exports: [NavBarComponent],

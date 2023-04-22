@@ -34,9 +34,27 @@ form {
     margin: 32px auto 20px auto;
     cursor: pointer;
   }
-  button:disable {
-    background-color: #3861FB80;
-    color: #FFFFFF80;
+  button:disabled {
+    background-color: #3861fb80;
+    color: #ffffff80;
+  }
+}
+.tabs {
+  text-align: center;
+  margin-bottom: 37px;
+  .btnLog {
+    color: #58667e;
+    background-color: transparent;
+    border: none;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 179%;
+    cursor: pointer;
+  }
+  .actived {
+    color: #3861fb;
+    border-bottom: 2px solid #3861fb;
+    font-weight: 700;
   }
 }
 ::ng-deep .ant-modal-content {

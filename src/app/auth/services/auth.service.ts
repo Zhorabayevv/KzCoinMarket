@@ -11,8 +11,8 @@ import { ILoginRequest } from 'src/app/auth/types/loginRequest.interface';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  getUser(response: AuthResponseInterface): ICurrentUser {
-    return response.user;
+  getUser(response): ICurrentUser {
+    return response;
   }
 
   register(data: IRegisterRequest): Observable<string> {

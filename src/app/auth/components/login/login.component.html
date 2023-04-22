@@ -36,56 +36,79 @@
 </div> -->
 
 <div style="border-radius: 20px">
-  <nz-tabset nzCentered>
-    <nz-tab nzTitle="Log In">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="item">
-          <nz-form-item>
-            <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
-              <label>{{ "Username" }}</label>
+  <!-- <nz-tabset nzCentered> -->
+  <!-- <nz-tab nzTitle="Log In"> -->
+  <div class="tabs">
+    <button
+      class="btnLog"
+      style="margin-right: 40px"
+      [ngClass]="{ actived: logIn }"
+      (click)="changeLogIn()"
+    >
+      Log In
+    </button>
+    <button
+      class="btnLog"
+      [ngClass]="{ actived: !logIn }"
+      (click)="changeSignUp()"
+    >
+      Sign Up
+    </button>
+  </div>
+  <ng-container *ngIf="logIn; else elseTemplate">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="item">
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+            <label>{{ "Username" }}</label>
+            <input
+              class="email"
+              nz-input
+              placeholder="Enter your username..."
+              nzSize="large"
+              formControlName="username"
+              maxlength="70"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="item">
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+            <div class="dsc">
+              <label class="iece90">{{ "Password" }}</label>
+              <a [routerLink]="['/']">Forgot password?</a>
+            </div>
+            <nz-input-group [nzSuffix]="suffixTemplate" class="email">
               <input
-                class="email"
+                style="text-align: center"
+                [type]="passwordVisible ? 'text' : 'password'"
                 nz-input
-                placeholder="Enter your username..."
-                nzSize="large"
-                formControlName="username"
-                maxlength="70"
+                formControlName="password"
+                placeholder="Enter your password..."
               />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div class="item">
-          <nz-form-item>
-            <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
-              <div class="dsc">
-                <label class="iece90">{{ "Password" }}</label>
-                <a [routerLink]="['/']">Forgot password?</a>
-              </div>
-              <nz-input-group [nzSuffix]="suffixTemplate" class="email">
-                <input
-                  style="text-align: center"
-                  [type]="passwordVisible ? 'text' : 'password'"
-                  nz-input
-                  formControlName="password"
-                  placeholder="Enter your password..."
-                />
-              </nz-input-group>
-              <ng-template #suffixTemplate>
-                <span
-                  nz-icon
-                  [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-                  (click)="passwordVisible = !passwordVisible"
-                  class="password-icon"
-                ></span>
-              </ng-template>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <button type="submit" [disabled]="isSubmitting$ | async">
-          Sign in
-        </button>
-      </form>
-    </nz-tab>
-    <nz-tab nzTitle="Sign Up"><mc-register></mc-register> </nz-tab>
-  </nz-tabset>
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <span
+                nz-icon
+                [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                (click)="passwordVisible = !passwordVisible"
+                class="password-icon"
+              ></span>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <button
+        type="submit"
+        [disabled]="(isSubmitting$ | async) || form.invalid"
+      >
+        Sign in
+      </button>
+    </form>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <mc-register></mc-register>
+  </ng-template>
 </div>

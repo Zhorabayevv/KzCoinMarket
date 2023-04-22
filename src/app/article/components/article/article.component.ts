@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { getArticleAction } from 'src/app/article/store/actions/getArticle.action';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IArticle } from 'src/app/shared/types/article.interface';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import {
@@ -27,26 +27,34 @@ export class ArticleComponent implements OnInit, OnDestroy {
   error$: Observable<string | null>;
   isAuthor$: Observable<boolean>;
 
+  quantity: number = 1;
+  tenge: number = 10835847.6;
+
   links = [
     {
       icon: 'link',
-      name: 'bitcoin.org',
+      name: '.org',
+      link: 'https://bitcoin.org/ru/',
     },
     {
       icon: 'search',
       name: 'Explorers',
+      link: 'https://www.blockchain.com/explorer',
     },
     {
       icon: 'user',
       name: 'Community',
+      link: 'https://www.blockchain.com/explorer',
     },
     {
       icon: 'code',
       name: 'Source code',
+      link: 'https://github.com/bitcoin/bitcoin',
     },
     {
       icon: 'file-text',
       name: 'Whitepaper',
+      link: 'https://www.blockchain.com/explorer',
     },
   ];
 
@@ -59,7 +67,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.14,
       dRate: 0.8,
       wRate: 1.37,
-      price: '12708676.94',
+      price: 12708676.94,
       marketCapValue: '245646563.04',
       volumeCryptoValue: '168.00',
       volumeValue: '13293.58',
@@ -76,7 +84,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.28,
       dRate: 0.61,
       wRate: 3.68,
-      price: '805042.96',
+      price: 805042.96,
       marketCapValue: '98516219.31',
       volumeCryptoValue: '4.00',
       volumeValue: '3393.58',
@@ -93,7 +101,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.0,
       dRate: 0.02,
       wRate: 0.01,
-      price: '457.84',
+      price: 457.84,
       marketCapValue: '36179566.01',
       volumeCryptoValue: '4.00',
       volumeValue: '2243.23',
@@ -109,7 +117,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.14,
       dRate: 1.23,
       wRate: 6.05,
-      price: '149576.33',
+      price: 149576.33,
       marketCapValue: '26616540.00',
       volumeCryptoValue: '4.00',
       volumeValue: '2115.46',
@@ -126,7 +134,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.01,
       dRate: 0.0,
       wRate: 0.02,
-      price: '457.43',
+      price: 457.43,
       marketCapValue: '15503278.51',
       volumeCryptoValue: '3.00',
       volumeValue: '1893.34',
@@ -142,7 +150,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.18,
       dRate: 0.35,
       wRate: 1.81,
-      price: '203.01',
+      price: 203.01,
       marketCapValue: '10343544.83',
       volumeCryptoValue: '3.00',
       volumeValue: '1694.63',
@@ -159,7 +167,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 6.32,
       dRate: 5.06,
       wRate: 3.39,
-      price: '161.53',
+      price: 161.53,
       marketCapValue: '5610101.05',
       volumeCryptoValue: '3.00',
       volumeValue: '991.48',
@@ -176,7 +184,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 3.3,
       dRate: 0.5,
       wRate: 1.26,
-      price: '2742.46',
+      price: 2742.46,
       marketCapValue: '3210220.95',
       volumeCryptoValue: '4.00',
       volumeValue: '723.98',
@@ -193,7 +201,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.69,
       dRate: 11.45,
       wRate: 15.32,
-      price: '9532.23',
+      price: 9532.23,
       marketCapValue: '3659426.92',
       volumeCryptoValue: '3.00',
       volumeValue: '693.58',
@@ -210,7 +218,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.14,
       dRate: 0.21,
       wRate: 11.46,
-      price: '7801.59',
+      price: 7801.59,
       marketCapValue: '3080633.59',
       volumeCryptoValue: '4.00',
       volumeValue: '552.93',
@@ -227,7 +235,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.42,
       dRate: 0.21,
       wRate: 2.23,
-      price: '0.00',
+      price: 0.0,
       marketCapValue: '0.00',
       volumeCryptoValue: '0.00',
       volumeValue: '0.00',
@@ -244,7 +252,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.69,
       dRate: 0.26,
       wRate: 4.27,
-      price: '0.00',
+      price: 0.0,
       marketCapValue: '0.00',
       volumeCryptoValue: '0.00',
       volumeValue: '0.00',
@@ -261,7 +269,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 1.7,
       dRate: 0.56,
       wRate: 1.37,
-      price: '0.00',
+      price: 0.0,
       marketCapValue: '0.00',
       volumeCryptoValue: '0.00',
       volumeValue: '0.00',
@@ -278,7 +286,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.13,
       dRate: 0.21,
       wRate: 1.46,
-      price: '0.00',
+      price: 0.0,
       marketCapValue: '0.00',
       volumeCryptoValue: '0.00',
       volumeValue: '0.00',
@@ -295,7 +303,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
       hRate: 0.42,
       dRate: 0.16,
       wRate: 2.23,
-      price: '0.00',
+      price: 0.0,
       marketCapValue: '0.00',
       volumeCryptoValue: '0.00',
       volumeValue: '0.00',
@@ -305,13 +313,21 @@ export class ArticleComponent implements OnInit, OnDestroy {
       isFavorited: false,
     },
   ];
+  actRoute: string;
+  coin = this.coinsTr[0];
 
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initializeValues();
     this.initializeListeners();
     this.fetchData();
+    this.findCoin();
+    this.actRoute = this.router.url;
   }
 
   ngOnDestroy(): void {
@@ -341,6 +357,17 @@ export class ArticleComponent implements OnInit, OnDestroy {
       .subscribe((article: IArticle | null) => {
         this.article = article;
       });
+  }
+
+  findCoin(): void {
+    this.coin = this.coinsTr.find(
+      (coin) => coin.coinSymbol === this.route.params['_value']['symbol']
+    );
+    console.log(this.coin);
+  }
+
+  quantityInput(): void {
+    this.tenge = this.quantity * this.coin.price;
   }
 
   fetchData(): void {

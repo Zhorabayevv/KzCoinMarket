@@ -1,3 +1,4 @@
+import { NgAntModule } from './../ng-zorro-antd.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -16,6 +17,7 @@ import { TagListModule } from 'src/app/shared/modules/tagList/tagList.module';
 import { DeleteArticleEffect } from './store/effects/deleteArticle.effect';
 import { ArticleService } from 'src/app/article/services/article.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { FormsModule } from '@angular/forms';
 
 const routes = [
   {
@@ -35,6 +37,8 @@ const icons: IconDefinition[] = [SearchOutline];
     ErrorMessageModule,
     TagListModule,
     NzIconModule.forRoot(icons),
+    NgAntModule,
+    FormsModule
   ],
   declarations: [ArticleComponent],
   providers: [ArticleService, SharedArticleService],

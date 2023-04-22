@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+
 import {
   currentUserSelector,
   isLoggedInSelector,
 } from 'src/app/auth/store/selectors';
-
 import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
 import { ISelect } from '../types/select.interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -19,8 +20,8 @@ import { LoginComponent } from 'src/app/auth/components/login/login.component';
 export class NavBarComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   currentUser$: Observable<ICurrentUser | null>;
-  selectedCurrency = 'USD';
-  selectedLanguage = 'kz';
+  selectedCurrency: string = 'USD';
+  selectedLanguage: string = 'kz';
   languageOptions: ISelect[] = [
     {
       value: 'kz',
@@ -58,7 +59,14 @@ export class NavBarComponent implements OnInit {
     { img: 'cardano', title: 'Cardano', symbol: 'ADA', number: 6 },
   ];
 
-  constructor(private store: Store, private modal: NzModalService) {}
+  constructor(
+    private store: Store,
+    private modal: NzModalService,
+    public translate: TranslateService
+  ) {
+    this.translate.setDefaultLang('kz');
+    this.selectedLanguage = this.translate.defaultLang;
+  }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
@@ -74,5 +82,10 @@ export class NavBarComponent implements OnInit {
       nzWidth: 496,
       nzFooter: null,
     });
+  }
+  changeLanguage(lang: string) {
+    console.log(lang);
+    this.translate.use(lang);
+    this.selectedLanguage = lang;
   }
 }

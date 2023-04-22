@@ -23,7 +23,7 @@ export class LoginEffect {
         return this.authService.login(request).pipe(
           map((currentUser: ICurrentUser) => {
             console.log('currentUser', currentUser);
-            // this.persistanService.set('accessToken', currentUser.accessToken);
+            this.persistanService.set('accessToken', currentUser.accessToken);
             return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {

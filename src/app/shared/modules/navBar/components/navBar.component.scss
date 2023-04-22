@@ -26,6 +26,24 @@
         padding-right: 10px;
         border-right: 1px solid #eff2f5;
       }
+      .bell {
+        margin: 0px 9px 0px 7px;
+        span {
+          font-size: 20px;
+        }
+      }
+      .avatar-img {
+        cursor: pointer;
+        border: 1px solid #58667e;
+        transition: border 100ms ease-out 0s;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        margin-left: 5px;
+      }
+      .avatar-img:hover {
+        border: 2px solid #3861fb;
+      }
       .anonymous {
         width: 203px;
         height: 34px;
@@ -114,8 +132,8 @@
   }
 }
 .search-ul {
-  li:hover{
-    background-color: #F8FAFD;
+  li:hover {
+    background-color: #f8fafd;
     border-radius: 8px;
   }
   img {
@@ -133,6 +151,35 @@
     color: #58667e;
     font-size: 12px;
     font-weight: 83%;
+  }
+}
+.dropdown {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin-top: 20px;
+  .img {
+    margin: 0 12px 12px 0;
+    border: 1px solid #58667e;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    span {
+      font-size: 44px;
+    }
+  }
+  .profile-info {
+    .username {
+      font-size: 14px;
+      color: #000000;
+      font-weight: 600;
+    }
+    .email {
+      font-size: 11px;
+      color: #58667e;
+      font-weight: 600;
+    }
   }
 }
 ::ng-deep .ant-select-single.ant-select-show-arrow .ant-select-selection-item {

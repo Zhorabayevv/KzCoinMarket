@@ -1,7 +1,7 @@
 <div class="container">
   <div class="navBar dsc">
     <div class="info">
-      Cryptos: <span>22,423</span> Market Cap:
+      {{ "сryptos" | translate }}: <span>22,423</span> Market Cap:
       <span> $1,080,810,844,422 </span> 24h Vol:
       <span> $54,256,403,756 </span> Dominance:
       <span> BTC: 41.7% ETH: 18.7% </span>
@@ -12,6 +12,7 @@
         nzBorderless
         class="select"
         [nzOptions]="languageOptions"
+        (ngModelChange)="changeLanguage($event)"
       >
       </nz-select>
       <img src="../../../../../assets/kzt.svg" alt="" />
@@ -27,15 +28,33 @@
       <!-- </button> -->
 
       <ng-container *ngIf="isLoggedIn$ | async; else anonymous">
-        <span nz-icon nzType="bell" nzTheme="outline"></span>
-        <a [routerLink]="['/profiles', (currentUser$ | async).username]">
-          <button>
-            <span nz-icon nzType="user" nzTheme="outline"></span>
-            <ng-template #imgUser>
-              <!-- <img [src]="(currentUser$ | async).image" alt="" /> -->
-            </ng-template>
-          </button>
-        </a>
+        <div class="dc bell">
+          <nz-badge [nzCount]="5">
+            <span
+              nz-icon
+              nzType="bell"
+              [nzTheme]="'twotone'"
+              [nzTwotoneColor]="'#000000'"
+              nzStatus="processing"
+            ></span>
+          </nz-badge>
+        </div>
+        <div class="dcc avatar-img" nz-dropdown [nzDropdownMenu]="menu">
+          <span nz-icon nzType="user" nzTheme="outline"></span>
+        </div>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <div class="dropdown">
+            <div class="dcc img">
+              <span nz-icon nzType="user" nzTheme="outline"></span>
+            </div>
+            <div class="profile-info">
+              <p class="username">Hi, {{ (currentUser$ | async).username }}</p>
+              <p class="email">
+                {{ (currentUser$ | async).email }}
+              </p>
+            </div>
+          </div>
+        </nz-dropdown-menu>
       </ng-container>
       <ng-template #anonymous>
         <div class="anonymous dc">

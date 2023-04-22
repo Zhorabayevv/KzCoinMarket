@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,12 +21,21 @@ import { PopularTagsModule } from './shared/modules/popularTags/popularTags.modu
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
+import localeEn from '@angular/common/locales/en';
+import localeRu from '@angular/common/locales/ru';
+import localeKz from '@angular/common/locales/kk';
 import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { FooterModule } from './shared/modules/footer/footer.module';
 import { ArticleModule } from './article/article.module';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-registerLocaleData(en);
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+registerLocaleData(localeEn);
+registerLocaleData(localeRu);
+registerLocaleData(localeKz);
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +53,13 @@ registerLocaleData(en);
     }),
     EffectsModule.forRoot([]),
     NavBarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     GlobalFeedModule,
     PopularTagsModule,
     StoreRouterConnectingModule.forRoot(),
