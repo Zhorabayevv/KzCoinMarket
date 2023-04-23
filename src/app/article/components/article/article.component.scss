@@ -40,24 +40,7 @@
         border-radius: 4px;
       }
     }
-    .second-div {
-      margin-bottom: 22px;
-      span {
-        padding: 2px 6px;
-        font-size: 11px;
-        font-weight: 500;
-        border-radius: 4px;
-        margin-right: 8px;
-      }
-      .rank {
-        background-color: #808a9d;
-        color: #ffffff;
-      }
-      .coin {
-        color: #58667e;
-        background-color: #eff2f5;
-      }
-    }
+
     .main-links {
       width: 306px;
       flex-wrap: wrap;
@@ -111,26 +94,6 @@
           border-radius: 8px;
           font-size: 14px;
           font-weight: 600;
-        }
-      }
-      .gas-price {
-        color: #808a9d;
-        font-size: 14px;
-        font-weight: 400;
-        span {
-          color: #ea3943;
-          margin-left: 16px;
-        }
-      }
-      .progress-div {
-        color: #58667e;
-        font-size: 12px;
-        font-weight: 600;
-        .progress {
-          margin: 0 13px;
-          ::ng-deep .ant-progress-line {
-            width: 166px;
-          }
         }
       }
     }
@@ -209,10 +172,6 @@
       height: 500px;
       margin-bottom: 60px;
     }
-    .title-converter {
-      color: #222531;
-      margin-bottom: 10px;
-    }
     .converter {
       border: 1px solid #eff2f5;
       border-radius: 16px;
@@ -275,31 +234,4 @@
       }
     }
   }
-  .info-text {
-    margin-left: 55px;
-    .title {
-      color: #222531;
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 129%;
-      margin-bottom: 10px;
-    }
-    .text {
-      width: 440px;
-      color: #58667e;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 124%;
-    }
-  }
-}
-.dayh {
-  background-color: #eff2f5;
-  border-radius: 4px;
-  color: #58667e;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 135%;
-  padding: 2px 6px;
-  margin-left: 10px;
 }

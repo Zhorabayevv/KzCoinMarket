@@ -76,16 +76,16 @@ button {
   justify-content: center;
   align-items: center;
 }
-.dc{
+.dc {
   display: flex;
   align-items: center;
 }
-.dsc{
+.dsc {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.dec{
+.dec {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -96,13 +96,85 @@ button {
 .df {
   display: flex;
 }
-.ds{
+.ds {
   display: flex;
   justify-content: space-between;
 }
 .ma {
   margin: auto;
 }
-.mr0{
+.mr0 {
   margin-right: 0;
+}
+.dayh {
+  background-color: #eff2f5;
+  border-radius: 4px;
+  color: #58667e;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 135%;
+  padding: 2px 6px;
+  margin-left: 10px;
+}
+.info-text {
+  margin-left: 55px;
+  .title {
+    color: #222531;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 129%;
+    margin-bottom: 10px;
+  }
+  .text {
+    width: 440px;
+    color: #58667e;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 124%;
+  }
+}
+
+.title-converter {
+  color: #222531;
+  margin-bottom: 10px;
+}
+
+.second-div {
+  margin-bottom: 22px;
+  span {
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  .rank {
+    background-color: #808a9d;
+    color: #ffffff;
+  }
+  .coin {
+    color: #58667e;
+    background-color: #eff2f5;
+  }
+}
+.gas-price {
+  color: #808a9d;
+  font-size: 14px;
+  font-weight: 400;
+  span {
+    color: #ea3943;
+    margin-left: 16px;
+  }
+}
+
+.progress-div {
+  color: #58667e;
+  font-size: 12px;
+  font-weight: 600;
+  .progress {
+    margin: 0 13px;
+    ::ng-deep .ant-progress-line {
+      width: 166px;
+    }
+  }
 }
