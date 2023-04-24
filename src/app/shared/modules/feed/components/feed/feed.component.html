@@ -30,15 +30,15 @@
           <th class="second">
             <b># &nbsp;</b>
           </th>
-          <th class="name">Name</th>
-          <th class="price paddin">Price</th>
+          <th class="name">{{"price" | translate}}</th>
+          <th class="price paddin">{{"name" | translate}}</th>
           <th class="one-procent paddin">1h %</th>
           <th class="day-procent paddin">24h %</th>
           <th class="week-procent paddin">7d %</th>
           <th class="cap paddin">
             <div class="dc">
               <p>
-                Market Cap
+                {{ "market_cap" | translate }}
                 <span
                   nz-icon
                   nzType="info-circle"
@@ -51,7 +51,7 @@
           <th class="volume paddin">
             <div class="dc">
               <p>
-                Volume(24h)
+                {{ "volume" | translate }}(24h)
                 <span
                   nz-icon
                   nzType="info-circle"
@@ -63,10 +63,10 @@
           </th>
           <th class="supply paddin">
             <div class="dc">
-              <p>Circulating Supply</p>
+              <p>{{ "circulating_supply" | translate }}</p>
             </div>
           </th>
-          <th class="days paddin">Last 7 days</th>
+          <th class="days paddin">{{ "last_days" | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -89,7 +89,10 @@
             {{ coin.id }}
           </td>
           <td class="">
-            <a class="dc articles" [routerLink]="['/articles', coin.coinSymbol]">
+            <a
+              class="dc articles"
+              [routerLink]="['/articles', coin.coinSymbol]"
+            >
               <img
                 class="coin-icon"
                 [src]="'../../../../../../assets/' + coin.coinIcon + '.png'"

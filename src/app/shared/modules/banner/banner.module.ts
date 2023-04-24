@@ -7,6 +7,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { BannerComponent } from './components/banner.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 const icons: IconDefinition[] = [SearchOutline];
 
@@ -16,6 +17,7 @@ const icons: IconDefinition[] = [SearchOutline];
     RouterModule,
     NgAntModule,
     NzIconModule.forRoot(icons),
+    TranslateModule.forRoot(),
   ],
   declarations: [BannerComponent],
   exports: [BannerComponent],

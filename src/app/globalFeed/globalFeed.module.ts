@@ -12,6 +12,7 @@ import { FeedModule } from 'src/app/shared/modules/feed/feed.module';
 import { BannerModule } from 'src/app/shared/modules/banner/banner.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FeedTogglerModule } from '../shared/modules/feedToggler/coinToggler.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes = [
   {
@@ -33,6 +34,7 @@ const icons: IconDefinition[] = [SearchOutline];
     ReactiveFormsModule,
     NzIconModule.forRoot(icons),
     FeedTogglerModule,
+    TranslateModule,
   ],
   declarations: [GlobalFeedComponent],
 })

@@ -18,6 +18,7 @@ import { LoginEffect } from 'src/app/auth/store/effects/login.effect';
 import { LoginComponent } from 'src/app/auth/components/login/login.component';
 import { GetCurrentUserEffect } from 'src/app/auth/store/effects/getCurrentUser.effect';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 // const routes: Routes = [
 //   {
@@ -39,11 +40,16 @@ const icons: IconDefinition[] = [SearchOutline];
     RouterModule,
     ReactiveFormsModule,
     StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect, GetCurrentUserEffect]),
+    EffectsModule.forFeature([
+      RegisterEffect,
+      LoginEffect,
+      GetCurrentUserEffect,
+    ]),
     BackendErrorMessagesModule,
     NgAntModule,
     FormsModule,
     NzIconModule.forRoot(icons),
+    TranslateModule,
   ],
   providers: [AuthService, PersistanceService],
 })

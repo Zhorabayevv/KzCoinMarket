@@ -1,9 +1,9 @@
 <div class="container">
   <div class="navBar dsc">
     <div class="info">
-      {{ "сryptos" | translate }}: <span>22,423</span> Market Cap:
-      <span> $1,080,810,844,422 </span> 24h Vol:
-      <span> $54,256,403,756 </span> Dominance:
+      {{ "сryptos" | translate }}: <span>22,423</span> {{"market_cap" | translate}}:
+      <span> $1,168,810,844,422 </span> {{"24vol" | translate}}:
+      <span> $54,256,403,756 </span> {{"dominance" | translate}}:
       <span> BTC: 41.7% ETH: 18.7% </span>
     </div>
     <div class="dc">
@@ -76,19 +76,19 @@
     </a>
     <div class="dsc menu">
       <ul class="df">
-        <li>Cryptocurrencies <span>•</span></li>
-        <li>Community</li>
-        <li>Products</li>
-        <li>Learn</li>
+        <li>{{ "сryptocurrencies" | translate }} <span>•</span></li>
+        <li>{{ "community" | translate }}</li>
+        <li>{{ "products" | translate }}</li>
+        <li>{{ "learn" | translate }}</li>
       </ul>
       <div class="dsc">
         <a [routerLink]="['/watchlist']" class="dec watch-port">
           <img src="../../../../../assets/star.svg" alt="" />
-          Watchlist
+          {{ "watchlist" | translate }}
         </a>
         <a [routerLink]="['/portfolio']" class="dec watch-port">
           <img src="../../../../../assets/portfolio.svg" alt="" />
-          Portfolio
+          {{ "portfolio" | translate }}
         </a>
         <nz-input-group
           [nzSuffix]="suffixIconSearch"
@@ -97,7 +97,7 @@
           nz-dropdown
           [nzDropdownMenu]="menu4"
         >
-          <input type="text" nz-input placeholder="Search" />
+          <input type="text" nz-input [placeholder]="'search' | translate" />
         </nz-input-group>
         <ng-template #suffixIconSearch>
           <span nz-icon nzType="search"></span>

@@ -8,6 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FeedTogglerComponent } from 'src/app/shared/modules/feedToggler/components/feedToggler/coinToggler.component';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 const icons: IconDefinition[] = [SearchOutline];
 
@@ -18,6 +19,7 @@ const icons: IconDefinition[] = [SearchOutline];
     NgAntModule,
     FormsModule,
     NzIconModule.forRoot(icons),
+    TranslateModule,
   ],
   declarations: [FeedTogglerComponent],
   exports: [FeedTogglerComponent],

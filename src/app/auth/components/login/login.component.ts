@@ -12,6 +12,7 @@ import { IBackendErrors } from 'src/app/shared/types/backendErrors.interface';
 import { ILoginRequest } from 'src/app/auth/types/loginRequest.interface';
 import { loginAction } from 'src/app/auth/store/actions/login.action';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private modal: NzModalRef
+    private modal: NzModalRef,
+    public translate: TranslateService
   ) {}
 
   ngOnInit(): void {

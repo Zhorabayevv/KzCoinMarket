@@ -13,6 +13,7 @@ import { currentUserSelector } from 'src/app/auth/store/selectors';
 import { map } from 'rxjs/operators';
 import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
 import { deleteArticleAction } from 'src/app/article/store/actions/deleteArticle.action';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-article',
@@ -319,7 +320,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) {}
 
   ngOnInit(): void {

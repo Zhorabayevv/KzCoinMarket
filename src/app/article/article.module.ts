@@ -18,6 +18,7 @@ import { DeleteArticleEffect } from './store/effects/deleteArticle.effect';
 import { ArticleService } from 'src/app/article/services/article.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes = [
   {
@@ -38,7 +39,8 @@ const icons: IconDefinition[] = [SearchOutline];
     TagListModule,
     NzIconModule.forRoot(icons),
     NgAntModule,
-    FormsModule
+    FormsModule,
+    TranslateModule,
   ],
   declarations: [ArticleComponent],
   providers: [ArticleService, SharedArticleService],

@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { isLoggedInSelector } from 'src/app/auth/store/selectors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-feed-toggler',
@@ -23,12 +24,13 @@ export class FeedTogglerComponent implements OnInit {
     {
       value: '30',
       label: '30',
-    }];
-    selectedRows: string = '10';
+    },
+  ];
+  selectedRows: string = '10';
 
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, public translate: TranslateService) {}
 
   ngOnInit(): void {
     this.initializeValues();

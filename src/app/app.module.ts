@@ -1,13 +1,21 @@
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateLoader,
+  TranslateService,
+} from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +39,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+export function appInitializerFactory(translate: TranslateService) {
+  return () => {
+    translate.setDefaultLang('kz');
+    return translate.use('kz').toPromise();
+  };
 }
 
 registerLocaleData(localeEn);
@@ -57,16 +71,18 @@ registerLocaleData(localeKz);
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     GlobalFeedModule,
     PopularTagsModule,
     StoreRouterConnectingModule.forRoot(),
     YourFeedModule,
     FooterModule,
-    ArticleModule
+    ArticleModule,
+    HttpClientModule,
   ],
+  exports: [TranslateModule],
   providers: [
     PersistanceService,
     {
@@ -75,6 +91,12 @@ registerLocaleData(localeKz);
       multi: true,
     },
     { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

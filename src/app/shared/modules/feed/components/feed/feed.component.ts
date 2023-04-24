@@ -15,6 +15,7 @@ import {
   feedSelector,
 } from 'src/app/shared/modules/feed/store/selectors';
 import { ICoinsTr } from 'src/app/shared/modules/feed/types/coinsTr.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-feed',
@@ -290,7 +291,8 @@ export class FeedComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {

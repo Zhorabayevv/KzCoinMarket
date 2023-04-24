@@ -1,12 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="item">
     <nz-form-item>
-      <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
-        <label>{{ "Username" }}</label>
+      <nz-form-control [nzErrorTip]="'fill_required' | translate">
+        <label>{{ "username" | translate }}</label>
         <input
           class="email"
           nz-input
-          placeholder="Enter your username..."
+          [placeholder]="('enter_username' | translate) + '...'"
           nzSize="large"
           formControlName="username"
           maxlength="70"
@@ -16,12 +16,12 @@
   </div>
   <div class="item">
     <nz-form-item>
-      <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
-        <label>{{ "Email Address" }}</label>
+      <nz-form-control [nzErrorTip]="'fill_required' | translate">
+        <label>{{ "email_address" | translate }}</label>
         <input
           class="email"
           nz-input
-          placeholder="Enter your email address..."
+          [placeholder]="('email_address' | translate) + '...'"
           nzSize="large"
           formControlName="email"
           maxlength="70"
@@ -31,17 +31,17 @@
   </div>
   <div class="item">
     <nz-form-item>
-      <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+      <nz-form-control [nzErrorTip]="'fill_required' | translate">
         <div class="dsc">
-          <label class="iece90">{{ "Password" }}</label>
-          <a [routerLink]="['/']">Forgot password?</a>
+          <label class="iece90">{{ "password" | translate }}</label>
+          <a [routerLink]="['/']">{{ "forgot_password" | translate }}?</a>
         </div>
         <nz-input-group [nzSuffix]="suffixTemplate" class="email">
           <input
             [type]="passwordVisible ? 'text' : 'password'"
             nz-input
             formControlName="password"
-            placeholder="Enter your password..."
+            [placeholder]="('enter_password' | translate) + '...'"
             style="text-align: center"
           />
         </nz-input-group>
@@ -57,6 +57,6 @@
     </nz-form-item>
   </div>
   <button type="submit" [disabled]="(isSubmitting$ | async) || form.invalid">
-    Sign Up
+    {{ "sign_up" | translate }}
   </button>
 </form>

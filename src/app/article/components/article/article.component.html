@@ -49,10 +49,10 @@
 <div class="container">
   <ul class="dc">
     <li>
-      <a [routerLink]="['/']">Cryptocurrencies</a>
+      <a [routerLink]="['/']">{{ "сryptocurrencies" | translate }}</a>
     </li>
     <li>
-      <a [routerLink]="['/']">Coins</a>
+      <a [routerLink]="['/']">{{ "coins" | translate }}</a>
     </li>
     <li>{{ coin.coinName }}</li>
   </ul>
@@ -64,9 +64,9 @@
         <span> {{ coin.coinSymbol }} </span>
       </div>
       <div class="second-div">
-        <span class="rank">Rank #{{ coin.id }}</span>
-        <span class="coin">Coin</span>
-        <span class="coin">On 3,720,983 watchlists</span>
+        <span class="rank">{{ "rank" | translate }} #{{ coin.id }}</span>
+        <span class="coin">{{ "coin" | translate }}</span>
+        <span class="coin">{{ "watchlists" | translate }}</span>
       </div>
       <div class="dc main-links">
         <p *ngFor="let link of links">
@@ -83,21 +83,25 @@
     <div class="bla-div">
       <div class="price-div">
         <div class="dsc first">
-          <p class="title-price">Bitcoin Price <span> (BTC) </span></p>
+          <p class="title-price">
+            {{ coin.coinName }} {{ "price" | translate }}
+            <span> ({{ coin.coinSymbol }}) </span>
+          </p>
           <div class="dc">
             <p class="dsc btn-blue">
-              Buy <span nz-icon nzType="caret-down" nzTheme="outline"></span>
-            </p>
-            <p class="dsc btn-blue">
-              Exchange
+              {{ "buy" | translate }}
               <span nz-icon nzType="caret-down" nzTheme="outline"></span>
             </p>
             <p class="dsc btn-blue">
-              Gamings
+              {{ "exchange" | translate }}
               <span nz-icon nzType="caret-down" nzTheme="outline"></span>
             </p>
             <p class="dsc btn-blue">
-              Earn crypto
+              {{ "gamings" | translate }}
+              <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+            </p>
+            <p class="dsc btn-blue">
+              {{ "earn_crypto" | translate }}
               <span nz-icon nzType="caret-down" nzTheme="outline"></span>
             </p>
           </div>
@@ -116,7 +120,7 @@
             nzStrokeWidth="6"
             [nzShowInfo]="false"
           ></nz-progress>
-          <span>High:</span
+          <span>{{ "high" | translate }}:</span
           ><span style="color: #000000">₸{{ coin.price }}</span>
           <span class="dayh">24h</span>
         </div>
@@ -125,7 +129,7 @@
       <div class="df second">
         <div class="divs">
           <p class="title">
-            Market Cap
+            {{ "market_cap" | translate }}
             <span
               nz-icon
               nzType="info-circle"
@@ -136,14 +140,14 @@
           <p class="price">₸208 781 367 751 952</p>
           <p class="procent">0.73%</p>
           <p class="dvolume">
-            24h Volume / Market Cap
+            {{ "24h" | translate }}
             <span>0.0563</span>
           </p>
         </div>
 
         <div class="divs" style="padding-left: 24px">
           <p class="title">
-            Fully Diluted Market Cap
+            {{ "fully_cap" | translate }}
             <span
               nz-icon
               nzType="info-circle"
@@ -157,7 +161,7 @@
 
         <div class="divs" style="padding-left: 24px">
           <p class="title">
-            Volume <span class="dayh">24h</span>
+            {{ "volume" | translate }} <span class="dayh">24h</span>
             <span
               nz-icon
               nzType="info-circle"
@@ -171,7 +175,7 @@
 
         <div class="divs" style="padding-left: 24px">
           <p class="dc title">
-            Circulating Supply
+            {{ "circulating_supply" | translate }}
             <img
               style="margin-left: 5px"
               src="../../../../assets/checkMark.svg"
@@ -190,7 +194,8 @@
           ></nz-progress>
           <div class="dsc max-supply" style="margin-top: 29px">
             <p>
-              Max Supply<span
+              {{ "max_supply" | translate
+              }}<span
                 nz-icon
                 nzType="info-circle"
                 [nzTheme]="'twotone'"
@@ -201,7 +206,8 @@
           </div>
           <div class="dsc max-supply">
             <p>
-              Total Supply<span
+              {{ "total_supply" | translate
+              }}<span
                 nz-icon
                 nzType="info-circle"
                 [nzTheme]="'twotone'"
@@ -218,7 +224,9 @@
 
   <div class="ds main-info">
     <div>
-      <h1 class="title-chart">{{ coin.coinName }} to KZT Chart</h1>
+      <h1 class="title-chart">
+        {{ coin.coinName }} {{ "kzt_chart" | translate }}
+      </h1>
       <div class="chart">
         <iframe
           id="tradingview_44306"
@@ -235,7 +243,9 @@
           allowfullscreen
         ></iframe>
       </div>
-      <h1 class="title-converter">{{ coin.coinSymbol }} to KZT Converter</h1>
+      <h1 class="title-converter">
+        {{ coin.coinSymbol }} {{ "kzt_converter" | translate }}
+      </h1>
       <div class="df converter">
         <div class="dsc coin">
           <div class="dc">
@@ -257,7 +267,7 @@
             <img src="../../../../assets/tenge.png" alt="" />
             <div>
               <p class="symbol">KZT</p>
-              <p class="name">Kazakhstani tenge</p>
+              <p class="name">{{ "kazakhstani_tenge" | translate }}</p>
             </div>
           </div>
           <input nz-input [(ngModel)]="tenge" nzSize="large" />
@@ -266,7 +276,10 @@
     </div>
 
     <div class="info-text">
-      <h1 class="title">{{ coin.coinSymbol }} Price Live Data</h1>
+      <h1 class="title">
+        {{ coin.coinSymbol }}
+        {{ "price_live_data" | translate }}
+      </h1>
       <p class="text">
         The live {{ coin.coinName }} price today is $23,330.894 USD with a
         24-hour trading volume of $25,376,158,229 USD. We update our

@@ -33,11 +33,11 @@
     <div class="links df">
       <a [routerLink]="['/watchlist']" class="dec watch-port btn">
         <img src="../../../../../assets/star.svg" alt="" />
-        Watchlist
+        {{ "watchlists" | translate }}
       </a>
       <a [routerLink]="['/portfolio']" class="dec watch-port btn">
         <img src="../../../../../assets/portfolio.svg" alt="" />
-        Portfolio
+        {{ "portfolio" | translate }}
       </a>
     </div>
     <div class="df">
@@ -47,15 +47,17 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
-        Cryptocurrencies
+        {{ "сryptocurrencies" | translate }}
       </a>
-      <a [routerLink]="['/']" class="dec btn coins"> Kz Coins </a>
+      <a [routerLink]="['/']" class="dec btn coins">
+        {{ "kz_coins" | translate }}
+      </a>
     </div>
   </div>
 
   <div class="dc right">
     <div class="rows">
-      <span>Show rows</span>
+      <span>{{ "show_rows" | translate }}</span>
       <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
       </nz-select>
     </div>

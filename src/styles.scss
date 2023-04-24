@@ -167,14 +167,3 @@ button {
   }
 }
 
-.progress-div {
-  color: #58667e;
-  font-size: 12px;
-  font-weight: 600;
-  .progress {
-    margin: 0 13px;
-    ::ng-deep .ant-progress-line {
-      width: 166px;
-    }
-  }
-}

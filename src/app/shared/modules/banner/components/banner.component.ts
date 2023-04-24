@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { IBanners } from 'src/app/shared/modules/banner//types/banners.interface';
 import { IBannerCarousel } from 'src/app/shared/modules/banner//types/bannerCarousel.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-banner',
@@ -11,7 +12,7 @@ import { IBannerCarousel } from 'src/app/shared/modules/banner//types/bannerCaro
 export class BannerComponent implements OnInit {
   banners: IBanners[] = [
     {
-      title: 'Trending',
+      title: this.translate.instant('trending'),
       image: '../../../../../assets/fire.png',
       coins: [
         {
@@ -38,7 +39,7 @@ export class BannerComponent implements OnInit {
       ],
     },
     {
-      title: 'Top KZ Cryptocurrencies',
+      title: this.translate.instant('kz_cryptocurrencies'),
       image: '../../../../../assets/kzcoin.png',
       coins: [
         {
@@ -65,7 +66,7 @@ export class BannerComponent implements OnInit {
       ],
     },
     {
-      title: 'Top Community Article',
+      title: this.translate.instant('community_article'),
       image: '',
     },
   ];
@@ -109,6 +110,9 @@ export class BannerComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(private translate: TranslateService) {
+    translate.addLangs(['en', 'kz']);
+    translate.setDefaultLang('en');
+  }
   ngOnInit(): void {}
 }

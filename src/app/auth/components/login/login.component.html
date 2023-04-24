@@ -45,26 +45,26 @@
       [ngClass]="{ actived: logIn }"
       (click)="changeLogIn()"
     >
-      Log In
+      {{ "log_in" | translate }}
     </button>
     <button
       class="btnLog"
       [ngClass]="{ actived: !logIn }"
       (click)="changeSignUp()"
     >
-      Sign Up
+      {{ "sign_up" | translate }}
     </button>
   </div>
   <ng-container *ngIf="logIn; else elseTemplate">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="item">
         <nz-form-item>
-          <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
-            <label>{{ "Username" }}</label>
+          <nz-form-control [nzErrorTip]="'fill_required' | translate">
+            <label>{{ "username" | translate }}</label>
             <input
               class="email"
               nz-input
-              placeholder="Enter your username..."
+              [placeholder]="('enter_username' | translate) + '...'"
               nzSize="large"
               formControlName="username"
               maxlength="70"
@@ -74,10 +74,10 @@
       </div>
       <div class="item">
         <nz-form-item>
-          <nz-form-control [nzErrorTip]="'Заполните обязательное поле'">
+          <nz-form-control [nzErrorTip]="'fill_required' | translate">
             <div class="dsc">
-              <label class="iece90">{{ "Password" }}</label>
-              <a [routerLink]="['/']">Forgot password?</a>
+              <label class="iece90">{{ "password" | translate }}</label>
+              <a [routerLink]="['/']">{{ "forgot_password" | translate }}?</a>
             </div>
             <nz-input-group [nzSuffix]="suffixTemplate" class="email">
               <input
@@ -85,7 +85,7 @@
                 [type]="passwordVisible ? 'text' : 'password'"
                 nz-input
                 formControlName="password"
-                placeholder="Enter your password..."
+                [placeholder]="('enter_password' | translate) + '...'"
               />
             </nz-input-group>
             <ng-template #suffixTemplate>
@@ -103,7 +103,7 @@
         type="submit"
         [disabled]="(isSubmitting$ | async) || form.invalid"
       >
-        Sign in
+       {{ "sign_in" | translate }}
       </button>
     </form>
   </ng-container>
