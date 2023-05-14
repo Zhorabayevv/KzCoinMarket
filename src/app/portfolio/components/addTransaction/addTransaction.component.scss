@@ -1,0 +1,53 @@
+.search {
+  margin-top: 20px;
+  height: 38.5px;
+  background-color: #eff2f5;
+  color: #a6b0c3;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 12px;
+  font-family: "Times New Roman", Times, serif;
+  line-height: 155%;
+  background-color: #eff2f5;
+  padding: 8.5px 16px;
+  cursor: pointer;
+  &:focus,
+  &:hover {
+    border: 1px solid #eff2f5 !important;
+  }
+}
+.coin-symbol {
+  font-size: 14px;
+  line-height: 142%;
+  font-weight: 700;
+  color: #808a9d;
+}
+.coin-icon {
+  width: 24px;
+  margin-right: 5px;
+}
+.coins {
+  margin-top: 28px;
+}
+.coin {
+  padding: 10px;
+  &:hover {
+    background-color: #f8fafd;
+    border-radius: 8px;
+  }
+}
+ul {
+  background-color: #eff2f5;
+  border-radius: 8px;
+  padding: 3px;
+  li {
+    padding: 4px;
+    text-align: center;
+    min-width: 155px;
+    &:hover {
+      background-color: #f8fafd;
+      border-radius: 8px;
+    }
+  }
+}

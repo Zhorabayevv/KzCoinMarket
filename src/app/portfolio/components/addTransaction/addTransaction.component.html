@@ -1,0 +1,56 @@
+<h1>
+  {{
+    addTransActive
+      ? ("Add Transaction" | translate)
+      : ("Select Coin" | translate)
+  }}
+</h1>
+<ng-container *ngIf="addTransActive; else elseTemplate">
+  <ul class="dc">
+    <li>Buy</li>
+    <li>Sell</li>
+    <li>Transfer</li>
+  </ul>
+
+  <nz-select nzShowSearch nzAllowClear [(ngModel)]="selectedOS" class="w100">
+    <ng-container *ngFor="let coin of coinsSelect">
+      <nz-option
+        nzCustomContent
+        (click)="selectCoin(coin)"
+        [nzLabel]="coin.label"
+        [nzValue]="coin.value"
+      >
+        <div class="dc">
+          <img
+            class="coin-icon"
+            [src]="'../../../../../../assets/' + (coin.value | lowercase) + '.png'"
+            alt=""
+          />
+          <span>&nbsp; {{ coin.label }}&nbsp;&nbsp;</span>
+          <span class="coin-symbol">
+            {{ coin.value }}
+          </span>
+        </div>
+      </nz-option>
+    </ng-container>
+  </nz-select>
+</ng-container>
+<ng-template #elseTemplate>
+  <input nz-input placeholder="Search" class="search" nzSize="large" />
+  <div class="coins">
+    <div class="dsc coin" *ngFor="let coin of coins" (click)="selectCoin(coin)">
+      <div class="dc">
+        <img
+          class="coin-icon"
+          [src]="'../../../../../../assets/' + coin.logo + '.png'"
+          alt=""
+        />
+        <span>&nbsp; {{ coin.name }}&nbsp;&nbsp;</span>
+        <span class="coin-symbol">
+          {{ coin.symbol }}
+        </span>
+      </div>
+      <span nz-icon nzType="right" nzTheme="outline"></span>
+    </div>
+  </div>
+</ng-template>

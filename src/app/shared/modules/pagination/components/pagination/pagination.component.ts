@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ISelect } from 'src/app/shared/modules/navBar/types/select.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'mc-pagination',
@@ -31,7 +32,10 @@ export class PaginationComponent implements OnInit {
   ];
   selectedRows: string = '10';
 
-  constructor(private utilsService: UtilsService) {}
+  constructor(
+    private utilsService: UtilsService,
+    public translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.pagesCount = Math.ceil(this.totalProps / this.limitProps);

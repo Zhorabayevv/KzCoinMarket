@@ -2,28 +2,9 @@
   <!-- <mc-loading *ngIf="(isLoading$ | async) || !(feed$ | async)"></mc-loading> -->
   <mc-error-message *ngIf="error$ | async"></mc-error-message>
   <!-- [nzSpinning]="(isLoading$ | async) || !(feed$ | async)" -->
-  <nz-spin style="min-height: 400px" [nzSpinning]="false">
-    <!-- *ngIf="feed$ | async" -->
+  <nz-spin style="min-height: 400px" [nzSpinning]="(isLoading$ | async)">
     <div>
-      <!-- <div class="article-preview" *ngFor="let article of (feed$ | async).articles">
-      <div class="artile-meta">
-        <a [routerLink]="['/profiles', article.author.username]">
-          <img [src]="article.author.image" alt="" />
-        </a>
-        <div class="info">
-          <a [routerLink]="['/profiles', article.author.username]">
-            {{ article.author.username }}
-          </a>
-          <span class="date">{{ article.createdAt | date }}</span>
-        </div>
-        <div class="pull-xs-right">Add to favorites</div>
-      </div>
-      <a [routerLink]="['/articles', article.slug]" class="preview-link">
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
-        <mc-tag-list [tags]="article.tagList" ></mc-tag-list>
-      </a>
-    </div> -->
+
       <thead>
         <tr class="head">
           <th class="first"></th>
@@ -77,7 +58,7 @@
               nzType="star"
               [nzTheme]="'twotone'"
               nz-tooltip
-              [nzTooltipTitle]="!watchListProps ? 'Жүйеге кірген жоқсыз' : ''"
+              [nzTooltipTitle]="(isLoggedIn$ | async) ? 'Жүйеге кірген жоқсыз' : ''"
               [nzTwotoneColor]="
                 coin.isFavorited || watchListProps ? '#F6B87E' : '#808a9d'
               "

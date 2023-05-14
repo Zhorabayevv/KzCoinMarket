@@ -31,9 +31,12 @@
 <div class="toggler dsc">
   <div class="dc">
     <div class="links df">
-      <a [routerLink]="['/watchlist']" class="dec watch-port btn">
+      <a
+        [routerLink]="(isLoggedIn$ | async) ? ['/watchlist'] : ['/']"
+        class="dec watch-port btn"
+      >
         <img src="../../../../../assets/star.svg" alt="" />
-        {{ "watchlists" | translate }}
+        {{ "watchlist" | translate }}
       </a>
       <a [routerLink]="['/portfolio']" class="dec watch-port btn">
         <img src="../../../../../assets/portfolio.svg" alt="" />

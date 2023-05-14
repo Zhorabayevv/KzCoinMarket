@@ -15,6 +15,7 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
 import { NzTransButtonModule } from 'ng-zorro-antd/core/trans-button';
@@ -78,6 +79,7 @@ import { NzResizableModule } from 'ng-zorro-antd/resizable';
     NzBadgeModule,
     NzBreadCrumbModule,
     NzButtonModule,
+    DragDropModule,
     NzCalendarModule,
     NzCardModule,
     NzCarouselModule,

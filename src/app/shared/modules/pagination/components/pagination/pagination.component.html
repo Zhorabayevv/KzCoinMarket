@@ -14,7 +14,7 @@
   <p>Барлык криптовалюталардн саны {{ totalProps }}</p>
   <nz-pagination [nzPageIndex]="1" [nzTotal]="pagesCount"></nz-pagination>
   <div class="rows">
-    <span>Show rows</span>
+    <span>{{"show_rows" | translate}}</span>
     <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
     </nz-select>
   </div>

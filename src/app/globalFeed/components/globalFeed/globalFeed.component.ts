@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class GlobalFeedComponent {
   apiUrl: string = '/coin/full';
-  switchValue: boolean = false;
+  switchValue: boolean = true;
   loading: boolean = false;
 
   constructor(public translate: TranslateService) {}

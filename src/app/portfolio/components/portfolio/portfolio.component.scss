@@ -1,0 +1,114 @@
+.portfolio {
+  padding: 50px 0 50px 0;
+  width: 1370px;
+  margin: 0 auto;
+  ul {
+    padding: 24px 16px;
+    color: #58667e;
+    li {
+      margin-right: 30px;
+    }
+    .active {
+      color: black;
+    }
+  }
+  .table {
+    margin-top: 21px;
+    border-top: 1px solid #eff2f5;
+    tr {
+      th {
+        border-bottom: 1px solid #eff2f5;
+        height: 47px;
+      }
+      .first {
+        width: 33px;
+      }
+      .second {
+        text-align: end;
+        width: 43px;
+        padding: 12px;
+      }
+      .name {
+        width: 185px;
+        padding: 12px;
+      }
+      .price {
+        width: 134px;
+        padding-left: 72px !important;
+      }
+      .one-procent {
+        width: 77px;
+        padding-left: 23px !important;
+      }
+      .day-procent {
+        width: 81px;
+        padding-left: 23px !important;
+      }
+      .week-procent {
+        width: 85px;
+        padding-left: 31px !important;
+      }
+      .cap {
+        width: 145px;
+        padding-left: 35px !important;
+      }
+      .volume {
+        width: 167px;
+        padding-left: 45px !important;
+      }
+      .supply {
+        width: 201px;
+        padding-left: 61px !important;
+      }
+      .days {
+        width: 219px;
+        padding-left: 106px !important;
+      }
+      .paddin {
+        padding: 12px 12px 12px 0;
+      }
+    }
+    tbody {
+      tr {
+        td {
+          border-bottom: 1px solid #eff2f5;
+          height: 81px;
+          text-align: center;
+          font-size: 14px;
+          line-height: 142%;
+          font-weight: 700;
+          &:first-child {
+            border-bottom: none;
+          }
+          .color-red {
+            color: #ea3943;
+          }
+          .color-green {
+            color: #00c48c;
+          }
+          ::ng-deep .ant-progress-line {
+            width: 160px;
+          }
+          .coin-symbol {
+            font-size: 14px;
+            line-height: 142%;
+            font-weight: 700;
+            color: #808a9d;
+          }
+          .id {
+            color: #808a9d;
+            text-align: center;
+          }
+          .coin-icon {
+            width: 24px;
+            margin-right: 5px;
+          }
+          .value {
+            color: #58667e;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

@@ -65,7 +65,7 @@ const authReducer = createReducer(
     (state, action): IAuthState => ({
       ...state,
       isSubmitting: false,
-      // validationErrors: action.errors,
+      validationErrors: action.errors,
     })
   ),
   on(

@@ -36,6 +36,7 @@ import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { FooterModule } from './shared/modules/footer/footer.module';
 import { ArticleModule } from './article/article.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PortfolioModule } from './portfolio/portfolio.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -79,6 +80,7 @@ registerLocaleData(localeKz);
     StoreRouterConnectingModule.forRoot(),
     YourFeedModule,
     FooterModule,
+    PortfolioModule,
     ArticleModule,
     HttpClientModule,
   ],

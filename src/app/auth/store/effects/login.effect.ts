@@ -13,6 +13,7 @@ import {
   loginAction,
   loginFailureAction,
 } from 'src/app/auth/store/actions/login.action';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable()
 export class LoginEffect {
@@ -28,7 +29,12 @@ export class LoginEffect {
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             console.log('errorResponse', errorResponse);
-            return of(loginFailureAction());
+            this.message.error('Ошибка!');
+            this.message.error('Бақылау тізімін алу мүмкін болмады!');
+            this.message.error(
+              'Әрекетті кейінірек қайталаңыз немесе мәселе шешілмесе, қолдау қызметіне хабарласыңыз.'
+            );
+            return of(loginFailureAction({ errors: errorResponse.error }));
           })
         );
       })
@@ -50,6 +56,7 @@ export class LoginEffect {
     private actions$: Actions,
     private authService: AuthService,
     private router: Router,
+    private message: NzMessageService,
     private persistanService: PersistanceService
   ) {}
 }

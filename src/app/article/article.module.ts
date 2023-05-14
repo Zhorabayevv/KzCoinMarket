@@ -1,7 +1,7 @@
 import { NgAntModule } from './../ng-zorro-antd.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SearchOutline } from '@ant-design/icons-angular/icons';
@@ -20,7 +20,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
-const routes = [
+const routes: Routes = [
   {
     path: 'articles/:symbol',
     component: ArticleComponent,

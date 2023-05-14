@@ -16,6 +16,7 @@ import {
 } from 'src/app/shared/modules/feed/store/selectors';
 import { ICoinsTr } from 'src/app/shared/modules/feed/types/coinsTr.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { isLoggedInSelector } from 'src/app/auth/store/selectors';
 
 @Component({
   selector: 'mc-feed',
@@ -29,6 +30,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   error$: Observable<string | null>;
   feed$: Observable<IGetFeedResponse | null>;
+  isLoggedIn$: Observable<boolean>;
   limitArticles = 10;
   baseUrl: string;
   queryParamsSubscription: Subscription;
@@ -287,6 +289,7 @@ export class FeedComponent implements OnInit, OnDestroy {
       isFavorited: false,
     },
   ];
+  spinning: boolean = false;
 
   constructor(
     private store: Store,
@@ -298,7 +301,6 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initializeValues();
     this.initializeListeners();
-    console.log('this.watchListProps', this.watchListProps);
   }
   ngOnDestroy(): void {
     this.queryParamsSubscription.unsubscribe();
@@ -308,7 +310,9 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorSelector));
     this.feed$ = this.store.pipe(select(feedSelector));
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.baseUrl = this.router.url.split('?')[0];
+    // if(this.feed$) this.spinning = true;
   }
 
   initializeListeners(): void {

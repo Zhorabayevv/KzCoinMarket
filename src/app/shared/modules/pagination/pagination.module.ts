@@ -9,6 +9,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 const icons: IconDefinition[] = [SearchOutline];
 @NgModule({
@@ -18,6 +19,7 @@ const icons: IconDefinition[] = [SearchOutline];
     NzIconModule.forRoot(icons),
     NgAntModule,
     FormsModule,
+    TranslateModule,
   ],
   declarations: [PaginationComponent],
   exports: [PaginationComponent],

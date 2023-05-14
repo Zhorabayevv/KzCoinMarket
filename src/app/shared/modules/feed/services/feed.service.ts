@@ -9,7 +9,8 @@ export class FeedService {
   constructor(private http: HttpClient) {}
 
   getFeed(url: string): Observable<IGetFeedResponse> {
-    const fullUrl = 'http://localhost:9832/v1/api' + url;
+    // const fullUrl = 'http://localhost:9832/v1/api' + url;
+    const fullUrl = 'https://conduit.productionready.io/api' + url;
     return this.http.get<IGetFeedResponse>(fullUrl);
   }
 }
