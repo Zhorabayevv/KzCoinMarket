@@ -1,4 +1,4 @@
-<h1>
+<h1 style="margin-bottom: 16px">
   {{
     addTransActive
       ? ("Add Transaction" | translate)
@@ -7,23 +7,30 @@
 </h1>
 <ng-container *ngIf="addTransActive; else elseTemplate">
   <ul class="dc">
-    <li>Buy</li>
+    <li class="active">Buy</li>
     <li>Sell</li>
     <li>Transfer</li>
   </ul>
-
-  <nz-select nzShowSearch nzAllowClear [(ngModel)]="selectedOS" class="w100">
-    <ng-container *ngFor="let coin of coinsSelect">
+  <div class="select-coin">
+    <nz-select
+      nzShowSearch
+      nzAllowClear
+      [(ngModel)]="selectedOS"
+      class="w100 br8"
+    >
       <nz-option
         nzCustomContent
         (click)="selectCoin(coin)"
+        *ngFor="let coin of coinsSelect"
         [nzLabel]="coin.label"
         [nzValue]="coin.value"
       >
         <div class="dc">
           <img
             class="coin-icon"
-            [src]="'../../../../../../assets/' + (coin.value | lowercase) + '.png'"
+            [src]="
+              '../../../../../../assets/' + (coin.value | lowercase) + '.png'
+            "
             alt=""
           />
           <span>&nbsp; {{ coin.label }}&nbsp;&nbsp;</span>
@@ -32,11 +39,49 @@
           </span>
         </div>
       </nz-option>
-    </ng-container>
-  </nz-select>
+    </nz-select>
+  </div>
+
+  <div class="dsc qu-pr">
+    <div class="qu">
+      <p>Quantity</p>
+      <input
+        nz-input
+        placeholder="0.00"
+        (input)="calculateTotalSpent()"
+        [(ngModel)]="quantity"
+      />
+    </div>
+
+    <div class="pr">
+      <p>Price Per Coin</p>
+      <input nz-input [(ngModel)]="pricePerCoin" />
+    </div>
+  </div>
+
+  <div class="total-spent br8">
+    <p>Total Spent</p>
+    <input
+      nz-input
+      nzBorderless
+      [placeholder]="0 | currency : '₸'"
+      [(ngModel)]="totalSpent"
+      disabled
+    />
+  </div>
+
+  <button class="add-transaction br8 cp">Add Transaction</button>
 </ng-container>
+
 <ng-template #elseTemplate>
-  <input nz-input placeholder="Search" class="search" nzSize="large" />
+  <input
+    nz-input
+    placeholder="Search"
+    class="search"
+    nzSize="large"
+    [(ngModel)]="search"
+    (input)="seacrchCoin()"
+  />
   <div class="coins">
     <div class="dsc coin" *ngFor="let coin of coins" (click)="selectCoin(coin)">
       <div class="dc">

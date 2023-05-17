@@ -50,4 +50,51 @@ ul {
       border-radius: 8px;
     }
   }
+  .active {
+    background-color: #f8fafd;
+    border-radius: 8px;
+  }
+}
+.select-coin {
+  margin: 24px 0 16px 0;
+  ::ng-deep .ant-select-selector {
+    height: 48px;
+    border: 1px solid #cfd6e4;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+  }
+}
+.qu-pr {
+  margin-bottom: 16px;
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #000000;
+  }
+  // .qu {
+  ::ng-deep .ant-input {
+    height: 40px;
+    border: 1px solid #cfd6e4;
+    border-radius: 8px;
+    // }
+  }
+}
+.total-spent {
+  background-color: #eff2f5;
+  height: 84px;
+  padding: 16px;
+  ::ng-deep .ant-input-borderless{
+    color: #000000;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+.add-transaction {
+  margin-top: 32px;
+  background-color: #3861fb;
+  color: #ffffff;
+  width: 100%;
+  height: 48px;
 }

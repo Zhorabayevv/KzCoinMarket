@@ -47,7 +47,12 @@
             cdkDrag
             style="height: 57px"
           >
-            <div cdkDragHandle class="cp" style="margin-right: 8px">
+            <div
+              cdkDragHandle
+              class="cp"
+              style="margin-right: 8px"
+              *ngIf="editing"
+            >
               <svg width="20px" fill="#808a9d" viewBox="0 0 24 24">
                 <path
                   d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
@@ -87,7 +92,7 @@
                       font-weight: 400;
                     "
                   >
-                    {{ portfolio.price | currency : "KZT" }}
+                    {{ portfolio.price | currency : "₸" }}
                   </p>
                 </div>
               </div>
@@ -107,7 +112,7 @@
         </div>
 
         <div style="height: 115px; padding: 9px">
-          <div class="dc" style="height: 48.5px">
+          <div class="dc cp" style="height: 48.5px">
             <span
               nz-icon
               nzType="plus-circle"
@@ -118,7 +123,7 @@
               {{ "Create Portfolio" | translate }}
             </span>
           </div>
-          <div class="dc" style="height: 48.5px">
+          <div class="dc cp" style="height: 48.5px" *ngIf="editing" (click)="editPortfolio()">
             <span
               nz-icon
               nzType="check-circle"
@@ -134,7 +139,7 @@
     </div>
 
     <div class="w100" style="margin-left: 32px">
-      <p>
+      <p style="color: #58667e; font-size: 12px; margin-bottom: 6px">
         {{ "Current Balance" | translate }}
         <span (click)="balanceVis()" class="cp">
           <ng-container *ngIf="invisBalance; else invisEye">
@@ -149,7 +154,15 @@
       <div>
         <div class="dsc">
           <div class="dc">
-            <span style="margin-right: 16px">
+            <span
+              style="
+                margin-right: 16px;
+                color: #b52c34;
+                font-size: 32px;
+                font-weight: 700;
+                margin-bottom: 5px;
+              "
+            >
               {{ invisBalance ? "****" : ("174805.05" | currency : "₸") }}</span
             >
             <p
@@ -161,7 +174,12 @@
                 border-radius: 8px;
               "
             >
-              <span nz-icon [nzType]="invisBalance ? '' : 'caret-down'" nzTheme="outline"></span>{{invisBalance? '' : '3.79'}}%
+              <span
+                nz-icon
+                [nzType]="invisBalance ? '' : 'caret-down'"
+                nzTheme="outline"
+              ></span
+              >{{ invisBalance ? "" : "3.79" }}%
             </p>
           </div>
           <div>
@@ -173,7 +191,10 @@
                 border-radius: 8px;
                 color: #000000;
                 margin-right: 20px;
+                font-weight: 600;
               "
+              *ngIf="!editing"
+              (click)="editPortfolio()"
             >
               <span
                 nz-icon
@@ -181,7 +202,7 @@
                 style="transform: rotate(90deg); font-size: 16px"
                 nzTheme="outline"
               ></span>
-              {{ "More" | translate }}</button
+              {{ "Edit" | translate }}</button
             ><button
               class="cp"
               style="
@@ -189,6 +210,7 @@
                 background-color: #3861fb;
                 border-radius: 8px;
                 color: #ffffff;
+                font-weight: 600;
               "
               (click)="addCoin()"
             >
@@ -202,7 +224,7 @@
             </button>
           </div>
         </div>
-        <p>
+        <p style="color: #ea3943; margin-bottom: 16px">
           -{{ "6878.65" | currency : "₸" }}
           <span
             style="
@@ -210,6 +232,7 @@
               padding: 3px 4px;
               border-radius: 3px;
               color: #58667e;
+              margin-left: 4px;
             "
             >24h</span
           >

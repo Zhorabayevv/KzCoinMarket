@@ -21,32 +21,51 @@ export class AddTransactionComponent implements OnInit {
       symbol: 'ETH',
     },
   ];
-  coinsSelect= [
+  coinsSelect = [
     {
       value: 'BTC',
       label: 'Bitcoin',
+      price: 29000,
     },
     {
       value: 'ETH',
       label: 'Ethereum',
-    }
-  ]
-  selectedOS = {
-    value: '',
-    label: '',
-  };
+      price: 2000,
+    },
+  ];
+  selectedOS: string;
+  quantity: number;
+  pricePerCoin: number;
+  totalSpent: number;
+  search: string;
 
   addTransActive: boolean = false;
   constructor(private translate: TranslateService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.calculateTotalSpent();
+    this.seacrchCoin();
+  }
 
   selectCoin(coin): void {
     console.log(coin);
 
     this.addTransActive = true;
-    this.selectedOS = this.coinsSelect.find((item) => item.value === coin.symbol);
+    const selected = this.coinsSelect.find(
+      (item) => item.value === coin.symbol
+    );
+    this.selectedOS = selected.value;
+    this.pricePerCoin = selected.price;
 
     console.log(this.selectedOS);
+  }
+
+  seacrchCoin(): void {
+    console.log(this.search);
+  }
+
+  calculateTotalSpent(): void {
+    if( !this.quantity || !this.pricePerCoin ) return;
+    this.totalSpent = this.pricePerCoin * this.quantity;
   }
 }

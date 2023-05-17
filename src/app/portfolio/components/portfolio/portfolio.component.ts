@@ -54,7 +54,8 @@ export class PortfolioComponent implements OnInit {
       profit: 7732.84,
       profitPercent: 0.8
     }
-  ]
+  ];
+  editing: boolean = false;
 
   constructor(public translate: TranslateService, private modal: NzModalService) {}
 
@@ -80,5 +81,9 @@ export class PortfolioComponent implements OnInit {
       },
       nzFooter: null,
     })
+  }
+
+  editPortfolio(): void {
+    this.editing = !this.editing;
   }
 }
