@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let coin of coins">
+        <tr *ngFor="let coin of (feed$ | async).coinDto; let i = index">
           <td>
             <span
               nz-icon
@@ -135,7 +135,7 @@
             <img
               [src]="
                 'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/' +
-                coin.grap +
+                i +
                 '.svg'
               "
               alt=""
