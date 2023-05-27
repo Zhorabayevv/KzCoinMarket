@@ -1,6 +1,6 @@
 import { ICoinsTr } from './coinsTr.interface';
 
 export interface IGetFeedResponse {
-  countDto: ICoinsTr[];
+  coinDto: ICoinsTr[];
   count: number;
 }

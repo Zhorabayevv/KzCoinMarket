@@ -17,6 +17,7 @@ export class GetFeedEffect {
       switchMap(({url}) => {
         return this.feedService.getFeed(url).pipe(
           map((feed: IGetFeedResponse) => {
+            console.log('feed', feed);
             return getFeedSuccessAction({ feed });
           }),
           catchError(() => {

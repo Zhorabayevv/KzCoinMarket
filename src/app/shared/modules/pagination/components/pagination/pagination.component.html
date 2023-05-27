@@ -12,9 +12,10 @@
 
 <div class="dsc" style="margin-top: 55px; padding-bottom: 81px">
   <p>Барлык криптовалюталардн саны {{ totalProps }}</p>
-  <nz-pagination [nzPageIndex]="1" [nzTotal]="pagesCount"></nz-pagination>
+  {{ pagesCount }}
+  <nz-pagination [nzPageIndex]="currentPageProps" [nzTotal]="pagesCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
   <div class="rows">
-    <span>{{"show_rows" | translate}}</span>
+    <span>{{ "show_rows" | translate }}</span>
     <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
     </nz-select>
   </div>

@@ -1,51 +1,3 @@
-<!-- <div class="article-page">
-  <div class="banner">
-    <div class="container" *ngIf="article">
-      <h1>{{ article.title }}</h1>
-      <div class="article-meta">
-        <a [routerLink]="['/profiles', article.author.username]">
-          <img [src]="article.author.image" />
-        </a>
-        <div class="info">
-          <a [routerLink]="['/profiles', article.author.username]">
-            {{ article.author.username }}
-          </a>
-          <span class="date">
-            {{ article.createdAt }}
-          </span>
-        </div>
-        <span *ngIf="isAuthor$ | async">
-          <a
-            [routerLink]="['/articles', article.slug, 'edit']"
-            class="btn btn-outline-secondary btn-sm"
-          >
-            <i class="ion-edit"></i>
-            Edit Article
-          </a>
-          <button
-            class="btn btn-outline-danger btn-sm"
-            (click)="deleteArticle()"
-          >
-            Delete Article
-          </button>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div class="container page">
-    <mc-loading *ngIf="isLoading$ | async"></mc-loading>
-    <mc-error-message *ngIf="error$ | async"></mc-error-message>
-
-    <div class="row article-content" *ngIf="article">
-      <div class="col-xs-12">
-        <div>
-          <p>{{ article.body }}</p>
-        </div>
-        <mc-tag-list [tags]="article.tagList"></mc-tag-list>
-      </div>
-    </div>
-  </div>
-</div> -->
 <div class="container">
   <ul class="dc">
     <li>
@@ -54,26 +6,28 @@
     <li>
       <a [routerLink]="['/']">{{ "coins" | translate }}</a>
     </li>
-    <li>{{ coin.coinName }}</li>
+    <li>{{ article.fullName }}</li>
   </ul>
   <div class="ds">
     <div class="main-div">
       <div class="dc title-div">
-        <img [src]="'../../../../assets/' + coin.coinIcon + '.png'" alt="" />
-        <h1>{{ coin.coinName }}</h1>
-        <span> {{ coin.coinSymbol }} </span>
+        <img [src]="article.logoUrl" alt="" />
+        <h1>{{ article.fullName }}</h1>
+        <span> {{ article.symbol }} </span>
       </div>
       <div class="second-div">
-        <span class="rank">{{ "rank" | translate }} #{{ coin.id }}</span>
+        <span class="rank">{{ "rank" | translate }} #{{ article.id }}</span>
         <span class="coin">{{ "coin" | translate }}</span>
         <span class="coin">{{ "watchlists" | translate }}</span>
       </div>
       <div class="dc main-links">
         <p *ngFor="let link of links">
-          <a target="_blank" [href]="link.link ? link.link : actRoute">
-            <span nz-icon [nzType]="link.icon" nzTheme="outline"></span>
+          <a target="_blank" [href]="link?.link ? link.link : actRoute">
+            <span nz-icon [nzType]="link?.icon" nzTheme="outline"></span>
             {{
-              link.link.includes("org") ? coin.coinName + link.name : link.name
+              link.link.includes("org")
+                ? article?.fullName + link?.name
+                : link?.name
             }}
             <span nz-icon nzType="robot" nzTheme="outline"></span>
           </a>
@@ -84,8 +38,8 @@
       <div class="price-div">
         <div class="dsc first">
           <p class="title-price">
-            {{ coin.coinName }} {{ "price" | translate }}
-            <span> ({{ coin.coinSymbol }}) </span>
+            {{ article?.fullName }} {{ "price" | translate }}
+            <span> ({{ article?.symbol }}) </span>
           </p>
           <div class="dc">
             <p class="dsc btn-blue">
@@ -107,21 +61,22 @@
           </div>
         </div>
         <div class="dc pprice">
-          <p>₸{{ coin.price }}</p>
+          <p>₸{{ article.priceUsd }}</p>
           <span>0.73%</span>
         </div>
         <div class="gas-price">14.10 ETH <span>1.50%</span></div>
         <div class="progress-div">
-          <span>Low:</span><span style="color: #000000">₸{{ coin.price }}</span>
+          <span>Low:</span
+          ><span style="color: #000000">₸{{ article.priceUsd }}</span>
           <nz-progress
-            [nzPercent]="coin.procent"
+            [nzPercent]="article.percent"
             nzStrokeColor="#808a9d"
             class="progress"
             nzStrokeWidth="6"
             [nzShowInfo]="false"
           ></nz-progress>
           <span>{{ "high" | translate }}:</span
-          ><span style="color: #000000">₸{{ coin.price }}</span>
+          ><span style="color: #000000">₸{{ article.priceUsd }}</span>
           <span class="dayh">24h</span>
         </div>
       </div>
@@ -137,7 +92,7 @@
               [nzTwotoneColor]="'#808a9d'"
             ></span>
           </p>
-          <p class="price">₸208 781 367 751 952</p>
+          <p class="price">$ {{ article.marketCapValue }}</p>
           <p class="procent">0.73%</p>
           <p class="dvolume">
             {{ "24h" | translate }}
@@ -155,7 +110,7 @@
               [nzTwotoneColor]="'#808a9d'"
             ></span>
           </p>
-          <p class="price">₸227 385 257 344 912</p>
+          <p class="price">$ {{ article.marketCapValue }}</p>
           <p class="procent">0.73%</p>
         </div>
 
@@ -183,11 +138,11 @@
             />
           </p>
           <div class="dsc">
-            <p class="price">19,280,993 {{ coin.coinSymbol }}</p>
-            <span class="procent-coin">{{ coin.procent }}%</span>
+            <p class="price">{{ article.volumeValue }} {{ article.symbol }}</p>
+            <span class="procent-coin">{{ article.percent }}%</span>
           </div>
           <nz-progress
-            [nzPercent]="coin.procent"
+            [nzPercent]="article.percent"
             nzStrokeColor="#808a9d"
             nzStrokeWidth="6"
             [nzShowInfo]="false"
@@ -215,7 +170,7 @@
                 nzTheme="outline"
               ></span>
             </p>
-            <span>19,280,993</span>
+            <span>{{ article.volumeValue }}</span>
           </div>
         </div>
       </div>
@@ -225,7 +180,7 @@
   <div class="ds main-info">
     <div>
       <h1 class="title-chart">
-        {{ coin.coinName }} {{ "kzt_chart" | translate }}
+        {{ article.fullName }} {{ "kzt_chart" | translate }}
       </h1>
       <div class="chart">
         <iframe
@@ -244,15 +199,15 @@
         ></iframe>
       </div>
       <h1 class="title-converter">
-        {{ coin.coinSymbol }} {{ "kzt_converter" | translate }}
+        {{ article.symbol }} {{ "kzt_converter" | translate }}
       </h1>
       <div class="df converter">
         <div class="dsc coin">
           <div class="dc">
             <img src="../../../../assets/btc.png" alt="" />
             <div>
-              <p class="symbol">{{ coin.coinSymbol }}</p>
-              <p class="name">{{ coin.coinName }}</p>
+              <p class="symbol">{{ article.symbol }}</p>
+              <p class="name">{{ article.fullName }}</p>
             </div>
           </div>
           <input
@@ -277,17 +232,17 @@
 
     <div class="info-text">
       <h1 class="title">
-        {{ coin.coinSymbol }}
+        {{ article.symbol }}
         {{ "price_live_data" | translate }}
       </h1>
       <p class="text">
-        The live {{ coin.coinName }} price today is $23,330.894 USD with a
+        The live {{ article.fullName }} price today is $23,330.894 USD with a
         24-hour trading volume of $25,376,158,229 USD. We update our
-        {{ coin.coinSymbol }} to USD price in real-time. {{ coin.coinName }} is
+        {{ article.symbol }} to USD price in real-time. {{ article.fullName }} is
         down 0.907% in the last 24 hours. The current KZCoinMarket ranking is
         #1, with a live market cap of $449,842,811,960 USD. It has a circulating
-        supply of 19,280,993 {{ coin.coinSymbol }} coins and a max. supply of
-        21,000,000 {{ coin.coinSymbol }} coins.
+        supply of 19,280,993 {{ article.symbol }} coins and a max. supply of
+        21,000,000 {{ article.symbol }} coins.
       </p>
     </div>
   </div>

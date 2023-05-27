@@ -7,7 +7,8 @@ export class ArticleService {
   constructor(private http: HttpClient) {}
 
   deleteArticle(slug: string): Observable<{}> {
-    const url = `http://localhost:9832/v1/api/articles/${slug}`
+    console.log('deleteArticle', slug);
+    const url = `https://springboot-postgresql-kzcoin.herokuapp.com/v1/api/coin/bySymbol?symbol=${slug}`
 
     return this.http.delete<{}>(url)
   }

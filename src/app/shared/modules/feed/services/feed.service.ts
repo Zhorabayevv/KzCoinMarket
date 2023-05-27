@@ -9,8 +9,7 @@ export class FeedService {
   constructor(private http: HttpClient) {}
 
   getFeed(url: string): Observable<IGetFeedResponse> {
-    // const fullUrl = 'http://localhost:9832/v1/api' + url;
-    const fullUrl = 'https://conduit.productionready.io/api' + url;
+    const fullUrl = 'https://springboot-postgresql-kzcoin.herokuapp.com/v1/api' + url;
     return this.http.get<IGetFeedResponse>(fullUrl);
   }
 }

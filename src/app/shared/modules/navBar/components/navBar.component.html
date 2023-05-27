@@ -1,9 +1,10 @@
 <div class="container">
   <div class="navBar dsc">
     <div class="info">
-      {{ "сryptos" | translate }}: <span>22,423</span> {{"market_cap" | translate}}:
-      <span> $1,168,810,844,422 </span> {{"24vol" | translate}}:
-      <span> $54,256,403,756 </span> {{"dominance" | translate}}:
+      {{ "сryptos" | translate }}: <span>22,423</span>
+      {{ "market_cap" | translate }}: <span> $1,168,810,844,422 </span>
+      {{ "24vol" | translate }}: <span> $54,256,403,756 </span>
+      {{ "dominance" | translate }}:
       <span> BTC: 41.7% ETH: 18.7% </span>
     </div>
     <div class="dc">
@@ -27,7 +28,9 @@
       <img class="moon" src="../../../../../assets/moon.svg" alt="" />
       <!-- </button> -->
 
-      <ng-container *ngIf="isLoggedIn$ | async; else anonymous">
+      <ng-container
+        *ngIf="(isLoggedIn$ | async) && (currentUser$ | async); else anonymous"
+      >
         <div class="dc bell">
           <nz-badge [nzCount]="5">
             <span

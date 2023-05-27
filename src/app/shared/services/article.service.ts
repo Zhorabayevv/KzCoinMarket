@@ -11,10 +11,12 @@ export class ArticleService {
   constructor(private http: HttpClient) {}
 
   getArticle(slug: string): Observable<IArticle> {
-    const fullUrl = `http://localhost:9832/v1/api/articles/${slug}`
-    return this.http.get<IGetArticleResponse>(fullUrl).pipe(
-      map((response: IGetArticleResponse) => {
-        return response.article
+    const fullUrl = `https://springboot-postgresql-kzcoin.herokuapp.com/v1/api/coin/bySymbol?symbol=${slug}`
+    return this.http.get<IArticle>(fullUrl).pipe(
+      map((response: IArticle) => {
+        console.log('response', response);
+
+        return response
       })
     )
   }

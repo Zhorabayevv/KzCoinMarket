@@ -2,17 +2,16 @@
   <!-- <mc-loading *ngIf="(isLoading$ | async) || !(feed$ | async)"></mc-loading> -->
   <mc-error-message *ngIf="error$ | async"></mc-error-message>
   <!-- [nzSpinning]="(isLoading$ | async) || !(feed$ | async)" -->
-  <nz-spin style="min-height: 400px" [nzSpinning]="(isLoading$ | async)">
-    <div>
-
+  <nz-spin style="min-height: 400px" [nzSpinning]="isLoading$ | async">
+    <div *ngIf="feed$ | async">
       <thead>
         <tr class="head">
           <th class="first"></th>
           <th class="second">
             <b># &nbsp;</b>
           </th>
-          <th class="name">{{"price" | translate}}</th>
-          <th class="price paddin">{{"name" | translate}}</th>
+          <th class="name">{{ "price" | translate }}</th>
+          <th class="price paddin">{{ "name" | translate }}</th>
           <th class="one-procent paddin">1h %</th>
           <th class="day-procent paddin">24h %</th>
           <th class="week-procent paddin">7d %</th>
@@ -51,37 +50,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let coin of coinsTr">
+        <tr *ngFor="let coin of coins">
           <td>
             <span
               nz-icon
               nzType="star"
               [nzTheme]="'twotone'"
               nz-tooltip
-              [nzTooltipTitle]="(isLoggedIn$ | async) ? 'Жүйеге кірген жоқсыз' : ''"
+              [nzTooltipTitle]="
+                (isLoggedIn$ | async) ? 'Жүйеге кірген жоқсыз' : ''
+              "
               [nzTwotoneColor]="
-                coin.isFavorited || watchListProps ? '#F6B87E' : '#808a9d'
+                coin.isLiked || watchListProps ? '#F6B87E' : '#808a9d'
               "
               style="font-size: 16px"
-              (click)="addFavorite(coin.id, coin.isFavorited)"
+              (click)="addFavorite(coin.id, coin.isLiked)"
             ></span>
           </td>
           <td class="id">
             {{ coin.id }}
           </td>
           <td class="">
-            <a
-              class="dc articles"
-              [routerLink]="['/articles', coin.coinSymbol]"
-            >
-              <img
-                class="coin-icon"
-                [src]="'../../../../../../assets/' + coin.coinIcon + '.png'"
-                alt=""
-              />
-              <span>&nbsp; {{ coin.coinName }}&nbsp;&nbsp;</span>
+            <a class="dc articles" [routerLink]="['/articles', coin.symbol]">
+              <img class="coin-icon" [src]="coin.logoUrl" alt="" />
+              <span>&nbsp; {{ coin.fullName }}&nbsp;&nbsp;</span>
               <span class="coin-symbol">
-                {{ coin.coinSymbol }}
+                {{ coin.symbol }}
               </span>
             </a>
           </td>
@@ -90,48 +84,48 @@
             <div
               class="dc procent df"
               [ngClass]="{
-                'color-red': coin.hRate < 1,
-                'color-green': coin.hRate > 1
+                'color-red': coin.hrate < 1,
+                'color-green': coin.hrate > 1
               }"
             >
               <span nz-icon nzType="caret-up" nzTheme="outline"></span>
-              <p>{{ coin.hRate }}%</p>
+              <p>{{ coin.hrate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
           <td class="paddin">
             <div
               class="dc procent df"
               [ngClass]="{
-                'color-red': coin.dRate < 1,
-                'color-green': coin.dRate > 1
+                'color-red': coin.drate < 1,
+                'color-green': coin.drate > 1
               }"
             >
               <span nz-icon nzType="caret-up" nzTheme="outline"></span>
-              <p>{{ coin.dRate }}%</p>
+              <p>{{ coin.drate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
           <td class="paddin">
             <div
               class="dc procent df"
               [ngClass]="{
-                'color-red': coin.wRate < 1,
-                'color-green': coin.wRate > 1
+                'color-red': coin.wrate < 1,
+                'color-green': coin.wrate > 1
               }"
             >
               <span nz-icon nzType="caret-up" nzTheme="outline"></span>
-              <p>{{ coin.wRate }}%</p>
+              <p>{{ coin.wrate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
           <td class="paddin">₸ {{ coin.marketCapValue }}</td>
           <td class="paddin">
             <p>₸ {{ coin.volumeCryptoValue }}</p>
-            <p class="value">{{ coin.volumeValue }} {{ coin.coinSymbol }}</p>
+            <p class="value">{{ coin.volumeValue }} {{ coin.symbol }}</p>
           </td>
           <td class="paddin">
-            <p>{{ coin.circulatingSupply }} {{ coin.coinSymbol }}</p>
+            <p>{{ coin.circulatingSupply }} {{ coin.symbol }}</p>
             <nz-progress
-              *ngIf="coin.procent"
-              [nzPercent]="coin.procent"
+              *ngIf="coin.percent"
+              [nzPercent]="coin.percent"
               nzStrokeColor="#808a9d"
               nzStrokeWidth="6"
               [nzShowInfo]="false"
@@ -149,12 +143,14 @@
           </td>
         </tr>
       </tbody>
+      <!-- <ng-container *ngIf="(feed$ | async)"> -->
       <mc-pagination
         [totalCount]="(feed$ | async)?.count"
         [limitArticles]="limitArticles"
         [currentPage]="currentPage"
         [url]="baseUrl"
       ></mc-pagination>
+      <!-- </ng-container> -->
     </div>
   </nz-spin>
 </div>

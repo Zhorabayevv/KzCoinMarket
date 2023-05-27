@@ -290,17 +290,19 @@ export class FeedComponent implements OnInit, OnDestroy {
     },
   ];
   spinning: boolean = false;
+  coins: any[] = [];
 
   constructor(
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    public translate: TranslateService,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
     this.initializeValues();
     this.initializeListeners();
+    // this.feed$.subscribe((data) => console.log(data));
   }
   ngOnDestroy(): void {
     this.queryParamsSubscription.unsubscribe();
@@ -313,6 +315,17 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.baseUrl = this.router.url.split('?')[0];
     // if(this.feed$) this.spinning = true;
+
+    this.feed$.subscribe((data) => {
+      if (data) {
+        data.coinDto.forEach((item, index) => {
+          // item.hrate = item.hrate.slice(0, 3);
+          const newItem = { ...item, grap: Number(index) };
+          this.coins.push(newItem);
+        });
+      }
+    });
+    console.log(this.coins);
   }
 
   initializeListeners(): void {
@@ -325,16 +338,14 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   fetchFeeds(): void {
-    const offset = this.currentPage * this.limitArticles - this.limitArticles;
+    const page = this.currentPage;
     const parsedUrl = queryString.parseUrl(this.apiUrlProps);
     const stringifiedParams = queryString.stringify({
       limit: this.limitArticles,
-      offset,
+      page,
       ...parsedUrl.query,
     });
     const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
-    console.log(apiUrlWithParams);
-
     this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
   }
 
