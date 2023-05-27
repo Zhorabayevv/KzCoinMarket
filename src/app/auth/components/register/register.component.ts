@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable } from 'rxjs';
 
 import { registerAction } from 'src/app/auth/store/actions/register.action';
@@ -20,10 +21,16 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
   backendErrors$: Observable<IBackendErrors | null>;
+  @Input() logIn: boolean;
+  @Output() logInChange = new EventEmitter<boolean>();
 
   passwordVisible: boolean = false;
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private message: NzMessageService
+  ) {}
 
   ngOnInit(): void {
     this.initionalizeForm();
@@ -46,5 +53,8 @@ export class RegisterComponent implements OnInit {
     console.log(this.form.value);
     const request: IRegisterRequest = this.form.value;
     this.store.dispatch(registerAction({ request }));
+    this.message.success('You are logged in');
+    this.logIn = true;
+    this.logInChange.emit(this.logIn);
   }
 }

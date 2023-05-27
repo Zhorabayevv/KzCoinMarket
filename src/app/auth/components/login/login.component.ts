@@ -13,6 +13,7 @@ import { ILoginRequest } from 'src/app/auth/types/loginRequest.interface';
 import { loginAction } from 'src/app/auth/store/actions/login.action';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { TranslateService } from '@ngx-translate/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'mc-login',
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     private modal: NzModalRef,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private message: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -58,14 +60,17 @@ export class LoginComponent implements OnInit {
     console.log(this.form.value);
     const request: ILoginRequest = this.form.value;
     this.store.dispatch(loginAction({ request }));
-    if (this.isLogged$) this.modal.destroy();
+    if (this.isLogged$) {
+      this.modal.destroy();
+      this.message.success('You are logged in');
+    }
   }
 
-  changeLogIn(): void {
+  changeLogIn(logIn): void {
     this.logIn = true;
   }
 
-  changeSignUp(): void {
+  changeSignUp(logIn): void {
     this.logIn = false;
   }
 }

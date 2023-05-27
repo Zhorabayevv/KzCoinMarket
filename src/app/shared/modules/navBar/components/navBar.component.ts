@@ -88,4 +88,11 @@ export class NavBarComponent implements OnInit {
     this.translate.use(lang);
     this.selectedLanguage = lang;
   }
+
+  signout(): void {
+    // this.store.dispatch(logoutAction());
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    window.location.reload();
+  }
 }

@@ -56,6 +56,7 @@
                 {{ (currentUser$ | async).email }}
               </p>
             </div>
+            <button (click)="signout()" class="sign-up dcc" style="text-align: center; margin: 20px auto 0 auto;">Sign Out</button>
           </div>
         </nz-dropdown-menu>
       </ng-container>
