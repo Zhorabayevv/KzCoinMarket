@@ -2,7 +2,7 @@
   <div><img src="../../../../../assets/logo.svg" class="logo" alt="" /></div>
   <div class="df">
     <div class="rows" *ngFor="let item of footerOptions">
-      <h1 class="title">{{ item.title }}</h1>
+      <h1 class="title">{{ item.title | translate }}</h1>
       <div>
         <ul>
           <li class="link" *ngFor="let link of item.options">

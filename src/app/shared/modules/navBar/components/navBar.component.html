@@ -16,12 +16,20 @@
         (ngModelChange)="changeLanguage($event)"
       >
       </nz-select>
-      <img src="../../../../../assets/kzt.svg" alt="" />
+      <img
+        style="max-width: 15px"
+        [src]="
+          '../../../../../assets/' +
+          (selectedCurrency === 'USD' ? 'dollar.svg' : 'kzt.svg')
+        "
+        alt=""
+      />
       <nz-select
         [(ngModel)]="selectedCurrency"
         nzBorderless
         class="select"
         [nzOptions]="currencyOptions"
+        (ngModelChange)="changeCurrency($event)"
       >
       </nz-select>
       <!-- <button > -->
@@ -56,19 +64,23 @@
                 {{ (currentUser$ | async).email }}
               </p>
             </div>
-            <button (click)="signout()" class="sign-up dcc" style="text-align: center; margin: 20px auto 0 auto;">Sign Out</button>
+            <button
+              (click)="signout()"
+              class="sign-up dcc"
+              style="text-align: center; margin: 20px auto 0 auto"
+            >
+              Sign Out
+            </button>
           </div>
         </nz-dropdown-menu>
       </ng-container>
       <ng-template #anonymous>
         <div class="anonymous dc">
-          <!-- [routerLink]="['/login']" -->
           <a (click)="signIn('in')"
-            ><button class="sign-in">Sign in</button>
+            ><button class="sign-in">{{ "log_in" | translate }}</button>
           </a>
-          <!-- [routerLink]="['/register']"> -->
           <a (click)="signIn('up')">
-            <button class="sign-up">Sign up</button>
+            <button class="sign-up">{{ "sign_up" | translate }}</button>
           </a>
         </div>
       </ng-template>

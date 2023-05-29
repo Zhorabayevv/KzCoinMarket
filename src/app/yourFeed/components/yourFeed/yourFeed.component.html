@@ -1,65 +1,57 @@
-<!-- <div class="home-page">
-  <mc-banner></mc-banner>
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-9">
-        <mc-feed-toggler></mc-feed-toggler>
-        <mc-feed [apiUrl]="apiUrl"></mc-feed>
-      </div>
-      <div class="col-md-3">
-        <mc-popular-tags></mc-popular-tags>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container">
-  <div class="watchlist">
-    <div class="dcc main">Main</div>
-    <div>
-      <div class="dc">
-        <p>My First Watchlist</p>
-        <div class="dcc edit">
-          <span nz-icon nzType="edit" nzTheme="outline"></span>
+  <div
+    *ngIf="!(currentUser$ | async) && !(isLoggedIn$ | async)"
+    style="height: 600px"
+  >
+    {{ "register_create_w" | translate }}
+  </div>
+
+  <ng-container *ngIf="(currentUser$ | async) && (isLoggedIn$ | async)">
+    <div class="watchlist">
+      <div class="dcc main">{{ "main" | translate }}</div>
+      <div>
+        <div class="dc">
+          <p>My First Watchlist</p>
+          <div class="dcc edit">
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="dsc">
-    <div class="links df">
-      <a
-        [routerLink]="['/watchlist']"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="dec watch-port btn"
-      >
-        <img src="../../../../../assets/star.svg" alt="" />
-        Watchlist
-      </a>
-      <a [routerLink]="['/portfolio']" class="dec watch-port btn">
-        <img src="../../../../../assets/portfolio.svg" alt="" />
-        Portfolio
-      </a>
+    <div class="dsc">
+      <div class="links df">
+        <a
+          [routerLink]="['/watchlist']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="dec watch-port btn"
+        >
+          <img src="../../../../../assets/star.svg" alt="" />
+          {{ "watchlist" | translate }}
+        </a>
+        <a [routerLink]="['/portfolio']" class="dec watch-port btn">
+          <img src="../../../../../assets/portfolio.svg" alt="" />
+          {{ "portfolio" | translate }}
+        </a>
+      </div>
+      <div class="links df">
+        <a [routerLink]="['/add-coins']" class="dec watch-port btn">
+          <span nz-icon nzType="plus" nzTheme="outline"></span>
+          {{ "add_coins" | translate }}
+        </a>
+        <a [routerLink]="['/edit']" class="dec watch-port btn">
+          <span nz-icon nzType="edit" nzTheme="outline"></span>
+          {{ "edit" | translate }}
+        </a>
+      </div>
     </div>
-    <div class="links df">
-      <a [routerLink]="['/add-coins']" class="dec watch-port btn">
-        <span nz-icon nzType="plus" nzTheme="outline"></span>
-        Add Coins
-      </a>
-      <a [routerLink]="['/edit']" class="dec watch-port btn">
-        <span nz-icon nzType="edit" nzTheme="outline"></span>
-        Edit
-      </a>
-    </div>
-  </div>
-  <div>
     <div>
       <div>
-        <mc-feed [apiUrl]="apiUrl" [watchList]="watchList"></mc-feed>
-      </div>
-      <div>
-        <!-- <mc-popular-tags></mc-popular-tags> -->
+        <div>
+          <mc-feed [apiUrl]="apiUrl" [watchList]="watchList"></mc-feed>
+        </div>
+        <div></div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>

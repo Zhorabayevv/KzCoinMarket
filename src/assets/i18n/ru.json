@@ -56,5 +56,17 @@
   "kz_cryptocurrencies": "Top KZ Cryptocurrencies",
   "community_article": "Top Community Article",
   "show_rows": "Show rows",
-  "kz_coins": "KZ Coins"
+  "kz_coins": "KZ Coins",
+  "last_days": "Последние 7 дней",
+  "name": "Имя",
+  "register_create_w": "Зарегистрируйтесь, чтобы создать свой собственный список наблюдения",
+  "support": "Поддержка",
+  "company": "Компания",
+  "socials": "Социальные сети",
+  "blockchain_explorer": "Blockchain Explorer",
+  "sitemap": "Sitemap",
+  "about_us": "About Us",
+  "terms_of_use": "Terms of Use",
+  "privacy_policy": "Privacy Policy",
+  "contact_support": "Contact Support"
 }

@@ -45,10 +45,6 @@ export class NavBarComponent implements OnInit {
       value: 'KZT',
       label: 'KZT',
     },
-    {
-      value: 'RUB',
-      label: 'RUB',
-    },
   ];
   searchOptions = [
     { img: 'btc', title: 'Bitcoin', symbol: 'BTC', number: 1 },
@@ -71,6 +67,7 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
+    localStorage.setItem('currency', this.selectedCurrency);
   }
 
   signIn(sign: string): void {
@@ -89,6 +86,11 @@ export class NavBarComponent implements OnInit {
     this.selectedLanguage = lang;
   }
 
+  changeCurrency(currency: string) {
+    console.log(currency);
+    this.selectedCurrency = currency;
+    localStorage.setItem('currency', currency);
+  }
   signout(): void {
     // this.store.dispatch(logoutAction());
     localStorage.removeItem('accessToken');

@@ -10,6 +10,7 @@ import { FeedModule } from 'src/app/shared/modules/feed/feed.module';
 import { BannerModule } from 'src/app/shared/modules/banner/banner.module';
 import { PopularTagsModule } from '../shared/modules/popularTags/popularTags.module';
 import { FeedTogglerModule } from 'src/app/shared/modules/feedToggler/coinToggler.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes = [
   {
@@ -28,6 +29,7 @@ const icons: IconDefinition[] = [SearchOutline];
     PopularTagsModule,
     FeedTogglerModule,
     NzIconModule.forRoot(icons),
+    TranslateModule
   ],
   declarations: [YourFeedComponent],
 })

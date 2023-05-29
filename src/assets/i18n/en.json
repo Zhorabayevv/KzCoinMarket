@@ -59,5 +59,15 @@
   "show_rows": "Show rows",
   "kz_coins": "KZ Coins",
   "last_days": "Last 7 days",
-  "name": "Name"
+  "name": "Name",
+  "register_create_w": "Register to create your own watchlist",
+  "support": "Support",
+  "company": "Company",
+  "socials": "Socials",
+  "blockchain_explorer": "Blockchain Explorer",
+  "sitemap": "Sitemap",
+  "about_us": "About Us",
+  "terms_of_use": "Terms of Use",
+  "privacy_policy": "Privacy Policy",
+  "contact_support": "Contact Support"
 }

@@ -8,36 +8,28 @@ import { Component } from "@angular/core";
 export class FooterComponent {
   footerOptions = [
     {
-      title: 'Products',
+      title: 'products',
       options: [
         { title: 'Blockchain Explorer', link: '/' },
-        { title: 'Crypto API', link: '/' },
-        { title: 'Crypto Indices', link: '/' },
-        { title: 'Jobs Board', link: '/' },
         { title: 'Sitemap', link: '/' },
       ],
     },
     {
-      title: 'Company',
+      title: 'company',
       options: [
         { title: 'About us', link: '/' },
         { title: 'Terms of use', link: '/' },
         { title: 'Privacy Policy', link: '/' },
-        { title: 'Community Rules', link: '/' },
-        { title: 'Disclaimer', link: '/' },
       ],
     },
     {
-      title: 'Support',
+      title: 'support',
       options: [
-        { title: 'Request Form', link: '/' },
         { title: 'Contact Support', link: '/' },
-        { title: 'FAQ', link: '/' },
-        { title: 'Glossary', link: '/' },
       ],
     },
     {
-      title: 'Socials',
+      title: 'socials',
       options: [
         { title: 'Facebook', link: '/' },
         { title: 'Twitter', link: '/' },
