@@ -3,14 +3,12 @@ import { Store, select } from '@ngrx/store';
 import { getArticleAction } from 'src/app/article/store/actions/getArticle.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IArticle } from 'src/app/shared/types/article.interface';
-import { Subscription, Observable, combineLatest } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import {
   articleSelector,
   isLoadingSelector,
   errorSelector,
 } from 'src/app/article/store/selectors';
-import { currentUserSelector } from 'src/app/auth/store/selectors';
-import { map } from 'rxjs/operators';
 import { deleteArticleAction } from 'src/app/article/store/actions/deleteArticle.action';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -91,6 +89,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
           // currentUser.username === article.author.username
       // )
     // );
+
+    
   }
 
   initializeListeners(): void {

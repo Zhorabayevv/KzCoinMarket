@@ -59,12 +59,16 @@ export class NavBarComponent implements OnInit {
     private store: Store,
     private modal: NzModalService,
     public translate: TranslateService
-  ) {
-    this.translate.setDefaultLang('kz');
-    this.selectedLanguage = this.translate.defaultLang;
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.selectedLanguage = localStorage.getItem('lang') || 'kz';
+    this.selectedCurrency = localStorage.getItem('currency') || 'USD';
+
+    if (!localStorage.getItem('lang')) {
+      localStorage.setItem('lang', this.selectedLanguage);
+    }
+
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
     localStorage.setItem('currency', this.selectedCurrency);
@@ -84,6 +88,7 @@ export class NavBarComponent implements OnInit {
     console.log(lang);
     this.translate.use(lang);
     this.selectedLanguage = lang;
+    localStorage.setItem('lang', lang);
   }
 
   changeCurrency(currency: string) {

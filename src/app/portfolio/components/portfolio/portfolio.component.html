@@ -1,11 +1,11 @@
 <div class="portfolio">
   <ul class="dc">
     <li>
-      <a [routerLink]="['/']">{{ "Home" | translate }}</a>
+      <a [routerLink]="['/']">{{ "home" | translate }}</a>
     </li>
     <li>
       <a [routerLink]="['/portfolio']" routerLinkActive="active">{{
-        "Portfolio" | translate
+        "portfolio" | translate
       }}</a>
     </li>
   </ul>
@@ -27,7 +27,7 @@
               font-weight: 600;
             "
           >
-            {{ "All Portfolios" | translate }}
+            {{ "all_portfolio" | translate }}
           </h2>
           <p style="color: #58667e; font-size: 12px; line-height: 150%">
             = ₸177,168.26
@@ -120,7 +120,7 @@
               nzTheme="outline"
             ></span>
             <span style="font-size: 14px; font-weight: 700">
-              {{ "Create Portfolio" | translate }}
+              {{ "create_portfolio" | translate }}
             </span>
           </div>
           <div class="dc cp" style="height: 48.5px" *ngIf="editing" (click)="editPortfolio()">
@@ -131,7 +131,7 @@
               nzTheme="outline"
             ></span>
             <span style="font-size: 14px; font-weight: 700">
-              {{ "Exit editing" | translate }}
+              {{ "exit_editing" | translate }}
             </span>
           </div>
         </div>
@@ -140,7 +140,7 @@
 
     <div class="w100" style="margin-left: 32px">
       <p style="color: #58667e; font-size: 12px; margin-bottom: 6px">
-        {{ "Current Balance" | translate }}
+        {{ "current_balance" | translate }}
         <span (click)="balanceVis()" class="cp">
           <ng-container *ngIf="invisBalance; else invisEye">
             <span nz-icon nzType="eye" nzTheme="outline"></span>
@@ -202,7 +202,7 @@
                 style="transform: rotate(90deg); font-size: 16px"
                 nzTheme="outline"
               ></span>
-              {{ "Edit" | translate }}</button
+              {{ "edit" | translate }}</button
             ><button
               class="cp"
               style="
@@ -220,7 +220,7 @@
                 style="font-size: 16px"
                 nzTheme="outline"
               ></span>
-              {{ "Add New" | translate }}
+              {{ "add_new" | translate }}
             </button>
           </div>
         </div>
@@ -254,7 +254,7 @@
           ></iframe>
         </div>
         <div>
-          <h1>{{ "Your Assets" | translate }}</h1>
+          <h1>{{ "your_assets" | translate }}</h1>
           <div class="table">
             <thead>
               <tr class="head">
@@ -264,7 +264,7 @@
                 <th class="cap paddin">
                   <div class="dc">
                     <p>
-                      {{ "Holdings" | translate }}
+                      {{ "holdings" | translate }}
                       <span
                         nz-icon
                         nzType="info-circle"
@@ -277,7 +277,7 @@
                 <th class="volume paddin">
                   <div class="dc">
                     <p>
-                      {{ "Avg. Buy Price" | translate }}(24h)
+                      {{ "avg_buy_price" | translate }}(24h)
                       <span
                         nz-icon
                         nzType="info-circle"
@@ -289,10 +289,10 @@
                 </th>
                 <th class="supply paddin">
                   <div class="dc">
-                    <p>{{ "Profit/Loss" | translate }}</p>
+                    <p>{{ "profit_loss" | translate }}</p>
                   </div>
                 </th>
-                <th class="days paddin">{{ "Actions" | translate }}</th>
+                <th class="days paddin">{{ "actions" | translate }}</th>
               </tr>
             </thead>
             <tbody>

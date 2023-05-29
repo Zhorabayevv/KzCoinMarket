@@ -109,10 +109,14 @@ export class BannerComponent implements OnInit {
       like: 5,
     },
   ];
+  lang: string = 'en';
+  currency: string = 'USD';
 
   constructor(private translate: TranslateService) {
-    translate.addLangs(['en', 'kz']);
-    translate.setDefaultLang('en');
+    this.lang = localStorage.getItem('lang') || 'kz';
+    this.currency = localStorage.getItem('currency') || 'KZT';
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.lang, this.currency);
+  }
 }

@@ -16,22 +16,24 @@ export class AuthService {
   }
 
   register(data: IRegisterRequest): Observable<string> {
-    const url = 'https://springboot-postgresql-kzcoin.herokuapp.com/api/auth/signup';
+    const url =
+      'https://springboot-postgresql-kzcoin.herokuapp.com/api/auth/signup';
     return this.http
       .post<string>(url, data)
       .pipe(map((response: string): string => response));
   }
 
   login(data: ILoginRequest): Observable<ICurrentUser> {
-    const url = 'https://springboot-postgresql-kzcoin.herokuapp.com/api/auth/signin';
+    const url =
+      'https://springboot-postgresql-kzcoin.herokuapp.com/api/auth/signin';
     return this.http
       .post<AuthResponseInterface>(url, data)
       .pipe(map(this.getUser));
   }
-  // currentUser
 
   getCurrentUser(): Observable<ICurrentUser> {
-    const url = 'https://springboot-postgresql-kzcoin.herokuapp.com/api/auth/currentUser';
+    const url =
+      'https://springboot-postgresql-kzcoin.herokuapp.com/api/auth/currentUser';
     return this.http.get(url).pipe(map(this.getUser));
   }
 }

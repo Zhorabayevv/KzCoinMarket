@@ -14,7 +14,6 @@ import {
   errorSelector,
   feedSelector,
 } from 'src/app/shared/modules/feed/store/selectors';
-import { ICoinsTr } from 'src/app/shared/modules/feed/types/coinsTr.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { isLoggedInSelector } from 'src/app/auth/store/selectors';
 

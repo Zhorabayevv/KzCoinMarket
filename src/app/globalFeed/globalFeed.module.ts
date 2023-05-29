@@ -6,7 +6,6 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgAntModule } from '../ng-zorro-antd.module';
-import { PopularTagsModule } from 'src/app/shared/modules/popularTags/popularTags.module';
 import { GlobalFeedComponent } from 'src/app/globalFeed/components/globalFeed/globalFeed.component';
 import { FeedModule } from 'src/app/shared/modules/feed/feed.module';
 import { BannerModule } from 'src/app/shared/modules/banner/banner.module';
@@ -28,7 +27,6 @@ const icons: IconDefinition[] = [SearchOutline];
     RouterModule.forChild(routes),
     FeedModule,
     BannerModule,
-    PopularTagsModule,
     NgAntModule,
     FormsModule,
     ReactiveFormsModule,

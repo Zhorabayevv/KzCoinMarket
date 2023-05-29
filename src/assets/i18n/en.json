@@ -69,5 +69,16 @@
   "about_us": "About Us",
   "terms_of_use": "Terms of Use",
   "privacy_policy": "Privacy Policy",
-  "contact_support": "Contact Support"
+  "contact_support": "Contact Support",
+  "current_balance": "Current Balance",
+  "exit_editing": "Exit editing",
+  "create_portfolio": "Create Portfolio",
+  "all_portfolio": "All Portfolios",
+  "home": "Home",
+  "add_new": "Add New",
+  "your_assets": "Your Assets",
+  "holdings": "Holdings",
+  "avg_buy_price": "Avg. Buy Price",
+  "profit_loss": "Profit/Loss",
+  "actions": "Actions"
 }

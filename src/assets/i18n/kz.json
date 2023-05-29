@@ -70,5 +70,15 @@
   "terms_of_use": "Пайдалану шарттары",
   "privacy_policy": "Құпиялылық саясаты",
   "contact_support": "Қолдау қызметіне хабарласыңыз",
-  "faq": "FAQ"
+  "current_balance": "Ағымдағы баланс",
+  "exit_editing": "Өңдеуді аяқтаңыз",
+  "create_portfolio": "Портфолио құру",
+  "all_portfolio": "Барлық портфолио",
+  "home": "Басты бет",
+  "add_new": "Жаңасын қосыңыз",
+  "your_assets": "Сіздің активтеріңіз",
+  "holdings": "Иелік ету",
+  "avg_buy_price": "Орташа. Сатып алу бағасы",
+  "profit_loss": "Пайда / шығын",
+  "actions": "Әрекеттер"
 }
