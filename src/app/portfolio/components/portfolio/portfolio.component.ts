@@ -5,6 +5,13 @@ import { IPortfolio } from '../../types/portfolio.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddTransactionComponent } from '../addTransaction/addTransaction.component';
+import { Store, select } from '@ngrx/store';
+import {
+  currentUserSelector,
+  isLoggedInSelector,
+} from 'src/app/auth/store/selectors';
+import { Observable } from 'rxjs';
+import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
 
 @Component({
   selector: 'mc-portfolio',
@@ -12,6 +19,8 @@ import { AddTransactionComponent } from '../addTransaction/addTransaction.compon
   styleUrls: ['./portfolio.component.scss'],
 })
 export class PortfolioComponent implements OnInit {
+  isLoggedIn$: Observable<boolean>;
+  currentUser$: Observable<ICurrentUser | null>;
   portfolios: IPortfolio[] = [
     {
       name: 'Portfolio 1',
@@ -52,14 +61,20 @@ export class PortfolioComponent implements OnInit {
       quantity: 8,
       avgBuyPrice: 100,
       profit: 7732.84,
-      profitPercent: 0.8
-    }
+      profitPercent: 0.8,
+    },
   ];
   editing: boolean = false;
 
-  constructor(public translate: TranslateService, private modal: NzModalService) {}
+  constructor(
+    public translate: TranslateService,
+    private modal: NzModalService,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
+    this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
+    this.currentUser$ = this.store.pipe(select(currentUserSelector));
     this.portfolios.forEach((portfolio, index) => {
       portfolio.color = this.colors[index];
     });
@@ -77,10 +92,9 @@ export class PortfolioComponent implements OnInit {
     const modal = this.modal.create({
       nzTitle: null,
       nzContent: AddTransactionComponent,
-      nzComponentParams: {
-      },
+      nzComponentParams: {},
       nzFooter: null,
-    })
+    });
   }
 
   editPortfolio(): void {

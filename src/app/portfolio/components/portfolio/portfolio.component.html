@@ -10,331 +10,351 @@
     </li>
   </ul>
 
-  <div class="df" style="margin-top: 32px">
-    <div>
-      <div class="dc" style="width: 248px; margin-bottom: 25px">
-        <img
-          src="../../../assets/all_portfolio.svg"
-          style="width: 36px; margin-right: 12px"
-          alt=""
-        />
-        <div>
-          <h2
-            style="
-              font-size: 14px;
-              line-height: 142%;
-              color: black;
-              font-weight: 600;
-            "
-          >
-            {{ "all_portfolio" | translate }}
-          </h2>
-          <p style="color: #58667e; font-size: 12px; line-height: 150%">
-            = ₸177,168.26
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <div
-          cdkDropList
-          class="example-list"
-          (cdkDropListDropped)="drop($event)"
-        >
-          <div
-            class="dc"
-            *ngFor="let portfolio of portfolios"
-            cdkDrag
-            style="height: 57px"
-          >
-            <div
-              cdkDragHandle
-              class="cp"
-              style="margin-right: 8px"
-              *ngIf="editing"
-            >
-              <svg width="20px" fill="#808a9d" viewBox="0 0 24 24">
-                <path
-                  d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
-                ></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-              </svg>
-            </div>
-            <div class="dsc w100">
-              <div class="dsc">
-                <p
-                  class="dcc"
-                  style="
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    margin-right: 12px;
-                    color: #ffffff;
-                    font-size: 15px;
-                    line-height: 124%;
-                    font-weight: 400;
-                  "
-                  [ngStyle]="{ background: portfolio.color }"
-                >
-                  {{ portfolio.name[0] }}
-                </p>
-                <div>
-                  <p
-                    style="font-size: 14px; line-height: 142%; font-weight: 700"
-                  >
-                    {{ portfolio.name }}
-                  </p>
-                  <p
-                    style="
-                      font-size: 12px;
-                      line-height: 150%;
-                      color: #58667e;
-                      font-weight: 400;
-                    "
-                  >
-                    {{ portfolio.price | currency : "₸" }}
-                  </p>
-                </div>
-              </div>
-              <span
-                class="cp"
-                nz-icon
-                nzType="more"
-                style="
-                  transform: rotate(90deg);
-                  font-size: 24px;
-                  color: #808a9d;
-                "
-                nzTheme="outline"
-              ></span>
-            </div>
-          </div>
-        </div>
-
-        <div style="height: 115px; padding: 9px">
-          <div class="dc cp" style="height: 48.5px">
-            <span
-              nz-icon
-              nzType="plus-circle"
-              style="margin: 14.25px 23px 14.25px 8px; font-size: 20px"
-              nzTheme="outline"
-            ></span>
-            <span style="font-size: 14px; font-weight: 700">
-              {{ "create_portfolio" | translate }}
-            </span>
-          </div>
-          <div class="dc cp" style="height: 48.5px" *ngIf="editing" (click)="editPortfolio()">
-            <span
-              nz-icon
-              nzType="check-circle"
-              style="margin: 14.25px 23px 14.25px 8px; font-size: 20px"
-              nzTheme="outline"
-            ></span>
-            <span style="font-size: 14px; font-weight: 700">
-              {{ "exit_editing" | translate }}
-            </span>
-          </div>
-        </div>
-      </div>
+  <ng-container
+    *ngIf="!(currentUser$ | async) && !(isLoggedIn$ | async); else elseTemplate"
+  >
+    <div style="height: 600px">
+      {{ "register_create_w" | translate }}
     </div>
-
-    <div class="w100" style="margin-left: 32px">
-      <p style="color: #58667e; font-size: 12px; margin-bottom: 6px">
-        {{ "current_balance" | translate }}
-        <span (click)="balanceVis()" class="cp">
-          <ng-container *ngIf="invisBalance; else invisEye">
-            <span nz-icon nzType="eye" nzTheme="outline"></span>
-          </ng-container>
-          <ng-template #invisEye>
-            <span nz-icon nzType="eye-invisible" nzTheme="outline"></span>
-          </ng-template>
-        </span>
-      </p>
-
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="df" style="margin-top: 32px">
       <div>
-        <div class="dsc">
-          <div class="dc">
-            <span
-              style="
-                margin-right: 16px;
-                color: #b52c34;
-                font-size: 32px;
-                font-weight: 700;
-                margin-bottom: 5px;
-              "
-            >
-              {{ invisBalance ? "****" : ("174805.05" | currency : "₸") }}</span
-            >
-            <p
-              [ngStyle]="{ color: invisBalance ? '#58667e' : '#000000' }"
-              style="
-                padding: 4px 5px;
-                background-color: #ea3943;
-                color: #ffffff;
-                border-radius: 8px;
-              "
-            >
-              <span
-                nz-icon
-                [nzType]="invisBalance ? '' : 'caret-down'"
-                nzTheme="outline"
-              ></span
-              >{{ invisBalance ? "" : "3.79" }}%
-            </p>
-          </div>
+        <div class="dc" style="width: 248px; margin-bottom: 25px">
+          <img
+            src="../../../assets/all_portfolio.svg"
+            style="width: 36px; margin-right: 12px"
+            alt=""
+          />
           <div>
-            <button
-              class="cp"
+            <h2
               style="
-                padding: 5px 8px;
-                background-color: #eff2f5;
-                border-radius: 8px;
-                color: #000000;
-                margin-right: 20px;
+                font-size: 14px;
+                line-height: 142%;
+                color: black;
                 font-weight: 600;
               "
-              *ngIf="!editing"
+            >
+              {{ "all_portfolio" | translate }}
+            </h2>
+            <p style="color: #58667e; font-size: 12px; line-height: 150%">
+              = ₸177,168.26
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div
+            cdkDropList
+            class="example-list"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="dc"
+              *ngFor="let portfolio of portfolios"
+              cdkDrag
+              style="height: 57px"
+            >
+              <div
+                cdkDragHandle
+                class="cp"
+                style="margin-right: 8px"
+                *ngIf="editing"
+              >
+                <svg width="20px" fill="#808a9d" viewBox="0 0 24 24">
+                  <path
+                    d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+                  ></path>
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
+              </div>
+              <div class="dsc w100">
+                <div class="dsc">
+                  <p
+                    class="dcc"
+                    style="
+                      width: 36px;
+                      height: 36px;
+                      border-radius: 50%;
+                      margin-right: 12px;
+                      color: #ffffff;
+                      font-size: 15px;
+                      line-height: 124%;
+                      font-weight: 400;
+                    "
+                    [ngStyle]="{ background: portfolio.color }"
+                  >
+                    {{ portfolio.name[0] }}
+                  </p>
+                  <div>
+                    <p
+                      style="
+                        font-size: 14px;
+                        line-height: 142%;
+                        font-weight: 700;
+                      "
+                    >
+                      {{ portfolio.name }}
+                    </p>
+                    <p
+                      style="
+                        font-size: 12px;
+                        line-height: 150%;
+                        color: #58667e;
+                        font-weight: 400;
+                      "
+                    >
+                      {{ portfolio.price | currency : "₸" }}
+                    </p>
+                  </div>
+                </div>
+                <span
+                  class="cp"
+                  nz-icon
+                  nzType="more"
+                  style="
+                    transform: rotate(90deg);
+                    font-size: 24px;
+                    color: #808a9d;
+                  "
+                  nzTheme="outline"
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="height: 115px; padding: 9px">
+            <div class="dc cp" style="height: 48.5px">
+              <span
+                nz-icon
+                nzType="plus-circle"
+                style="margin: 14.25px 23px 14.25px 8px; font-size: 20px"
+                nzTheme="outline"
+              ></span>
+              <span style="font-size: 14px; font-weight: 700">
+                {{ "create_portfolio" | translate }}
+              </span>
+            </div>
+            <div
+              class="dc cp"
+              style="height: 48.5px"
+              *ngIf="editing"
               (click)="editPortfolio()"
             >
               <span
                 nz-icon
-                nzType="more"
-                style="transform: rotate(90deg); font-size: 16px"
+                nzType="check-circle"
+                style="margin: 14.25px 23px 14.25px 8px; font-size: 20px"
                 nzTheme="outline"
               ></span>
-              {{ "edit" | translate }}</button
-            ><button
-              class="cp"
-              style="
-                padding: 5px 8px;
-                background-color: #3861fb;
-                border-radius: 8px;
-                color: #ffffff;
-                font-weight: 600;
-              "
-              (click)="addCoin()"
-            >
-              <span
-                nz-icon
-                nzType="plus-circle"
-                style="font-size: 16px"
-                nzTheme="outline"
-              ></span>
-              {{ "add_new" | translate }}
-            </button>
+              <span style="font-size: 14px; font-weight: 700">
+                {{ "exit_editing" | translate }}
+              </span>
+            </div>
           </div>
         </div>
-        <p style="color: #ea3943; margin-bottom: 16px">
-          -{{ "6878.65" | currency : "₸" }}
-          <span
-            style="
-              background-color: #eff2f5;
-              padding: 3px 4px;
-              border-radius: 3px;
-              color: #58667e;
-              margin-left: 4px;
-            "
-            >24h</span
-          >
+      </div>
+
+      <div class="w100" style="margin-left: 32px">
+        <p style="color: #58667e; font-size: 12px; margin-bottom: 6px">
+          {{ "current_balance" | translate }}
+          <span (click)="balanceVis()" class="cp">
+            <ng-container *ngIf="invisBalance; else invisEye">
+              <span nz-icon nzType="eye" nzTheme="outline"></span>
+            </ng-container>
+            <ng-template #invisEye>
+              <span nz-icon nzType="eye-invisible" nzTheme="outline"></span>
+            </ng-template>
+          </span>
         </p>
-        <div style="min-height: 328px">
-          <iframe
-            id="tradingview_44306"
-            src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_4430…m=NASDAQ%3AAAPL#%7B%22page-uri%22%3A%22127.0.0.1%3A5500%2Ftrade.html%22%7D"
-            style="
-              width: 100%;
-              height: 328px;
-              margin: 0 !important;
-              padding: 0 !important;
-            "
-            frameborder="0"
-            allowtransparency="true"
-            scrolling="no"
-            allowfullscreen
-          ></iframe>
-        </div>
+
         <div>
-          <h1>{{ "your_assets" | translate }}</h1>
-          <div class="table">
-            <thead>
-              <tr class="head">
-                <th class="price paddin">{{ "name" | translate }}</th>
-                <th class="name">{{ "price" | translate }}</th>
-                <th class="day-procent paddin">24h %</th>
-                <th class="cap paddin">
-                  <div class="dc">
-                    <p>
-                      {{ "holdings" | translate }}
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        [nzTheme]="'twotone'"
-                        [nzTwotoneColor]="'#808a9d'"
-                      ></span>
-                    </p>
-                  </div>
-                </th>
-                <th class="volume paddin">
-                  <div class="dc">
-                    <p>
-                      {{ "avg_buy_price" | translate }}(24h)
-                      <span
-                        nz-icon
-                        nzType="info-circle"
-                        [nzTheme]="'twotone'"
-                        [nzTwotoneColor]="'#808a9d'"
-                      ></span>
-                    </p>
-                  </div>
-                </th>
-                <th class="supply paddin">
-                  <div class="dc">
-                    <p>{{ "profit_loss" | translate }}</p>
-                  </div>
-                </th>
-                <th class="days paddin">{{ "actions" | translate }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let coin of coins">
-                <td class="dcc">
-                  <img
-                    class="coin-icon"
-                    [src]="'../../../../../../assets/' + coin.logo + '.png'"
-                    alt=""
-                  />
-                  <span>&nbsp; {{ coin.name }}&nbsp;&nbsp;</span>
-                  <span class="coin-symbol">
-                    {{ coin.symbol }}
-                  </span>
-                </td>
-                <td class="paddin">₸ {{ coin.price }}</td>
-                <td class="paddin">
-                  <div
-                    class="dc procent df"
-                    [ngClass]="{
-                      'color-red': coin.change24 < 1,
-                      'color-green': coin.change24 > 1
-                    }"
-                  >
-                    <span nz-icon nzType="caret-up" nzTheme="outline"></span>
-                    <p>{{ coin.change24 }}%</p>
-                  </div>
-                </td>
-                <td class="paddin">
-                  <p>₸ {{ coin.holdings }}</p>
-                  <p class="value">{{ coin.quantity }} {{ coin.symbol }}</p>
-                </td>
-                <td class="paddin">₸ {{ coin.avgBuyPrice }}</td>
-                <td class="paddin">
-                  <p>+ ₸ {{ coin.profit }}</p>
-                  <p class="value">{{ coin.profitPercent }}</p>
-                </td>
-              </tr>
-            </tbody>
+          <div class="dsc">
+            <div class="dc">
+              <span
+                style="
+                  margin-right: 16px;
+                  color: #b52c34;
+                  font-size: 32px;
+                  font-weight: 700;
+                  margin-bottom: 5px;
+                "
+              >
+                {{
+                  invisBalance ? "****" : ("174805.05" | currency : "₸")
+                }}</span
+              >
+              <p
+                [ngStyle]="{ color: invisBalance ? '#58667e' : '#000000' }"
+                style="
+                  padding: 4px 5px;
+                  background-color: #ea3943;
+                  color: #ffffff;
+                  border-radius: 8px;
+                "
+              >
+                <span
+                  nz-icon
+                  [nzType]="invisBalance ? '' : 'caret-down'"
+                  nzTheme="outline"
+                ></span
+                >{{ invisBalance ? "" : "3.79" }}%
+              </p>
+            </div>
+            <div>
+              <button
+                class="cp"
+                style="
+                  padding: 5px 8px;
+                  background-color: #eff2f5;
+                  border-radius: 8px;
+                  color: #000000;
+                  margin-right: 20px;
+                  font-weight: 600;
+                "
+                *ngIf="!editing"
+                (click)="editPortfolio()"
+              >
+                <span
+                  nz-icon
+                  nzType="more"
+                  style="transform: rotate(90deg); font-size: 16px"
+                  nzTheme="outline"
+                ></span>
+                {{ "edit" | translate }}</button
+              ><button
+                class="cp"
+                style="
+                  padding: 5px 8px;
+                  background-color: #3861fb;
+                  border-radius: 8px;
+                  color: #ffffff;
+                  font-weight: 600;
+                "
+                (click)="addCoin()"
+              >
+                <span
+                  nz-icon
+                  nzType="plus-circle"
+                  style="font-size: 16px"
+                  nzTheme="outline"
+                ></span>
+                {{ "add_new" | translate }}
+              </button>
+            </div>
+          </div>
+          <p style="color: #ea3943; margin-bottom: 16px">
+            -{{ "6878.65" | currency : "₸" }}
+            <span
+              style="
+                background-color: #eff2f5;
+                padding: 3px 4px;
+                border-radius: 3px;
+                color: #58667e;
+                margin-left: 4px;
+              "
+              >24h</span
+            >
+          </p>
+          <div style="min-height: 328px">
+            <iframe
+              id="tradingview_44306"
+              src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_4430…m=NASDAQ%3AAAPL#%7B%22page-uri%22%3A%22127.0.0.1%3A5500%2Ftrade.html%22%7D"
+              style="
+                width: 100%;
+                height: 328px;
+                margin: 0 !important;
+                padding: 0 !important;
+              "
+              frameborder="0"
+              allowtransparency="true"
+              scrolling="no"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div>
+            <h1>{{ "your_assets" | translate }}</h1>
+            <div class="table">
+              <thead>
+                <tr class="head">
+                  <th class="price paddin">{{ "name" | translate }}</th>
+                  <th class="name">{{ "price" | translate }}</th>
+                  <th class="day-procent paddin">24h %</th>
+                  <th class="cap paddin">
+                    <div class="dc">
+                      <p>
+                        {{ "holdings" | translate }}
+                        <span
+                          nz-icon
+                          nzType="info-circle"
+                          [nzTheme]="'twotone'"
+                          [nzTwotoneColor]="'#808a9d'"
+                        ></span>
+                      </p>
+                    </div>
+                  </th>
+                  <th class="volume paddin">
+                    <div class="dc">
+                      <p>
+                        {{ "avg_buy_price" | translate }}(24h)
+                        <span
+                          nz-icon
+                          nzType="info-circle"
+                          [nzTheme]="'twotone'"
+                          [nzTwotoneColor]="'#808a9d'"
+                        ></span>
+                      </p>
+                    </div>
+                  </th>
+                  <th class="supply paddin">
+                    <div class="dc">
+                      <p>{{ "profit_loss" | translate }}</p>
+                    </div>
+                  </th>
+                  <th class="days paddin">{{ "actions" | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let coin of coins">
+                  <td class="dcc">
+                    <img
+                      class="coin-icon"
+                      [src]="'../../../../../../assets/' + coin.logo + '.png'"
+                      alt=""
+                    />
+                    <span>&nbsp; {{ coin.name }}&nbsp;&nbsp;</span>
+                    <span class="coin-symbol">
+                      {{ coin.symbol }}
+                    </span>
+                  </td>
+                  <td class="paddin">₸ {{ coin.price }}</td>
+                  <td class="paddin">
+                    <div
+                      class="dc procent df"
+                      [ngClass]="{
+                        'color-red': coin.change24 < 1,
+                        'color-green': coin.change24 > 1
+                      }"
+                    >
+                      <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+                      <p>{{ coin.change24 }}%</p>
+                    </div>
+                  </td>
+                  <td class="paddin">
+                    <p>₸ {{ coin.holdings }}</p>
+                    <p class="value">{{ coin.quantity }} {{ coin.symbol }}</p>
+                  </td>
+                  <td class="paddin">₸ {{ coin.avgBuyPrice }}</td>
+                  <td class="paddin">
+                    <p>+ ₸ {{ coin.profit }}</p>
+                    <p class="value">{{ coin.profitPercent }}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>
