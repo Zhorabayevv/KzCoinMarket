@@ -1,18 +1,10 @@
-<!-- <ul class="pagination">
-  <li *ngFor="let page of pages" class="page-item" [ngClass]="{active: page === currentPageProps}">
-    <a
-      class="page-link"
-      [routerLink]="[urlProps]"
-      [queryParams]="{page: page}"
-    >
-      {{ page }}
-    </a>
-  </li>
-</ul> -->
-
 <div class="dsc" style="margin-top: 55px; padding-bottom: 81px">
   <p>Барлык криптовалюталардн саны {{ totalProps }}</p>
-  <nz-pagination [nzPageIndex]="currentPageProps" [nzTotal]="pagesCount" (nzPageIndexChange)="changePage($event)"></nz-pagination>
+  <nz-pagination
+    [nzPageIndex]="currentPageProps"
+    [nzTotal]="pagesCount"
+    (nzPageIndexChange)="changePage($event)"
+  ></nz-pagination>
   <div class="rows">
     <span>{{ "show_rows" | translate }}</span>
     <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
