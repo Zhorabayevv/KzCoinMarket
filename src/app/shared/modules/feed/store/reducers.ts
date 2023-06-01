@@ -33,7 +33,7 @@ const feedReducer = createReducer(
       isLoading: false
     })
   ),
-  on(routerNavigatedAction, (): IFeedState => initialState)
+  // on(routerNavigatedAction, (): IFeedState => initialState)
 );
 
 export function reducers(state: IFeedState, action: Action) {

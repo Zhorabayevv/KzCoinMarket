@@ -3,6 +3,8 @@
   <mc-error-message *ngIf="error$ | async"></mc-error-message>
   <!-- [nzSpinning]="(isLoading$ | async) || !(feed$ | async)" -->
   <nz-spin style="min-height: 400px" [nzSpinning]="isLoading$ | async">
+    {{isLoading$ | async}}
+    {{feed$ | async}}
     <div *ngIf="feed$ | async">
       <thead>
         <tr class="head">
