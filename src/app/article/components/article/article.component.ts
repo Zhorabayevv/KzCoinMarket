@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { getArticleAction } from 'src/app/article/store/actions/getArticle.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IArticle } from 'src/app/shared/types/article.interface';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, takeUntil, Subject } from 'rxjs';
 import {
   articleSelector,
   isLoadingSelector,
@@ -22,8 +22,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
   article: IArticle;
   articleSubscription: Subscription;
   isLoading$: Observable<boolean>;
+  article$: Observable<IArticle | null>;
   error$: Observable<string | null>;
   isAuthor$: Observable<boolean>;
+  private unscbscribe$ = new Subject<void>();
+
 
   quantity: number = 1;
   tenge: number = 10835847.6;
@@ -73,13 +76,23 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.articleSubscription.unsubscribe();
+    this.unscbscribe$.next();
+    this.unscbscribe$.complete();
   }
 
   initializeValues(): void {
     this.slug = this.route.snapshot.paramMap.get('symbol');
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorSelector));
+    this.article$ = this.store.pipe(select(articleSelector));
+    this.article$.subscribe(
+      (data) => {
+        // this.article = data;
+        console.log(this.article);
+      }
+    )
+
+
     // this.isAuthor$ = combineLatest([
     //   this.store.pipe(select(articleSelector)),
     //   this.store.pipe(select(currentUserSelector)),
@@ -90,13 +103,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
       // )
     // );
 
-    
+
   }
 
   initializeListeners(): void {
     this.articleSubscription = this.store
-      .pipe(select(articleSelector))
-      .subscribe((article: IArticle | null) => {
+      .pipe(select(articleSelector), takeUntil(this.unscbscribe$))
+      .subscribe((article) => {
         console.log(article);
         this.article = article;
       });

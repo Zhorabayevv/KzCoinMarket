@@ -37,6 +37,7 @@ import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { FooterModule } from './shared/modules/footer/footer.module';
 import { ArticleModule } from './article/article.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
+import { LocalStorageService } from './shared/services/localStorageChanged.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -97,6 +98,7 @@ registerLocaleData(localeKz);
       deps: [TranslateService],
       multi: true,
     },
+    LocalStorageService
   ],
   bootstrap: [AppComponent],
 })

@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-
-import { IPortfolio } from '../../types/portfolio.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { Store, select } from '@ngrx/store';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddTransactionComponent } from '../addTransaction/addTransaction.component';
-import { Store, select } from '@ngrx/store';
 import {
   currentUserSelector,
   isLoggedInSelector,
 } from 'src/app/auth/store/selectors';
-import { Observable } from 'rxjs';
 import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
+import { PortFolioService } from 'src/app/portfolio/services/portfolio.service';
+import { IGetAllProtfolio } from '../../types/getAllPortfolio.interface';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 @Component({
   selector: 'mc-portfolio',
@@ -19,25 +22,12 @@ import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
   styleUrls: ['./portfolio.component.scss'],
 })
 export class PortfolioComponent implements OnInit {
+  private unsubscribe$ = new Subject<void>();
+  darkMode: boolean;
+  currency: string;
   isLoggedIn$: Observable<boolean>;
   currentUser$: Observable<ICurrentUser | null>;
-  portfolios: IPortfolio[] = [
-    {
-      name: 'Portfolio 1',
-      price: 100,
-      color: '',
-    },
-    {
-      name: 'Portfolio 2',
-      price: 100,
-      color: '',
-    },
-    {
-      name: 'Portfolio 3',
-      price: 100,
-      color: '',
-    },
-  ];
+  portfolios: any;
   colors: string[] = [
     '#ff4cff',
     '#FF6681',
@@ -50,34 +40,43 @@ export class PortfolioComponent implements OnInit {
     '#92FF77',
   ];
   invisBalance: boolean = false;
-  coins = [
-    {
-      logo: 'btc',
-      name: 'Bitcoin',
-      symbol: 'BTC',
-      price: 100,
-      change24: 0.8,
-      holdings: 174805.05,
-      quantity: 8,
-      avgBuyPrice: 100,
-      profit: 7732.84,
-      profitPercent: 0.8,
-    },
-  ];
+  coins: any[];
   editing: boolean = false;
+  newPortfolio: boolean = false;
+  validateForm: FormGroup = this.fb.group({
+    name: [null, [Validators.required, Validators.minLength(3)]],
+  });
+  selectedWallet;
+  selectedWalletName: string;
+  fullPrice: number;
 
   constructor(
     public translate: TranslateService,
     private modal: NzModalService,
-    private store: Store
+    private store: Store,
+    private portfolioService: PortFolioService,
+    private fb: FormBuilder,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    this.initializeValues();
+  }
+
+  initializeValues(): void {
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
-    this.portfolios.forEach((portfolio, index) => {
-      portfolio.color = this.colors[index];
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+      console.log(this.darkMode);
+      // Здесь вы можете выполнить необходимые действия при изменении darkMode
     });
+
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+      // Здесь вы можете выполнить необходимые действия при изменении currency
+    });
+    this.getAllPortfolios();
   }
 
   drop(event: CdkDragDrop<string[]>): void {
@@ -88,16 +87,57 @@ export class PortfolioComponent implements OnInit {
     this.invisBalance = !this.invisBalance;
   }
 
+  selectPortfolio(portfolio): void {
+    this.selectedWallet = portfolio;
+    this.coins = portfolio.coins.coinDto;
+    this.selectedWalletName = portfolio.name;
+    this.fullPrice = portfolio.fullPrice;
+  }
+
+  getAllPortfolios(): void {
+    this.portfolioService
+      .getAllPortfolios()
+      .subscribe((portfolios: IGetAllProtfolio) => {
+        this.portfolios = portfolios.walletModel;
+        this.portfolios.forEach((portfolio, index) => {
+          portfolio.color = this.colors[index];
+        });
+        this.selectedWalletName = portfolios.walletModel[0].name;
+        this.fullPrice = portfolios.walletModel[0].fullPrice;
+
+        this.coins = portfolios.walletModel[0].coins.coinDto;
+      });
+  }
+
   addCoin(): void {
     const modal = this.modal.create({
       nzTitle: null,
       nzContent: AddTransactionComponent,
-      nzComponentParams: {},
+      nzComponentParams: {
+        idWallet: this.selectedWallet.id,
+      },
       nzFooter: null,
     });
   }
 
   editPortfolio(): void {
     this.editing = !this.editing;
+  }
+
+  createPortfolio(): void {
+    this.newPortfolio = true;
+  }
+
+  addPortfolio(): void {
+    this.newPortfolio = false;
+    this.portfolioService
+      .createPortfolio(this.validateForm.value)
+      .subscribe((res) => {
+        this.getAllPortfolios();
+      });
+  }
+
+  cancelAddPortfolio(): void {
+    this.newPortfolio = false;
   }
 }

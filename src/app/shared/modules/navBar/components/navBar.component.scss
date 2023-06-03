@@ -1,14 +1,21 @@
+@import "/src/assets/scss/mixins/mini.scss";
+@import "/src/assets/scss/mixins/rem.scss";
+@import "/src/assets/scss/vars.scss";
+
 .container {
-  width: 1370px;
+  // width: 1370px;
+
+  @include rem(width, 1370px);
   margin: 0 auto;
   .navBar {
-    height: 53px;
+    @include rem(height, 53px);
     border-bottom: 1px solid #eff2f5;
     .info {
-      font-size: 11px;
+      // font-size: 11px;
       font-style: Medium;
       line-height: 169%;
       color: #58667e;
+      @include rem(font-size, 11px);
       span {
         color: #3861fb;
         cursor: pointer;
@@ -16,31 +23,46 @@
     }
     .dc {
       .select {
-        font-size: 12px;
+        // font-size: 12px;
         line-height: 155%;
         font-weight: 700;
-        margin-right: 10px;
-        min-width: 93px;
+        // margin-right: 10px;
+        // min-width: 93px;
+
+        @include rem(font-size, 12px);
+        @include rem(margin-right, 10px);
+        @include rem(min-width, 93px);
       }
       .moon {
         background-color: transparent;
-        padding-right: 10px;
+        // padding-right: 10px;
         border-right: 1px solid #eff2f5;
+
+        @include rem(padding-right, 10px);
       }
       .bell {
-        margin: 0px 9px 0px 7px;
+        // margin: 0px 9px 0px 7px;
+
+        @include rem(margin, 0px 9px 0px 7px);
         span {
-          font-size: 20px;
+          // font-size: 20px;
+
+          @include rem(font-size, 20px);
         }
       }
       .avatar-img {
         cursor: pointer;
         border: 1px solid #58667e;
         transition: border 100ms ease-out 0s;
-        width: 32px;
-        height: 32px;
-        border-radius: 16px;
-        margin-left: 5px;
+        // width: 32px;
+        // height: 32px;
+        // border-radius: 16px;
+        // margin-left: 5px;
+
+        @include rem(width, 32px);
+        @include rem(height, 32px);
+        @include rem(border-radius, 16px);
+        @include rem(margin-left, 5px);
       }
       .avatar-img:hover {
         border: 2px solid #3861fb;
@@ -49,71 +71,104 @@
         width: 203px;
         height: 34px;
         justify-content: right;
+
+        @include rem(width, 203px);
+        @include rem(height, 34px);
         .sign-in {
-          font-size: 12px;
-          line-height: 18px;
+          // font-size: 12px;
+          // line-height: 18px;
           font-weight: 700;
           color: #3861fb;
           border: 1px solid #3861fb;
-          border-radius: 8px;
+          // border-radius: 8px;
           background-color: #ffffff;
-          margin-right: 10px;
-          padding: 7px 16px 8px 17px;
+          // margin-right: 10px;
+          // padding: 7px 16px 8px 17px;
           text-align: center;
           cursor: pointer;
+
+          @include rem(font-size, 12px);
+          @include rem(line-height, 18px);
+          @include rem(margin-right, 10px);
+          @include rem(padding, 7px 16px 8px 17px);
+          @include rem(border-radius, 8px);
         }
       }
     }
   }
   nav {
     border-bottom: 1px solid #eff2f5;
-    height: 71px;
+    // height: 71px;
+
+    @include rem(height, 71px);
     .logo {
-      margin-right: 49px;
+      // margin-right: 49px;
       border: 1px solid #000000;
-      border-radius: 8px;
+      // border-radius: 8px;
+
+      @include rem(margin-right, 49px);
+      @include rem(border-radius, 8px);
     }
     .menu {
       width: 100%;
+
+      // @include rem(width, 100%);
       ul {
-        font-size: 14px;
+        // font-size: 14px;
         font-weight: 700;
         line-height: 124%;
+
+        @include rem(font-size, 14px);
         li {
-          margin-right: 32px;
+          // margin-right: 32px;
           cursor: pointer;
+
+          @include rem(margin-right, 32px);
           span {
             color: #ea3943;
           }
         }
       }
       .watch-port {
-        min-width: 87px;
-        height: 36px;
-        margin-right: 16px;
-        padding: 5px;
-        font-size: 12px;
+        // min-width: 87px;
+        // height: 36px;
+        // margin-right: 16px;
+        // padding: 5px;
+        // font-size: 12px;
         line-height: 248%;
         font-weight: 400;
         cursor: pointer;
+
+        @include rem(min-width, 87px);
+        @include rem(height, 36px);
+        @include rem(margin-right, 16px);
+        @include rem(padding, 5px);
+        @include rem(font-size, 12px);
       }
       .watch-port:hover {
         background-color: #eff2f5;
         color: #000000;
-        border-radius: 8px;
+        // border-radius: 8px;
+
+        @include rem(border-radius, 8px);
       }
       .search {
-        width: 256px;
-        height: 38.5px;
+        // width: 256px;
+        // height: 38.5px;
         background-color: #eff2f5;
         color: #a6b0c3;
         border: none;
-        border-radius: 8px;
+        // border-radius: 8px;
         font-weight: 700;
-        font-size: 12px;
+        // font-size: 12px;
         font-family: "Times New Roman", Times, serif;
         line-height: 155%;
         cursor: pointer;
+
+        @include rem(width, 256px);
+        @include rem(height, 38.5px);
+        @include rem(font-size, 12px);
+        @include rem(border-radius, 8px);
         input {
           background-color: #eff2f5;
         }
@@ -124,51 +179,76 @@
 .search-ul {
   li:hover {
     background-color: #f8fafd;
-    border-radius: 8px;
+    // border-radius: 8px;
+
+    @include rem(border-radius, 8px);
   }
   img {
-    width: 20px;
-    margin-right: 10px;
+    // width: 20px;
+    // margin-right: 10px;
+
+    @include rem(width, 20px);
+    @include rem(margin-right, 10px);
   }
   .name {
     color: #222531;
-    font-size: 14px;
+    // font-size: 14px;
     line-height: 83%;
     font-weight: 700;
-    margin-right: 10px;
+    // margin-right: 10px;
+
+    @include rem(font-size, 14px);
+    @include rem(margin-right, 10px);
   }
   .symbol {
     color: #58667e;
-    font-size: 12px;
+    // font-size: 12px;
     font-weight: 83%;
+
+    @include rem(font-size, 12px);
   }
 }
 .dropdown {
   background-color: #ffffff;
-  border-radius: 20px;
-  padding: 20px;
+  // border-radius: 20px;
+  // padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  margin-top: 20px;
+  // margin-top: 20px;
+
+  @include rem(border-radius, 20px);
+  @include rem(padding, 20px);
+  @include rem(margin-top, 20px);
   .img {
-    margin: 0 12px 12px 0;
+    // margin: 0 12px 12px 0;
     border: 1px solid #58667e;
     border-radius: 50%;
-    width: 64px;
-    height: 64px;
+    // width: 64px;
+    // height: 64px;
+
+    @include rem(margin, 0 12px 12px 0);
+    // @include rem(border-radius, 50%);
+    @include rem(width, 64px);
+    @include rem(height, 64px);
     span {
-      font-size: 44px;
+      // font-size: 44px;
+
+      @include rem(font-size, 44px);
     }
   }
   .profile-info {
     .username {
-      font-size: 14px;
+      // font-size: 14px;
       color: #000000;
       font-weight: 600;
+
+      @include rem(font-size, 14px);
     }
     .email {
-      font-size: 11px;
+      // font-size: 11px;
       color: #58667e;
       font-weight: 600;
+
+      @include rem(font-size, 11px);
     }
   }
 }
@@ -176,13 +256,18 @@
   font-weight: 700;
 }
 .sign-up {
-  font-size: 12px;
-  line-height: 18px;
+  // font-size: 12px;
+  // line-height: 18px;
   font-weight: 700;
   color: #ffffff;
   cursor: pointer;
-  border-radius: 8px;
+  // border-radius: 8px;
   border: 1px solid #3861fb;
   background-color: #3861fb;
-  padding: 7px 16px 8px 17px;
+  // padding: 7px 16px 8px 17px;
+
+  @include rem(font-size, 12px);
+  @include rem(line-height, 18px);
+  @include rem(border-radius, 8px);
+  @include rem(padding, 7px 16px 8px 17px);
 }

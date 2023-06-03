@@ -20,12 +20,11 @@
     >
       <nz-option
         nzCustomContent
-        (click)="selectCoin(coin)"
         *ngFor="let coin of coinsSelect"
         [nzLabel]="coin.label"
         [nzValue]="coin.value"
       >
-        <div class="dc">
+        <div class="dc" (click)="optionCoin(coin)">
           <img
             class="coin-icon"
             [src]="
@@ -55,7 +54,7 @@
 
     <div class="pr">
       <p>Price Per Coin</p>
-      <input nz-input [(ngModel)]="pricePerCoin" />
+      <input nz-input [(ngModel)]="pricePerCoin" disabled />
     </div>
   </div>
 
@@ -70,7 +69,9 @@
     />
   </div>
 
-  <button class="add-transaction br8 cp">Add Transaction</button>
+  <button class="add-transaction br8 cp" (click)="addTransaction()">
+    Add Transaction
+  </button>
 </ng-container>
 
 <ng-template #elseTemplate>

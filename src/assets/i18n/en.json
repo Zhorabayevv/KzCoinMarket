@@ -80,5 +80,8 @@
   "holdings": "Holdings",
   "avg_buy_price": "Avg. Buy Price",
   "profit_loss": "Profit/Loss",
-  "actions": "Actions"
+  "actions": "Actions",
+  "number_of_all_cryptocurrencies": "The number of all cryptocurrencies",
+  "add": "Добавить",
+  "undo": "Отменить"
 }

@@ -19,6 +19,7 @@ import { LoginComponent } from 'src/app/auth/components/login/login.component';
 import { GetCurrentUserEffect } from 'src/app/auth/store/effects/getCurrentUser.effect';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalStorageService } from '../shared/services/localStorageChanged.service';
 
 // const routes: Routes = [
 //   {
@@ -51,6 +52,6 @@ const icons: IconDefinition[] = [SearchOutline];
     NzIconModule.forRoot(icons),
     TranslateModule,
   ],
-  providers: [AuthService, PersistanceService],
+  providers: [AuthService, PersistanceService, LocalStorageService],
 })
 export class AuthModule {}

@@ -1,249 +1,254 @@
-<div class="container">
-  <ul class="dc">
-    <li>
-      <a [routerLink]="['/']">{{ "сryptocurrencies" | translate }}</a>
-    </li>
-    <li>
-      <a [routerLink]="['/']">{{ "coins" | translate }}</a>
-    </li>
-    <li>{{ article.fullName }}</li>
-  </ul>
-  <div class="ds">
-    <div class="main-div">
-      <div class="dc title-div">
-        <img [src]="article.logoUrl" alt="" />
-        <h1>{{ article.fullName }}</h1>
-        <span> {{ article.symbol }} </span>
+<nz-spin style="min-height: 400px" [nzSpinning]="isLoading$ | async">
+  <div class="container" *ngIf="article">
+    <ul class="dc">
+      <li>
+        <a [routerLink]="['/']">{{ "сryptocurrencies" | translate }}</a>
+      </li>
+      <li>
+        <a [routerLink]="['/']">{{ "coins" | translate }}</a>
+      </li>
+      <li>{{ article.fullName }}</li>
+    </ul>
+    <div class="ds">
+      <div class="main-div">
+        <div class="dc title-div">
+          <img [src]="article.logoUrl" alt="" />
+          <h1>{{ article.fullName }}</h1>
+          <span> {{ article.symbol }} </span>
+        </div>
+        <div class="second-div">
+          <span class="rank">{{ "rank" | translate }} #{{ article.id }}</span>
+          <span class="coin">{{ "coin" | translate }}</span>
+          <span class="coin">{{ "watchlists" | translate }}</span>
+        </div>
+        <div class="dc main-links">
+          <p *ngFor="let link of links">
+            <a target="_blank" [href]="link?.link ? link.link : actRoute">
+              <span nz-icon [nzType]="link?.icon" nzTheme="outline"></span>
+              {{
+                link.link.includes("org")
+                  ? article?.fullName + link?.name
+                  : link?.name
+              }}
+              <span nz-icon nzType="robot" nzTheme="outline"></span>
+            </a>
+          </p>
+        </div>
       </div>
-      <div class="second-div">
-        <span class="rank">{{ "rank" | translate }} #{{ article.id }}</span>
-        <span class="coin">{{ "coin" | translate }}</span>
-        <span class="coin">{{ "watchlists" | translate }}</span>
+      <div class="bla-div">
+        <div class="price-div">
+          <div class="dsc first">
+            <p class="title-price">
+              {{ article?.fullName }} {{ "price" | translate }}
+              <span> ({{ article?.symbol }}) </span>
+            </p>
+            <div class="dc">
+              <p class="dsc btn-blue">
+                {{ "buy" | translate }}
+                <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+              </p>
+              <p class="dsc btn-blue">
+                {{ "exchange" | translate }}
+                <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+              </p>
+              <p class="dsc btn-blue">
+                {{ "gamings" | translate }}
+                <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+              </p>
+              <p class="dsc btn-blue">
+                {{ "earn_crypto" | translate }}
+                <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+              </p>
+            </div>
+          </div>
+          <div class="dc pprice">
+            <p>₸{{ article.priceUsd }}</p>
+            <span>0.73%</span>
+          </div>
+          <div class="gas-price">14.10 ETH <span>1.50%</span></div>
+          <div class="progress-div">
+            <span>{{ "low" | translate }}:</span
+            ><span style="color: #000000">₸{{ article.low24Hour }}</span>
+            <nz-progress
+              [nzPercent]="article.percent"
+              nzStrokeColor="#808a9d"
+              class="progress"
+              nzStrokeWidth="6"
+              [nzShowInfo]="false"
+            ></nz-progress>
+            <span>{{ "high" | translate }}:</span
+            ><span style="color: #000000">₸{{ article.high24Hour }}</span>
+            <span class="dayh">24h</span>
+          </div>
+        </div>
+
+        <div class="df second">
+          <div class="divs">
+            <p class="title">
+              {{ "market_cap" | translate }}
+              <span
+                nz-icon
+                nzType="info-circle"
+                [nzTheme]="'twotone'"
+                [nzTwotoneColor]="'#808a9d'"
+              ></span>
+            </p>
+            <p class="price">$ {{ article.marketCapValue }}</p>
+            <p class="procent">0.73%</p>
+            <p class="dvolume">
+              {{ "24h" | translate }}
+              <span>0.0563</span>
+            </p>
+          </div>
+
+          <div class="divs" style="padding-left: 24px">
+            <p class="title">
+              {{ "fully_cap" | translate }}
+              <span
+                nz-icon
+                nzType="info-circle"
+                [nzTheme]="'twotone'"
+                [nzTwotoneColor]="'#808a9d'"
+              ></span>
+            </p>
+            <p class="price">$ {{ article.marketCapValue }}</p>
+            <p class="procent">0.73%</p>
+          </div>
+
+          <div class="divs" style="padding-left: 24px">
+            <p class="title">
+              {{ "volume" | translate }} <span class="dayh">24h</span>
+              <span
+                nz-icon
+                nzType="info-circle"
+                [nzTheme]="'twotone'"
+                [nzTwotoneColor]="'#808a9d'"
+              ></span>
+            </p>
+            <p class="price">₸11 764 717 057 776</p>
+            <p class="procent">12.29%</p>
+          </div>
+
+          <div class="divs" style="padding-left: 24px">
+            <p class="dc title">
+              {{ "circulating_supply" | translate }}
+              <img
+                style="margin-left: 5px"
+                src="../../../../assets/checkMark.svg"
+                alt=""
+              />
+            </p>
+            <div class="dsc">
+              <p class="price">
+                {{ article.volumeValue }} {{ article.symbol }}
+              </p>
+              <span class="procent-coin">{{ article.percent }}%</span>
+            </div>
+            <nz-progress
+              [nzPercent]="article.percent"
+              nzStrokeColor="#808a9d"
+              nzStrokeWidth="6"
+              [nzShowInfo]="false"
+            ></nz-progress>
+            <div class="dsc max-supply" style="margin-top: 29px">
+              <p>
+                {{ "max_supply" | translate
+                }}<span
+                  nz-icon
+                  nzType="info-circle"
+                  [nzTheme]="'twotone'"
+                  [nzTwotoneColor]="'#808a9d'"
+                ></span>
+              </p>
+              <span>21,000,000</span>
+            </div>
+            <div class="dsc max-supply">
+              <p>
+                {{ "total_supply" | translate
+                }}<span
+                  nz-icon
+                  nzType="info-circle"
+                  [nzTheme]="'twotone'"
+                  [nzTwotoneColor]="'#808a9d'"
+                  nzTheme="outline"
+                ></span>
+              </p>
+              <span>{{ article.volumeValue }}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="dc main-links">
-        <p *ngFor="let link of links">
-          <a target="_blank" [href]="link?.link ? link.link : actRoute">
-            <span nz-icon [nzType]="link?.icon" nzTheme="outline"></span>
-            {{
-              link.link.includes("org")
-                ? article?.fullName + link?.name
-                : link?.name
-            }}
-            <span nz-icon nzType="robot" nzTheme="outline"></span>
-          </a>
+    </div>
+
+    <div class="ds main-info">
+      <div>
+        <h1 class="title-chart">
+          {{ article.fullName }} {{ "kzt_chart" | translate }}
+        </h1>
+        <div class="chart">
+          <iframe
+            id="tradingview_44306"
+            src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_4430…m=NASDAQ%3AAAPL#%7B%22page-uri%22%3A%22127.0.0.1%3A5500%2Ftrade.html%22%7D"
+            style="
+              width: 100%;
+              height: 100%;
+              margin: 0 !important;
+              padding: 0 !important;
+            "
+            frameborder="0"
+            allowtransparency="true"
+            scrolling="no"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <h1 class="title-converter">
+          {{ article.symbol }} {{ "kzt_converter" | translate }}
+        </h1>
+        <div class="df converter">
+          <div class="dsc coin">
+            <div class="dc">
+              <img src="../../../../assets/btc.png" alt="" />
+              <div>
+                <p class="symbol">{{ article.symbol }}</p>
+                <p class="name">{{ article.fullName }}</p>
+              </div>
+            </div>
+            <input
+              nz-input
+              [(ngModel)]="quantity"
+              (input)="quantityInput()"
+              nzSize="large"
+            />
+          </div>
+          <div class="dsc tenge">
+            <div class="dc">
+              <img src="../../../../assets/tenge.png" alt="" />
+              <div>
+                <p class="symbol">KZT</p>
+                <p class="name">{{ "kazakhstani_tenge" | translate }}</p>
+              </div>
+            </div>
+            <input nz-input [(ngModel)]="tenge" nzSize="large" />
+          </div>
+        </div>
+      </div>
+
+      <div class="info-text">
+        <h1 class="title">
+          {{ article.symbol }}
+          {{ "price_live_data" | translate }}
+        </h1>
+        <p class="text">
+          The live {{ article.fullName }} price today is $23,330.894 USD with a
+          24-hour trading volume of $25,376,158,229 USD. We update our
+          {{ article.symbol }} to USD price in real-time.
+          {{ article.fullName }} is down 0.907% in the last 24 hours. The
+          current KZCoinMarket ranking is #1, with a live market cap of
+          $449,842,811,960 USD. It has a circulating supply of 19,280,993
+          {{ article.symbol }} coins and a max. supply of 21,000,000
+          {{ article.symbol }} coins.
         </p>
       </div>
     </div>
-    <div class="bla-div">
-      <div class="price-div">
-        <div class="dsc first">
-          <p class="title-price">
-            {{ article?.fullName }} {{ "price" | translate }}
-            <span> ({{ article?.symbol }}) </span>
-          </p>
-          <div class="dc">
-            <p class="dsc btn-blue">
-              {{ "buy" | translate }}
-              <span nz-icon nzType="caret-down" nzTheme="outline"></span>
-            </p>
-            <p class="dsc btn-blue">
-              {{ "exchange" | translate }}
-              <span nz-icon nzType="caret-down" nzTheme="outline"></span>
-            </p>
-            <p class="dsc btn-blue">
-              {{ "gamings" | translate }}
-              <span nz-icon nzType="caret-down" nzTheme="outline"></span>
-            </p>
-            <p class="dsc btn-blue">
-              {{ "earn_crypto" | translate }}
-              <span nz-icon nzType="caret-down" nzTheme="outline"></span>
-            </p>
-          </div>
-        </div>
-        <div class="dc pprice">
-          <p>₸{{ article.priceUsd }}</p>
-          <span>0.73%</span>
-        </div>
-        <div class="gas-price">14.10 ETH <span>1.50%</span></div>
-        <div class="progress-div">
-          <span>Low:</span
-          ><span style="color: #000000">₸{{ article.priceUsd }}</span>
-          <nz-progress
-            [nzPercent]="article.percent"
-            nzStrokeColor="#808a9d"
-            class="progress"
-            nzStrokeWidth="6"
-            [nzShowInfo]="false"
-          ></nz-progress>
-          <span>{{ "high" | translate }}:</span
-          ><span style="color: #000000">₸{{ article.priceUsd }}</span>
-          <span class="dayh">24h</span>
-        </div>
-      </div>
-
-      <div class="df second">
-        <div class="divs">
-          <p class="title">
-            {{ "market_cap" | translate }}
-            <span
-              nz-icon
-              nzType="info-circle"
-              [nzTheme]="'twotone'"
-              [nzTwotoneColor]="'#808a9d'"
-            ></span>
-          </p>
-          <p class="price">$ {{ article.marketCapValue }}</p>
-          <p class="procent">0.73%</p>
-          <p class="dvolume">
-            {{ "24h" | translate }}
-            <span>0.0563</span>
-          </p>
-        </div>
-
-        <div class="divs" style="padding-left: 24px">
-          <p class="title">
-            {{ "fully_cap" | translate }}
-            <span
-              nz-icon
-              nzType="info-circle"
-              [nzTheme]="'twotone'"
-              [nzTwotoneColor]="'#808a9d'"
-            ></span>
-          </p>
-          <p class="price">$ {{ article.marketCapValue }}</p>
-          <p class="procent">0.73%</p>
-        </div>
-
-        <div class="divs" style="padding-left: 24px">
-          <p class="title">
-            {{ "volume" | translate }} <span class="dayh">24h</span>
-            <span
-              nz-icon
-              nzType="info-circle"
-              [nzTheme]="'twotone'"
-              [nzTwotoneColor]="'#808a9d'"
-            ></span>
-          </p>
-          <p class="price">₸11 764 717 057 776</p>
-          <p class="procent">12.29%</p>
-        </div>
-
-        <div class="divs" style="padding-left: 24px">
-          <p class="dc title">
-            {{ "circulating_supply" | translate }}
-            <img
-              style="margin-left: 5px"
-              src="../../../../assets/checkMark.svg"
-              alt=""
-            />
-          </p>
-          <div class="dsc">
-            <p class="price">{{ article.volumeValue }} {{ article.symbol }}</p>
-            <span class="procent-coin">{{ article.percent }}%</span>
-          </div>
-          <nz-progress
-            [nzPercent]="article.percent"
-            nzStrokeColor="#808a9d"
-            nzStrokeWidth="6"
-            [nzShowInfo]="false"
-          ></nz-progress>
-          <div class="dsc max-supply" style="margin-top: 29px">
-            <p>
-              {{ "max_supply" | translate
-              }}<span
-                nz-icon
-                nzType="info-circle"
-                [nzTheme]="'twotone'"
-                [nzTwotoneColor]="'#808a9d'"
-              ></span>
-            </p>
-            <span>21,000,000</span>
-          </div>
-          <div class="dsc max-supply">
-            <p>
-              {{ "total_supply" | translate
-              }}<span
-                nz-icon
-                nzType="info-circle"
-                [nzTheme]="'twotone'"
-                [nzTwotoneColor]="'#808a9d'"
-                nzTheme="outline"
-              ></span>
-            </p>
-            <span>{{ article.volumeValue }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-
-  <div class="ds main-info">
-    <div>
-      <h1 class="title-chart">
-        {{ article.fullName }} {{ "kzt_chart" | translate }}
-      </h1>
-      <div class="chart">
-        <iframe
-          id="tradingview_44306"
-          src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_4430…m=NASDAQ%3AAAPL#%7B%22page-uri%22%3A%22127.0.0.1%3A5500%2Ftrade.html%22%7D"
-          style="
-            width: 100%;
-            height: 100%;
-            margin: 0 !important;
-            padding: 0 !important;
-          "
-          frameborder="0"
-          allowtransparency="true"
-          scrolling="no"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <h1 class="title-converter">
-        {{ article.symbol }} {{ "kzt_converter" | translate }}
-      </h1>
-      <div class="df converter">
-        <div class="dsc coin">
-          <div class="dc">
-            <img src="../../../../assets/btc.png" alt="" />
-            <div>
-              <p class="symbol">{{ article.symbol }}</p>
-              <p class="name">{{ article.fullName }}</p>
-            </div>
-          </div>
-          <input
-            nz-input
-            [(ngModel)]="quantity"
-            (input)="quantityInput()"
-            nzSize="large"
-          />
-        </div>
-        <div class="dsc tenge">
-          <div class="dc">
-            <img src="../../../../assets/tenge.png" alt="" />
-            <div>
-              <p class="symbol">KZT</p>
-              <p class="name">{{ "kazakhstani_tenge" | translate }}</p>
-            </div>
-          </div>
-          <input nz-input [(ngModel)]="tenge" nzSize="large" />
-        </div>
-      </div>
-    </div>
-
-    <div class="info-text">
-      <h1 class="title">
-        {{ article.symbol }}
-        {{ "price_live_data" | translate }}
-      </h1>
-      <p class="text">
-        The live {{ article.fullName }} price today is $23,330.894 USD with a
-        24-hour trading volume of $25,376,158,229 USD. We update our
-        {{ article.symbol }} to USD price in real-time. {{ article.fullName }} is
-        down 0.907% in the last 24 hours. The current KZCoinMarket ranking is
-        #1, with a live market cap of $449,842,811,960 USD. It has a circulating
-        supply of 19,280,993 {{ article.symbol }} coins and a max. supply of
-        21,000,000 {{ article.symbol }} coins.
-      </p>
-    </div>
-  </div>
-</div>
+</nz-spin>

@@ -17,4 +17,6 @@ export interface IArticle {
   volumeCryptoValue: string;
   volumeValue: string;
   wrate: number;
+  low24Hour: string;
+  high24Hour: string;
 }

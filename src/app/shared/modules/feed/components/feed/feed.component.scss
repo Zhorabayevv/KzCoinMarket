@@ -1,26 +1,37 @@
+@import '/src/assets/scss/mixins/mini.scss';
+@import '/src/assets/scss/mixins/rem.scss';
+@import '/src/assets/scss/vars.scss';
+
+
 .table-coins {
-  margin-top: 21px;
   border-top: 1px solid #eff2f5;
+
+  @include rem(margin-top, 21px);
+  @include rem(border-top, 1px);
   tr {
     th {
       border-bottom: 1px solid #eff2f5;
-      height: 47px;
+
+      @include rem(height, 47px);
     }
     .first {
-      width: 33px;
+      @include rem(width, 33px);
     }
     .second {
       text-align: end;
-      width: 43px;
-      padding: 12px;
+
+      @include rem(width, 43px);
+      @include rem(padding, 12px);
     }
     .name {
-      width: 185px;
-      padding: 12px;
+      @include rem(width, 185px);
+      @include rem(padding, 12px);
     }
     .price {
-      width: 134px;
-      padding-left: 72px !important;
+      // padding-left: 72px !important;
+
+      @include rem(width, 185px);
+      @include rem(padding-left, 72px);
     }
     .one-procent {
       width: 77px;

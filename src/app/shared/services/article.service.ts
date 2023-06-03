@@ -4,7 +4,6 @@ import {HttpClient} from '@angular/common/http'
 import {map} from 'rxjs/operators'
 
 import {IArticle} from '../types/article.interface'
-import {IGetArticleResponse} from 'src/app/shared/types/getArticleResponse.interface'
 
 @Injectable()
 export class ArticleService {

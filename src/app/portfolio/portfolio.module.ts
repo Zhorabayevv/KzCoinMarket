@@ -9,7 +9,10 @@ import { NgAntModule } from '../ng-zorro-antd.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { AddTransactionComponent } from './components/addTransaction/addTransaction.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PortFolioService } from './services/portfolio.service';
+import { TransactionService } from './services/transaction.services';
+import { LocalStorageService } from '../shared/services/localStorageChanged.service';
 
 const routes: Routes = [
   {
@@ -27,9 +30,10 @@ const icons: IconDefinition[] = [SearchOutline];
     NgAntModule,
     NzIconModule.forRoot(icons),
     TranslateModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [PortFolioService, TransactionService, LocalStorageService],
   exports: [],
 })
 export class PortfolioModule {}

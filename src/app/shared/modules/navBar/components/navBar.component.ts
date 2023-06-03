@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import { ICurrentUser } from 'src/app/shared/types/currentUser.interface';
 import { ISelect } from '../types/select.interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from 'src/app/auth/components/login/login.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mc-navBar',
@@ -18,6 +19,7 @@ import { LoginComponent } from 'src/app/auth/components/login/login.component';
   styleUrls: ['./navBar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
+  @Output() changedTheme = new EventEmitter<boolean>();
   isLoggedIn$: Observable<boolean>;
   currentUser$: Observable<ICurrentUser | null>;
   selectedCurrency: string = 'USD';
@@ -54,11 +56,16 @@ export class NavBarComponent implements OnInit {
     { img: 'solana', title: 'Solana', symbol: 'SOL', number: 5 },
     { img: 'cardano', title: 'Cardano', symbol: 'ADA', number: 6 },
   ];
+  darkMode: boolean = false;
+  isActiveRoute(): boolean {
+    return this.router.isActive('/watchlist', true);
+  }
 
   constructor(
     private store: Store,
     private modal: NzModalService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -85,17 +92,22 @@ export class NavBarComponent implements OnInit {
     });
   }
   changeLanguage(lang: string) {
-    console.log(lang);
     this.translate.use(lang);
     this.selectedLanguage = lang;
     localStorage.setItem('lang', lang);
   }
 
   changeCurrency(currency: string) {
-    console.log(currency);
     this.selectedCurrency = currency;
     localStorage.setItem('currency', currency);
   }
+
+  changeMode(): void {
+    this.darkMode = !this.darkMode;
+    localStorage.setItem('darkMode', this.darkMode.toString());
+    this.changedTheme.emit(this.darkMode);
+  }
+
   signout(): void {
     // this.store.dispatch(logoutAction());
     localStorage.removeItem('accessToken');

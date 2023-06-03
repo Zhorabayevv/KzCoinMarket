@@ -52,6 +52,7 @@
             <div
               class="dc"
               *ngFor="let portfolio of portfolios"
+              (click)="selectPortfolio(portfolio)"
               cdkDrag
               style="height: 57px"
             >
@@ -124,14 +125,51 @@
           </div>
 
           <div style="height: 115px; padding: 9px">
-            <div class="dc cp" style="height: 48.5px">
+            <div *ngIf="newPortfolio" class="new-group">
+              <form nz-form [formGroup]="validateForm">
+                <nz-form-item>
+                  <nz-form-control
+                    [nzErrorTip]="'error_tip.group_name' | translate"
+                  >
+                    <input
+                      nz-input
+                      formControlName="name"
+                      maxlength="30"
+                      nzSize="large"
+                      placeholder="{{ 'enter_portfolio_name' | translate }}"
+                      pattern="^[^\s]+(\s.*)?$"
+                    />
+                  </nz-form-control>
+                </nz-form-item>
+              </form>
+              <div class="dsc">
+                <button
+                  nz-button
+                  class="main-btn main-btn-sm main-btn-primary"
+                  (click)="addPortfolio()"
+                >
+                  {{ "add" | translate }}
+                </button>
+                <button
+                  nz-button
+                  class="main-btn main-btn-sm main-btn-default"
+                  (click)="cancelAddPortfolio()"
+                >
+                  {{ "undo" | translate }}
+                </button>
+              </div>
+            </div>
+            <div class="dc cp" style="height: 48.5px" *ngIf="!newPortfolio">
               <span
                 nz-icon
                 nzType="plus-circle"
                 style="margin: 14.25px 23px 14.25px 8px; font-size: 20px"
                 nzTheme="outline"
               ></span>
-              <span style="font-size: 14px; font-weight: 700">
+              <span
+                style="font-size: 14px; font-weight: 700"
+                (click)="createPortfolio()"
+              >
                 {{ "create_portfolio" | translate }}
               </span>
             </div>
@@ -156,6 +194,9 @@
       </div>
 
       <div class="w100" style="margin-left: 32px">
+        <span
+          ><b>{{ selectedWalletName }}</b></span
+        >
         <p style="color: #58667e; font-size: 12px; margin-bottom: 6px">
           {{ "current_balance" | translate }}
           <span (click)="balanceVis()" class="cp">
@@ -180,9 +221,7 @@
                   margin-bottom: 5px;
                 "
               >
-                {{
-                  invisBalance ? "****" : ("174805.05" | currency : "₸")
-                }}</span
+                {{ invisBalance ? "****" : (fullPrice | currency : "₸") }}</span
               >
               <p
                 [ngStyle]="{ color: invisBalance ? '#58667e' : '#000000' }"
@@ -317,37 +356,33 @@
               <tbody>
                 <tr *ngFor="let coin of coins">
                   <td class="dcc">
-                    <img
-                      class="coin-icon"
-                      [src]="'../../../../../../assets/' + coin.logo + '.png'"
-                      alt=""
-                    />
-                    <span>&nbsp; {{ coin.name }}&nbsp;&nbsp;</span>
+                    <img class="coin-icon" [src]="coin.logoUrl" alt="" />
+                    <span>&nbsp; {{ coin?.fullName }}&nbsp;&nbsp;</span>
                     <span class="coin-symbol">
-                      {{ coin.symbol }}
+                      {{ coin?.symbol }}
                     </span>
                   </td>
-                  <td class="paddin">₸ {{ coin.price }}</td>
+                  <td class="paddin">₸ {{ coin?.priceKzt }}</td>
                   <td class="paddin">
                     <div
                       class="dc procent df"
                       [ngClass]="{
-                        'color-red': coin.change24 < 1,
-                        'color-green': coin.change24 > 1
+                        'color-red': coin?.drate < 1,
+                        'color-green': coin?.drate > 1
                       }"
                     >
                       <span nz-icon nzType="caret-up" nzTheme="outline"></span>
-                      <p>{{ coin.change24 }}%</p>
+                      <p>{{ coin?.drate }}%</p>
                     </div>
                   </td>
                   <td class="paddin">
-                    <p>₸ {{ coin.holdings }}</p>
-                    <p class="value">{{ coin.quantity }} {{ coin.symbol }}</p>
+                    <p>₸ {{ coin?.holdings }}</p>
+                    <p class="value">{{ coin?.quantity }} {{ coin?.symbol }}</p>
                   </td>
-                  <td class="paddin">₸ {{ coin.avgBuyPrice }}</td>
+                  <td class="paddin">₸ {{ coin?.priceKzt }}</td>
                   <td class="paddin">
-                    <p>+ ₸ {{ coin.profit }}</p>
-                    <p class="value">{{ coin.profitPercent }}</p>
+                    <p>+ ₸ {{ coin?.profit }}</p>
+                    <p class="value">{{ coin?.profitPercent }}</p>
                   </td>
                 </tr>
               </tbody>

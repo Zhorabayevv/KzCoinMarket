@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 
 import { IAppState } from 'src/app/shared/types/appState.interface';
 import { IArticleState } from '../types/articleState.interface';

@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initionalizeForm();
     this.initionalizeValues();
+    if (this.sign === 'up') {
+      this.logIn = false;
+    }
     console.log(this.sign);
   }
 

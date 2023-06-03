@@ -32,10 +32,9 @@
         (ngModelChange)="changeCurrency($event)"
       >
       </nz-select>
-      <!-- <button > -->
-      <!-- <img class="moon" src="../../../../../assets/moon.svg" alt="" /> -->
       <nz-switch
-        [ngModel]="true"
+        [(ngModel)]="!darkMode"
+        (ngModelChange)="changeMode()"
         [nzCheckedChildren]="checkedTemplate"
         [nzUnCheckedChildren]="unCheckedTemplate"
       ></nz-switch>
@@ -45,7 +44,6 @@
       <ng-template #unCheckedTemplate
         ><img src="../../../../../assets/night.gif" style="width: 14px" alt=""
       /></ng-template>
-      <!-- </button> -->
 
       <ng-container
         *ngIf="(isLoggedIn$ | async) && (currentUser$ | async); else anonymous"
@@ -103,14 +101,27 @@
     </a>
     <div class="dsc menu">
       <ul class="df">
-        <li>{{ "сryptocurrencies" | translate }} <span>•</span></li>
-        <li>{{ "community" | translate }}</li>
+        <li>
+          <a [routerLink]="['/']">
+            {{ "сryptocurrencies" | translate }} <span>•</span>
+          </a>
+        </li>
+        <!-- <li>{{ "community" | translate }}</li>
         <li>{{ "products" | translate }}</li>
-        <li>{{ "learn" | translate }}</li>
+        <li>{{ "learn" | translate }}</li> -->
       </ul>
       <div class="dsc">
         <a [routerLink]="['/watchlist']" class="dec watch-port">
-          <img src="../../../../../assets/star.svg" alt="" />
+          <ng-container *ngIf="isActiveRoute(); else elseTemplate">
+            <img
+              style="width: 18px"
+              src="../../../../../assets/star_active.png"
+              alt=""
+            />
+          </ng-container>
+          <ng-template #elseTemplate>
+            <img src="../../../../../assets/star.svg" alt="" />
+          </ng-template>
           {{ "watchlist" | translate }}
         </a>
         <a [routerLink]="['/portfolio']" class="dec watch-port">

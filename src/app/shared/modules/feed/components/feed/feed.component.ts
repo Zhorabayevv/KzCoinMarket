@@ -30,7 +30,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   error$: Observable<string | null>;
   feed$: Observable<IGetFeedResponse | null>;
   isLoggedIn$: Observable<boolean>;
-  limitArticles = 10;
+  limitArticles: number = 10;
   baseUrl: string;
   queryParamsSubscription: Subscription;
   currentPage: number;

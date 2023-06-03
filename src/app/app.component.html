@@ -1,3 +1,5 @@
-<mc-navBar></mc-navBar>
-<router-outlet></router-outlet>
-<mc-footer></mc-footer>
+<div [ngClass]="{'darkMode': darkMode}">
+  <mc-navBar (changedTheme)="changeTheme($event)"></mc-navBar>
+  <router-outlet></router-outlet>
+  <mc-footer></mc-footer>
+</div>

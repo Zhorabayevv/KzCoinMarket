@@ -80,5 +80,8 @@
   "holdings": "Иелік ету",
   "avg_buy_price": "Орташа. Сатып алу бағасы",
   "profit_loss": "Пайда / шығын",
-  "actions": "Әрекеттер"
+  "actions": "Әрекеттер",
+  "number_of_all_cryptocurrencies": "Барлық криптовалюталардың саны",
+  "add": "Добавить",
+  "undo": "Отменить"
 }
