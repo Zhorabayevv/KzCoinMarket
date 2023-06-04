@@ -122,7 +122,7 @@
           </td>
           <td class="paddin">₸ {{ coin.marketCapValue }}</td>
           <td class="paddin">
-            <p>₸ {{ coin.volumeCryptoValue }}</p>
+            <p>₸ {{ coin.volumeCryptoValue.toString().slice(0, 4) }}</p>
             <p class="value">{{ coin.volumeValue }} {{ coin.symbol }}</p>
           </td>
           <td class="paddin">

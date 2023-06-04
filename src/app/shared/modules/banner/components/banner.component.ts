@@ -13,7 +13,7 @@ import { LocalStorageService } from 'src/app/shared/services/localStorageChanged
 export class BannerComponent implements OnInit {
   banners: IBanners[] = [
     {
-      title: this.translate.instant('trending'),
+      title: 'trending',
       image: '../../../../../assets/fire.png',
       coins: [
         {
@@ -40,7 +40,7 @@ export class BannerComponent implements OnInit {
       ],
     },
     {
-      title: this.translate.instant('kz_cryptocurrencies'),
+      title: 'kz_cryptocurrencies',
       image: '../../../../../assets/kzcoin.png',
       coins: [
         {
@@ -67,45 +67,45 @@ export class BannerComponent implements OnInit {
       ],
     },
     {
-      title: this.translate.instant('community_article'),
+      title: 'community_article',
       image: '',
     },
   ];
 
   carousel: IBannerCarousel[] = [
     {
-      title: 'Kazakhstan',
+      title: 'kazakhstan',
       image: '../../../../../assets/news.svg',
       logo: '../../../../../assets/btc.png',
-      desc: 'Crypto News of the Day: Judge bans SBF from encrypted messaging apps, Bithumb owner arrested in South Korea',
-      date: 'Sep 30',
+      desc: 'kazakhdesc',
+      date: 'sep30',
       watch: 998,
       like: 4,
     },
     {
-      title: 'Earth',
+      title: 'earth',
       image: '../../../../../assets/news.svg',
       logo: '../../../../../assets/eth.png',
-      desc: 'Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.',
-      date: 'Aug 8',
+      desc: 'earthdesc',
+      date: 'aug8',
       watch: 238,
       like: 2,
     },
     {
-      title: 'Kazakhstan',
+      title: 'kazakhstan',
       image: '../../../../../assets/news.svg',
       logo: '../../../../../assets/shiba.png',
-      desc: 'Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.',
-      date: 'Mar 8',
+      desc: 'earthdesc',
+      date: 'mar8',
       watch: 233,
       like: 3,
     },
     {
-      title: 'Earth',
+      title: 'earth',
       image: '../../../../../assets/news.svg',
       logo: '../../../../../assets/xrp.png',
-      desc: 'Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.',
-      date: 'Feb 2',
+      desc: 'earthdesc',
+      date: 'feb2',
       watch: 237,
       like: 5,
     },

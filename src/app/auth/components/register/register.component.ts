@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable } from 'rxjs';
 
@@ -33,7 +34,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     private message: NzMessageService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    public translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -62,9 +64,9 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     const request: IRegisterRequest = this.form.value;
     this.store.dispatch(registerAction({ request }));
-    if (this.logIn) {
-      this.message.info('Your account has been created!');
-    }
+    // if (this.logIn) {
+      this.message.success(this.translate.instant('you_are_logged_in'));
+    // }
     this.logIn = true;
     this.logInChange.emit(this.logIn);
   }

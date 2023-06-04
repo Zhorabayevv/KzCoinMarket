@@ -1,12 +1,17 @@
 <div class="dc">
-  <div class="banner" *ngFor="let banner of banners" [ngStyle]="{'background-color': darkMode ? '#58667e': '#ffffff' }" [ngClass]="{'darkModeColor' : darkMode}">
+  <div
+    class="banner"
+    *ngFor="let banner of banners"
+    [ngStyle]="{ 'background-color': darkMode ? '#58667e' : '#ffffff' }"
+    [ngClass]="{ darkModeColor: darkMode }"
+  >
     <div class="dsc">
       <div class="dc">
         <img [src]="banner.image" class="fire" alt="" />
-        <span class="title">{{ banner.title }}</span>
+        <span class="title">{{ banner.title | translate }}</span>
       </div>
       <div class="more">
-        <a [routerLink]="['/']"
+        <a [routerLink]="['/posts']"
           >{{ "more" | translate }}
           <span nz-icon nzType="right" nzTheme="outline"></span
         ></a>
@@ -19,7 +24,7 @@
         <div class="dc text-coin">
           <img [src]="coin.img" alt="" />
           <p>
-            {{ coin.title }}
+            {{ coin.title | translate }}
             <span>{{ coin.symbol }}</span>
           </p>
         </div>
@@ -47,13 +52,15 @@
               <div class="title">
                 <div class="dc">
                   <img [src]="item.logo" alt="" />
-                  <p [ngClass]="{'darkModeColor' : darkMode}">{{ item.title }}</p>
+                  <p [ngClass]="{ darkModeColor: darkMode }">
+                    {{ item.title | translate }}
+                  </p>
                 </div>
                 <p class="des">
-                  {{ item.desc }}
+                  {{ item.desc | translate }}
                 </p>
                 <div class="dc footer-ban">
-                  <span class="data">{{ item.date }}</span
+                  <span class="data">{{ item.date | translate }}</span
                   >•
                   <span
                     nz-icon

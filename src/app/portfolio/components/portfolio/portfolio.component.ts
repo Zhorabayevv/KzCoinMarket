@@ -39,7 +39,7 @@ export class PortfolioComponent implements OnInit {
     '#92FF77',
   ];
   invisBalance: boolean = false;
-  coins: any[];
+  coins;
   editing: boolean = false;
   newPortfolio: boolean = false;
   validateForm: FormGroup = this.fb.group({
@@ -104,7 +104,10 @@ export class PortfolioComponent implements OnInit {
         this.selectedWalletName = portfolios.walletModel[0].name;
         this.fullPrice = portfolios.walletModel[0].fullPrice;
 
-        this.coins = portfolios.walletModel[0].coins.coinDto;
+        console.log(this.selectedWallet.coins);
+
+        this.coins = this.selectedWallet.coins.coinWalletDto;
+        console.log(this.coins);
       });
   }
 

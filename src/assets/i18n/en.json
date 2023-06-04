@@ -87,5 +87,22 @@
   "hi": "Hi",
   "sign_out": "Exit",
   "posts": "Posts",
-  "back": "Back"
+  "back": "Back",
+  "kazakhstan": "Kazakhstan",
+  "kazakhdesc": "Crypto News of the Day: Judge bans SBF from encrypted messaging apps, Bithumb owner arrested in South Korea",
+  "earth": "Earth",
+  "earthdesc": "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.",
+  "feb2": "Feb 2",
+  "mar8": "Mar 8",
+  "aug8": "Aug 8",
+  "sep30": "Sep 30",
+  "success_created": "Success created",
+  "you_are_logged_in": "You have successfully registered",
+  "logged_in": "You are logged in",
+  "enter_portfolio_name": "Enter a portfolio name",
+  "error_name": "Enter the name",
+  "transaction_success": "Successful transaction",
+  "transaction_failed": "Transaction failed",
+  "please_fill_all_fields": "Please fill in all fields",
+  "save": "Save"
 }

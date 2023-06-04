@@ -104,16 +104,16 @@ export class AddTransactionComponent implements OnInit {
       this.portfolioService.buyCoin(transaction).subscribe(
         (data) => {
           console.log(data);
-          this.message.success('Transaction added successfully');
+          this.message.success(this.translate.instant('transaction_success'));
           this.modal.closeAll();
         },
         (error) => {
-          this.message.error('Something went wrong');
+          this.message.error(this.translate.instant('transaction_failed'));
           this.modal.closeAll();
         }
       );
     } else {
-      this.message.error('Please fill all fields');
+      this.message.error(this.translate.instant('please_fill_all_fields'));
     }
   }
 }

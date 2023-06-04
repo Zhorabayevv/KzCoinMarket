@@ -42,7 +42,7 @@
                 {{ "all_portfolio" | translate }}
               </h2>
               <p style="color: #58667e; font-size: 12px; line-height: 150%">
-                = ₸177,168.26
+                = ₸{{ selectedWallet?.fullPrice | number : "1.2-2" }}
               </p>
             </div>
           </div>
@@ -132,9 +132,7 @@
               <div *ngIf="newPortfolio" class="new-group">
                 <form nz-form [formGroup]="validateForm">
                   <nz-form-item>
-                    <nz-form-control
-                      [nzErrorTip]="'error_tip.group_name' | translate"
-                    >
+                    <nz-form-control [nzErrorTip]="'error_name' | translate">
                       <input
                         nz-input
                         formControlName="name"
@@ -229,21 +227,17 @@
                     invisBalance ? "****" : (fullPrice | currency : "₸")
                   }}</span
                 >
+                <!-- background-color: #ea3943; -->
                 <p
                   [ngStyle]="{ color: invisBalance ? '#58667e' : '#000000' }"
-                  style="
-                    padding: 4px 5px;
-                    background-color: #ea3943;
-                    color: #ffffff;
-                    border-radius: 8px;
-                  "
+                  style="padding: 4px 5px; color: #ffffff; border-radius: 8px"
                 >
                   <span
                     nz-icon
                     [nzType]="invisBalance ? '' : 'caret-down'"
                     nzTheme="outline"
                   ></span
-                  >{{ invisBalance ? "" : "3.79" }}%
+                  >{{ invisBalance ? "" : "0" }}%
                 </p>
               </div>
               <div>
@@ -288,8 +282,9 @@
                 </button>
               </div>
             </div>
-            <p style="color: #ea3943; margin-bottom: 16px">
-              -{{ "6878.65" | currency : "₸" }}
+            <!-- color: #ea3943 -->
+            <p style="margin-bottom: 16px" *ngIf="selectedWallet">
+              {{ "0" | currency : "₸" }}
               <span
                 style="
                   background-color: #eff2f5;
@@ -301,22 +296,25 @@
                 >24h</span
               >
             </p>
-            <div style="min-height: 328px">
-              <iframe
-                id="tradingview_44306"
-                src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_4430…m=NASDAQ%3AAAPL#%7B%22page-uri%22%3A%22127.0.0.1%3A5500%2Ftrade.html%22%7D"
-                style="
-                  width: 100%;
-                  height: 328px;
-                  margin: 0 !important;
-                  padding: 0 !important;
-                "
-                frameborder="0"
-                allowtransparency="true"
-                scrolling="no"
-                allowfullscreen
-              ></iframe>
-            </div>
+            <ng-container *ngIf="selectedWallet">
+              <div style="min-height: 328px">
+                <iframe
+                  id="tradingview_44306"
+                  src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_4430…m=NASDAQ%3AAAPL#%7B%22page-uri%22%3A%22127.0.0.1%3A5500%2Ftrade.html%22%7D"
+                  style="
+                    width: 100%;
+                    height: 328px;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                  "
+                  frameborder="0"
+                  allowtransparency="true"
+                  scrolling="no"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </ng-container>
+
             <div>
               <h1>{{ "your_assets" | translate }}</h1>
               <div class="table">
@@ -356,47 +354,49 @@
                         <p>{{ "profit_loss" | translate }}</p>
                       </div>
                     </th>
-                    <th class="days paddin">{{ "actions" | translate }}</th>
+                    <!-- <th class="days paddin">{{ "actions" | translate }}</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let coin of coins">
-                    <td class="dcc">
-                      <img class="coin-icon" [src]="coin.logoUrl" alt="" />
-                      <span>&nbsp; {{ coin?.fullName }}&nbsp;&nbsp;</span>
-                      <span class="coin-symbol">
-                        {{ coin?.symbol }}
-                      </span>
-                    </td>
-                    <td class="paddin">₸ {{ coin?.priceKzt }}</td>
-                    <td class="paddin">
-                      <div
-                        class="dc procent df"
-                        [ngClass]="{
-                          'color-red': coin?.drate < 1,
-                          'color-green': coin?.drate > 1
-                        }"
-                      >
-                        <span
-                          nz-icon
-                          nzType="caret-up"
-                          nzTheme="outline"
-                        ></span>
-                        <p>{{ coin?.drate }}%</p>
-                      </div>
-                    </td>
-                    <td class="paddin">
-                      <p>₸ {{ coin?.holdings }}</p>
-                      <p class="value">
-                        {{ coin?.quantity }} {{ coin?.symbol }}
-                      </p>
-                    </td>
-                    <td class="paddin">₸ {{ coin?.priceKzt }}</td>
-                    <td class="paddin">
-                      <p>+ ₸ {{ coin?.profit }}</p>
-                      <p class="value">{{ coin?.profitPercent }}</p>
-                    </td>
-                  </tr>
+                  <ng-container *ngIf="coins">
+                    <tr *ngFor="let coin of coins">
+                      <td class="dcc">
+                        <img class="coin-icon" [src]="coin.logoUrl" alt="" />
+                        <span>&nbsp; {{ coin?.fullName }}&nbsp;&nbsp;</span>
+                        <span class="coin-symbol">
+                          {{ coin?.symbol }}
+                        </span>
+                      </td>
+                      <td class="paddin">₸ {{ coin?.priceKzt }}</td>
+                      <td class="paddin">
+                        <div
+                          class="dc procent df"
+                          [ngClass]="{
+                            'color-red': coin?.drate < 1,
+                            'color-green': coin?.drate > 1
+                          }"
+                        >
+                          <span
+                            nz-icon
+                            nzType="caret-up"
+                            nzTheme="outline"
+                          ></span>
+                          <p>{{ coin?.volumeCryptoValue.toString().slice(0, 4) }}%</p>
+                        </div>
+                      </td>
+                      <td class="paddin">
+                        <p>₸ {{ coin?.value }}</p>
+                        <p class="value">
+                          {{ coin?.amount }} {{ coin?.symbol }}
+                        </p>
+                      </td>
+                      <td class="paddin">₸ {{ coin?.priceKzt }}</td>
+                      <td class="paddin">
+                        <p>+ ₸ {{ coin?.profit }}</p>
+                        <p class="value">{{ coin?.profitPercent }}</p>
+                      </td>
+                    </tr>
+                  </ng-container>
                 </tbody>
               </div>
             </div>
@@ -409,10 +409,10 @@
 <ng-template #elseTemplate>
   <div class="portfolio">
     <div
-    *ngIf="!(currentUser$ | async) && !(isLoggedIn$ | async)"
-    style="height: 600px"
-  >
-    {{ "register_create_w" | translate }}
-  </div>
+      *ngIf="!(currentUser$ | async) && !(isLoggedIn$ | async)"
+      style="height: 600px"
+    >
+      {{ "register_create_w" | translate }}
+    </div>
   </div>
 </ng-template>

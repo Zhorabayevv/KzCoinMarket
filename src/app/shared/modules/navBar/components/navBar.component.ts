@@ -160,7 +160,7 @@ export class NavBarComponent implements OnInit {
     };
 
     this.userUpdateService.userUpdate(data).subscribe((res) => {
-      this.message.success('Успешно обновлено');
+      this.message.success(this.translate.instant('success_created'));
     });
   }
 

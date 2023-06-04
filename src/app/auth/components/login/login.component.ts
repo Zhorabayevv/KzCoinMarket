@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(loginAction({ request }));
     if (this.isLogged$) {
       this.modal.destroy();
-      this.message.success('You are logged in');
+      this.message.success(this.translate.instant('logged_in'));
     }
   }
 
