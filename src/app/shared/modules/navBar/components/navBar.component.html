@@ -1,57 +1,64 @@
-<div class="container" *ngIf="market" [ngClass]="{'darkModeColor' : darkMode}">
-  <div class="navBar dsc">
-    <div class="info" [ngClass]="{'darkModeColor' : darkMode}">
-      {{ "сryptos" | translate }}: <span>{{ market.numberOfCrypto }}</span>
-      {{ "market_cap" | translate }}: <span> {{ market.marketCapital }} </span>
-      {{ "24vol" | translate }}: <span> {{ market.market24Hour }} </span>
-      {{ "dominance" | translate }}:
-      <span> {{ market.dominant2Cryptos }} </span>
-    </div>
-    <div class="dc">
-      <nz-select
-        [(ngModel)]="selectedLanguage"
-        nzBorderless
-        class="select"
-        [ngClass]="{'darkModeColor' : darkMode}"
-        [nzOptions]="languageOptions"
-        (ngModelChange)="changeLanguage($event)"
-      >
-      </nz-select>
-      <img
-        style="max-width: 15px"
-        [src]="
-          '../../../../../assets/' +
-          (selectedCurrency === 'USD' ? 'dollar.svg' : 'kzt.svg')
-        "
-        alt=""
-      />
-      <nz-select
-        [(ngModel)]="selectedCurrency"
-        nzBorderless
-        class="select"
-        [ngClass]="{'darkModeColor' : darkMode}"
-        [nzOptions]="currencyOptions"
-        (ngModelChange)="changeCurrency($event)"
-      >
-      </nz-select>
-      <nz-switch
-        [(ngModel)]="!darkMode"
-        style="margin: 0 15px 0 15px"
-        (ngModelChange)="changeMode()"
-        [nzCheckedChildren]="checkedTemplate"
-        [nzUnCheckedChildren]="unCheckedTemplate"
-      ></nz-switch>
-      <ng-template #checkedTemplate
-        ><img src="../../../../../assets/sun.gif" style="width: 14px" alt=""
-      /></ng-template>
-      <ng-template #unCheckedTemplate
-        ><img src="../../../../../assets/night.gif" style="width: 14px" alt=""
-      /></ng-template>
+<nz-spin style="min-height: 53px" [nzSpinning]="!market">
+  <div class="container" *ngIf="market" [ngClass]="{ darkModeColor: darkMode }">
+    <div class="navBar dsc">
+      <div class="info" [ngClass]="{ darkModeColor: darkMode }">
+        {{ "сryptos" | translate }}: <span>{{ market.numberOfCrypto }}</span>
+        {{ "market_cap" | translate }}:
+        <span> {{ market.marketCapital }} </span> {{ "24vol" | translate }}:
+        <span> {{ market.market24Hour }} </span> {{ "dominance" | translate }}:
+        <span> {{ market.dominant2Cryptos }} </span>
+      </div>
+      <div class="dc">
+        <nz-select
+          [(ngModel)]="selectedLanguage"
+          nzBorderless
+          class="select"
+          [ngClass]="{ darkModeColor: darkMode }"
+          [nzOptions]="languageOptions"
+          (ngModelChange)="changeLanguage($event)"
+        >
+        </nz-select>
+        <img
+          style="max-width: 15px"
+          [src]="
+            '../../../../../assets/' +
+            (selectedCurrency === 'USD' ? 'dollar.svg' : 'kzt.svg')
+          "
+          alt=""
+        />
+        <nz-select
+          [(ngModel)]="selectedCurrency"
+          nzBorderless
+          class="select"
+          [ngClass]="{ darkModeColor: darkMode }"
+          [nzOptions]="currencyOptions"
+          (ngModelChange)="changeCurrency($event)"
+        >
+        </nz-select>
+        <nz-switch
+          [(ngModel)]="!darkMode"
+          style="margin: 0 15px 0 15px"
+          (ngModelChange)="changeMode()"
+          [nzCheckedChildren]="checkedTemplate"
+          [nzUnCheckedChildren]="unCheckedTemplate"
+        ></nz-switch>
+        <ng-template #checkedTemplate
+          ><img src="../../../../../assets/sun.gif" style="width: 14px" alt=""
+        /></ng-template>
+        <ng-template #unCheckedTemplate
+          ><img
+            src="../../../../../assets/night.gif"
+            style="width: 14px"
+            alt=""
+        /></ng-template>
 
-      <ng-container
-        *ngIf="(isLoggedIn$ | async) && (currentUser$ | async); else anonymous"
-      >
-        <!-- <div class="dc bell">
+        <ng-container
+          *ngIf="
+            (isLoggedIn$ | async) && (currentUser$ | async);
+            else anonymous
+          "
+        >
+          <!-- <div class="dc bell">
           <nz-badge [nzCount]="5">
             <span
               nz-icon
@@ -63,142 +70,156 @@
           </nz-badge>
         </div> -->
 
-        <div class="dcc avatar-img" nz-dropdown [nzDropdownMenu]="menu">
-          <span nz-icon nzType="user" nzTheme="outline"></span>
-        </div>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <div class="dropdown">
-            <div class="dcc img">
-              <span nz-icon nzType="user" nzTheme="outline"></span>
-            </div>
-            <ng-container *ngIf="editProfileName; else elseTemplate">
-              <div class="profile-info">
-                <div>
-                  <input type="text" [(ngModel)]="username" />
-                </div>
-                <div>
-                  <input type="text" [(ngModel)]="email" />
-                </div>
-                <p class="username">
-                  {{ "hi" | translate }}, {{ (currentUser$ | async).username }}
-                </p>
-                <p class="email">
-                  {{ (currentUser$ | async).email }}
-                </p>
-              </div>
-            </ng-container>
-            <ng-template #elseTemplate>
-              <div class="profile-info">
-                <p class="username">
-                  {{ "hi" | translate }}, {{ (currentUser$ | async).username }}
-                </p>
-                <p class="email">
-                  {{ (currentUser$ | async).email }}
-                </p>
-              </div>
-            </ng-template>
-
-            <button
-              (click)="editProfileName ? updateUser() : editProfile()"
-              class="profile dcc"
-              style="text-align: center; margin: 20px auto 0 auto"
-            >
-              {{ editProfileName ? "save" : ("edit" | translate) }}
-            </button>
-            <button
-              (click)="signout()"
-              class="sign-up dcc"
-              style="text-align: center; margin: 20px auto 0 auto"
-            >
-              {{ "sign_out" | translate }}
-            </button>
+          <div class="dcc avatar-img" nz-dropdown [nzDropdownMenu]="menu">
+            <span nz-icon nzType="user" nzTheme="outline"></span>
           </div>
-        </nz-dropdown-menu>
-      </ng-container>
-      <ng-template #anonymous>
-        <div class="anonymous dc">
-          <a (click)="signIn('in')"
-            ><button class="sign-in">{{ "log_in" | translate }}</button>
-          </a>
-          <a (click)="signIn('up')">
-            <button class="sign-up">{{ "sign_up" | translate }}</button>
-          </a>
-        </div>
-      </ng-template>
-    </div>
-  </div>
-  <nav class="dc">
-    <a [routerLink]="['/']" class="logo">
-      <img src="../../../../../assets/logo.svg" alt="" />
-    </a>
-    <div class="dsc menu">
-      <ul class="df">
-        <li>
-          <a [routerLink]="['/']" [ngClass]="{'darkModeColor' : darkMode}">
-            {{ "сryptocurrencies" | translate }} <span>•</span>
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="['/posts']" [ngClass]="{'darkModeColor' : darkMode}">
-            {{ "posts" | translate }}
-          </a>
-        </li>
-        <!-- <li>{{ "community" | translate }}</li>
-        <li>{{ "products" | translate }}</li>
-        <li>{{ "learn" | translate }}</li> -->
-      </ul>
-      <div class="dsc">
-        <a [routerLink]="['/watchlist']" class="dec watch-port" [ngClass]="{'darkModeColor' : darkMode}">
-          <ng-container *ngIf="isActiveRoute(); else elseTemplate">
-            <img
-              style="width: 17px"
-              src="../../../../../assets/star_active.png"
-              alt=""
-            />
-          </ng-container>
-          <ng-template #elseTemplate>
-            <img src="../../../../../assets/star.svg" alt="" />
-          </ng-template>
-          {{ "watchlist" | translate }}
-        </a>
-        <a [routerLink]="['/portfolio']" class="dec watch-port" [ngClass]="{'darkModeColor' : darkMode}">
-          <ng-container *ngIf="isActiveRoutePortfolio(); else elseTemplate2">
-            <img src="../../../../../assets/portfolio_active.svg" alt="" />
-          </ng-container>
-          <ng-template #elseTemplate2>
-            <img src="../../../../../assets/portfolio.svg" alt="" />
-          </ng-template>
-
-          {{ "portfolio" | translate }}
-        </a>
-        <nz-input-group
-          [nzSuffix]="suffixIconSearch"
-          class="search"
-          nzTrigger="click"
-          nz-dropdown
-          [nzDropdownMenu]="menu4"
-        >
-          <input type="text" nz-input [placeholder]="'search' | translate" />
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-          <span nz-icon nzType="search"></span>
-        </ng-template>
-        <nz-dropdown-menu #menu4="nzDropdownMenu">
-          <ul nz-menu class="search-ul">
-            <li nz-menu-item class="dsc" *ngFor="let item of searchOptions">
-              <div class="dc">
-                <img
-                  [src]="'../../../../../assets/' + item.img + '.png'"
-                  alt=""
-                />
-                <span class="name">{{ item.title }}</span>
-                <span class="symbol">{{ item.symbol }}</span>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <div class="dropdown">
+              <div class="dcc img">
+                <span nz-icon nzType="user" nzTheme="outline"></span>
               </div>
-              <p class="symbol">#{{ item.number }}</p>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
+              <ng-container *ngIf="editProfileName; else elseTemplate">
+                <div class="profile-info">
+                  <div>
+                    <input type="text" [(ngModel)]="username" />
+                  </div>
+                  <div>
+                    <input type="text" [(ngModel)]="email" />
+                  </div>
+                  <p class="username">
+                    {{ "hi" | translate }},
+                    {{ (currentUser$ | async).username }}
+                  </p>
+                  <p class="email">
+                    {{ (currentUser$ | async).email }}
+                  </p>
+                </div>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <div class="profile-info">
+                  <p class="username">
+                    {{ "hi" | translate }},
+                    {{ (currentUser$ | async).username }}
+                  </p>
+                  <p class="email">
+                    {{ (currentUser$ | async).email }}
+                  </p>
+                </div>
+              </ng-template>
+
+              <button
+                (click)="editProfileName ? updateUser() : editProfile()"
+                class="profile dcc"
+                style="text-align: center; margin: 20px auto 0 auto"
+              >
+                {{ editProfileName ? "save" : ("edit" | translate) }}
+              </button>
+              <button
+                (click)="signout()"
+                class="sign-up dcc"
+                style="text-align: center; margin: 20px auto 0 auto"
+              >
+                {{ "sign_out" | translate }}
+              </button>
+            </div>
+          </nz-dropdown-menu>
+        </ng-container>
+        <ng-template #anonymous>
+          <div class="anonymous dc">
+            <a (click)="signIn('in')"
+              ><button class="sign-in">{{ "log_in" | translate }}</button>
+            </a>
+            <a (click)="signIn('up')">
+              <button class="sign-up">{{ "sign_up" | translate }}</button>
+            </a>
+          </div>
+        </ng-template>
       </div>
     </div>
-  </nav>
-</div>
+    <nav class="dc">
+      <a [routerLink]="['/']" class="logo">
+        <img src="../../../../../assets/logo.svg" alt="" />
+      </a>
+      <div class="dsc menu">
+        <ul class="df">
+          <li>
+            <a [routerLink]="['/']" [ngClass]="{ darkModeColor: darkMode }">
+              {{ "сryptocurrencies" | translate }} <span>•</span>
+            </a>
+          </li>
+          <li>
+            <a
+              [routerLink]="['/posts']"
+              [ngClass]="{ darkModeColor: darkMode }"
+            >
+              {{ "posts" | translate }}
+            </a>
+          </li>
+          <!-- <li>{{ "community" | translate }}</li>
+        <li>{{ "products" | translate }}</li>
+        <li>{{ "learn" | translate }}</li> -->
+        </ul>
+        <div class="dsc">
+          <a
+            [routerLink]="['/watchlist']"
+            class="dec watch-port"
+            [ngClass]="{ darkModeColor: darkMode }"
+          >
+            <ng-container *ngIf="isActiveRoute(); else elseTemplate">
+              <img
+                style="width: 17px"
+                src="../../../../../assets/star_active.png"
+                alt=""
+              />
+            </ng-container>
+            <ng-template #elseTemplate>
+              <img src="../../../../../assets/star.svg" alt="" />
+            </ng-template>
+            {{ "watchlist" | translate }}
+          </a>
+          <a
+            [routerLink]="['/portfolio']"
+            class="dec watch-port"
+            [ngClass]="{ darkModeColor: darkMode }"
+          >
+            <ng-container *ngIf="isActiveRoutePortfolio(); else elseTemplate2">
+              <img src="../../../../../assets/portfolio_active.svg" alt="" />
+            </ng-container>
+            <ng-template #elseTemplate2>
+              <img src="../../../../../assets/portfolio.svg" alt="" />
+            </ng-template>
+
+            {{ "portfolio" | translate }}
+          </a>
+          <nz-input-group
+            [nzSuffix]="suffixIconSearch"
+            class="search"
+            nzTrigger="click"
+            nz-dropdown
+            [nzDropdownMenu]="menu4"
+          >
+            <input type="text" nz-input [placeholder]="'search' | translate" />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+          </ng-template>
+          <nz-dropdown-menu #menu4="nzDropdownMenu">
+            <ul nz-menu class="search-ul">
+              <li nz-menu-item class="dsc" *ngFor="let item of searchOptions">
+                <div class="dc">
+                  <img
+                    [src]="'../../../../../assets/' + item.img + '.png'"
+                    alt=""
+                  />
+                  <span class="name">{{ item.title }}</span>
+                  <span class="symbol">{{ item.symbol }}</span>
+                </div>
+                <p class="symbol">#{{ item.number }}</p>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+      </div>
+    </nav>
+  </div>
+</nz-spin>
