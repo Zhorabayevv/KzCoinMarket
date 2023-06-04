@@ -52,7 +52,7 @@
         class="dc tenge"
         [ngClass]="{ backgroundDark: darkMode, darkModeColor: darkMode }"
       >
-        <span>₸</span>Tenge
+        <span>{{ currency === "USD" ? "$" : "₸" }}</span>{{ currency === "USD" ? "Dollar" : "Tenge" }}
       </p>
       <!-- <button
         class="btn-togg"

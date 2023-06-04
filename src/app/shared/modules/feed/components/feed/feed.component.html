@@ -64,7 +64,9 @@
                 coin.isLiked || watchListProps ? '#F6B87E' : '#808a9d'
               "
               style="font-size: 16px; cursor: pointer"
-              (click)="addFavorite(coin.id)"
+              (click)="
+                coin.isLiked ? removeFavorite(coin.id) : addFavorite(coin.id)
+              "
             ></span>
           </td>
           <td class="id">
@@ -79,7 +81,9 @@
               </span>
             </a>
           </td>
-          <td class="paddin">₸ {{ coin.price }}</td>
+          <td class="paddin">
+            {{ currency === "USD" ? "$" : "₸" }} {{currency === "USD" ? coin.priceUsd : coin.priceKzt }}
+          </td>
           <td class="paddin">
             <div
               class="dc procent df"
@@ -104,7 +108,11 @@
                 'color-green': coin.drate > 1
               }"
             >
-              <span nz-icon [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'" nzTheme="outline"></span>
+              <span
+                nz-icon
+                [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'"
+                nzTheme="outline"
+              ></span>
               <p>{{ coin.drate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
@@ -116,13 +124,22 @@
                 'color-green': coin.wrate > 1
               }"
             >
-              <span nz-icon [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'" nzTheme="outline"></span>
+              <span
+                nz-icon
+                [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'"
+                nzTheme="outline"
+              ></span>
               <p>{{ coin.wrate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
-          <td class="paddin">₸ {{ coin.marketCapValue }}</td>
           <td class="paddin">
-            <p>₸ {{ coin.volumeCryptoValue.toString().slice(0, 4) }}</p>
+            {{ currency === "USD" ? "$" : "₸" }} {{ coin.marketCapValue }}
+          </td>
+          <td class="paddin">
+            <p>
+              {{ currency === "USD" ? "$" : "₸" }}
+              {{ coin.volumeValue }}
+            </p>
             <p class="value">{{ coin.volumeValue }} {{ coin.symbol }}</p>
           </td>
           <td class="paddin">
@@ -149,7 +166,7 @@
       </tbody>
       <!-- <ng-container *ngIf="(feed$ | async)"> -->
       <mc-pagination
-        [totalCount]="(feed$ | async).count"
+        [totalCount]="count"
         [limitArticles]="limitArticles"
         [currentPage]="currentPage"
         [url]="baseUrl"

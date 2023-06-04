@@ -19,4 +19,8 @@ export class FeedService {
     const fullUrl = `https://springboot-postgresql-kzcoin.herokuapp.com/v1/api/user/watchlist/like?coinId=${coinId}`;
     return this.http.post<IGetFeedResponse>(fullUrl, { coinId });
   }
+  removeToFavorites(coinId): Observable<IGetFeedResponse> {
+    const fullUrl = `https://springboot-postgresql-kzcoin.herokuapp.com/v1/api/user/watchlist/unlike?coinId=${coinId}`;
+    return this.http.post<IGetFeedResponse>(fullUrl, { coinId });
+  }
 }

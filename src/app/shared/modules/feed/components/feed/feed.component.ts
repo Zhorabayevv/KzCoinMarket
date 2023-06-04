@@ -39,6 +39,7 @@ export class FeedComponent implements OnInit, OnDestroy {
   spinning: boolean = false;
   darkMode: boolean;
   currency: string;
+  count: number;
 
   constructor(
     private store: Store,
@@ -63,13 +64,17 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.feed$ = this.store.pipe(select(feedSelector));
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.baseUrl = this.router.url.split('?')[0];
+    this.feed$.subscribe((data) => {
+      console.log(data.count);
+      this.count = data.count;
+    });
     this.localStorageService.getDarkMode().subscribe((value: boolean) => {
       this.darkMode = value;
-      console.log(this.darkMode);
     });
 
     this.localStorageService.getCurrency().subscribe((value: string) => {
       this.currency = value;
+      console.log(this.currency);
     });
   }
 
@@ -96,7 +101,13 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   addFavorite(coinId): void {
     this.feedService.addToFavorites(coinId).subscribe((data) => {
-      console.log(data);
+
+      this.fetchFeeds();
+    });
+    // this.store.dispatch(addToFavoritesAction({ id }));
+  }
+  removeFavorite(coinId): void {
+    this.feedService.removeToFavorites(coinId).subscribe((data) => {
       this.fetchFeeds();
     });
     // this.store.dispatch(addToFavoritesAction({ id }));

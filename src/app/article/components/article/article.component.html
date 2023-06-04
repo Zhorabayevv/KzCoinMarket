@@ -62,7 +62,10 @@
             </div>
           </div>
           <div class="dc pprice">
-            <p>₸{{ article.priceKzt }}</p>
+            <p>
+              {{ currency === "USD" ? "$" : "₸"
+              }}{{ currency === "USD" ? article.priceUsd : article.priceKzt }}
+            </p>
             <span>0.73%</span>
           </div>
           <div class="gas-price">14.10 ETH <span>1.50%</span></div>
@@ -125,7 +128,9 @@
                 [nzTwotoneColor]="'#808a9d'"
               ></span>
             </p>
-            <p class="price">₸11 764 717 057 776</p>
+            <p class="price">
+              {{ currency === "USD" ? "$" : "₸" }} 11 764 717 057 776
+            </p>
             <p class="procent">12.29%</p>
           </div>
 

@@ -41,7 +41,9 @@
           </div>
         </ng-container>
         <ng-template #price>
-          <div class="dc procent df">₸ {{ coin.price }}</div>
+          <div class="dc procent df">
+            {{ currency === "USD" ? "$" : "₸" }} {{ coin.price }}
+          </div>
         </ng-template>
       </div>
       <ng-container *ngIf="!banner.coins">
