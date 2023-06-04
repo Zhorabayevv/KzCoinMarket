@@ -184,21 +184,15 @@
     @include rem(border-radius, 8px);
   }
   img {
-    // width: 20px;
-    // margin-right: 10px;
-
-    @include rem(width, 20px);
-    @include rem(margin-right, 10px);
+    width: 20px;
+    margin-right: 10px;
   }
   .name {
     color: #222531;
-    // font-size: 14px;
+    font-size: 14px;
     line-height: 83%;
     font-weight: 700;
-    // margin-right: 10px;
-
-    @include rem(font-size, 14px);
-    @include rem(margin-right, 10px);
+    margin-right: 10px;
   }
   .symbol {
     color: #58667e;
@@ -219,36 +213,26 @@
   @include rem(padding, 20px);
   @include rem(margin-top, 20px);
   .img {
-    // margin: 0 12px 12px 0;
+    margin: 0 12px 12px 0;
     border: 1px solid #58667e;
     border-radius: 50%;
-    // width: 64px;
-    // height: 64px;
+    width: 64px;
+    height: 64px;
 
-    @include rem(margin, 0 12px 12px 0);
-    // @include rem(border-radius, 50%);
-    @include rem(width, 64px);
-    @include rem(height, 64px);
     span {
-      // font-size: 44px;
-
-      @include rem(font-size, 44px);
+      font-size: 44px;
     }
   }
   .profile-info {
     .username {
-      // font-size: 14px;
+      font-size: 14px;
       color: #000000;
       font-weight: 600;
-
-      @include rem(font-size, 14px);
     }
     .email {
-      // font-size: 11px;
+      font-size: 11px;
       color: #58667e;
       font-weight: 600;
-
-      @include rem(font-size, 11px);
     }
   }
 }
@@ -256,32 +240,24 @@
   font-weight: 700;
 }
 .sign-up {
-  // font-size: 12px;
-  // line-height: 18px;
+  font-size: 12px;
+  line-height: 18px;
   font-weight: 700;
   color: #ffffff;
   cursor: pointer;
-  // border-radius: 8px;
+  border-radius: 8px;
   border: 1px solid #3861fb;
   background-color: #3861fb;
-  // padding: 7px 16px 8px 17px;
-
-  @include rem(font-size, 12px);
-  @include rem(line-height, 18px);
-  @include rem(border-radius, 8px);
-  @include rem(padding, 7px 16px 8px 17px);
+  padding: 7px 16px 8px 17px;
 }
-.profile{
+.profile {
   font-weight: 700;
   color: #3861fb;
   cursor: pointer;
-  // border-radius: 8px;
+  border-radius: 8px;
   border: 1px solid #3861fb;
   background-color: #ffffff;
-  // padding: 7px 16px 8px 17px;
-
-  @include rem(font-size, 12px);
-  @include rem(line-height, 18px);
-  @include rem(border-radius, 8px);
-  @include rem(padding, 7px 16px 8px 17px);
+  padding: 7px 16px 8px 17px;
+  font-size: 12px;
+  line-height: 18px;
 }
