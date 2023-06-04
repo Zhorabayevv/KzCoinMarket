@@ -8,7 +8,11 @@
 
   <ng-container *ngIf="(currentUser$ | async) && (isLoggedIn$ | async)">
     <div class="watchlist">
-      <div class="dcc main">{{ "main" | translate }}</div>
+      <a [routerLink]="'/'">
+        <div class="dcc main">
+          {{ "main" | translate }}
+        </div>
+      </a>
       <div>
         <div class="dc">
           <p>My First Watchlist</p>
@@ -26,7 +30,11 @@
           [routerLinkActiveOptions]="{ exact: true }"
           class="dec watch-port btn"
         >
-          <img src="../../../../../assets/star.svg" alt="" />
+          <img
+            src="../../../../../assets/star_active.png"
+            style="width: 17px"
+            alt=""
+          />
           {{ "watchlist" | translate }}
         </a>
         <a [routerLink]="['/portfolio']" class="dec watch-port btn">
@@ -35,11 +43,11 @@
         </a>
       </div>
       <div class="links df">
-        <a [routerLink]="['/add-coins']" class="dec watch-port btn">
+        <!-- <a [routerLink]="['/add-coins']" class="dec watch-port btn">
           <span nz-icon nzType="plus" nzTheme="outline"></span>
           {{ "add_coins" | translate }}
-        </a>
-        <a [routerLink]="['/edit']" class="dec watch-port btn">
+        </a> -->
+        <a class="dec watch-port btn">
           <span nz-icon nzType="edit" nzTheme="outline"></span>
           {{ "edit" | translate }}
         </a>

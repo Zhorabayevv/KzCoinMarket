@@ -3,7 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TranslateService } from '@ngx-translate/core';
 import { Store, select } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddTransactionComponent } from '../addTransaction/addTransaction.component';
@@ -22,7 +22,6 @@ import { LocalStorageService } from 'src/app/shared/services/localStorageChanged
   styleUrls: ['./portfolio.component.scss'],
 })
 export class PortfolioComponent implements OnInit {
-  private unsubscribe$ = new Subject<void>();
   darkMode: boolean;
   currency: string;
   isLoggedIn$: Observable<boolean>;
@@ -69,12 +68,10 @@ export class PortfolioComponent implements OnInit {
     this.localStorageService.getDarkMode().subscribe((value: boolean) => {
       this.darkMode = value;
       console.log(this.darkMode);
-      // Здесь вы можете выполнить необходимые действия при изменении darkMode
     });
 
     this.localStorageService.getCurrency().subscribe((value: string) => {
       this.currency = value;
-      // Здесь вы можете выполнить необходимые действия при изменении currency
     });
     this.getAllPortfolios();
   }
@@ -98,10 +95,12 @@ export class PortfolioComponent implements OnInit {
     this.portfolioService
       .getAllPortfolios()
       .subscribe((portfolios: IGetAllProtfolio) => {
+        console.log(portfolios);
         this.portfolios = portfolios.walletModel;
         this.portfolios.forEach((portfolio, index) => {
           portfolio.color = this.colors[index];
         });
+        this.selectedWallet = portfolios.walletModel[0];
         this.selectedWalletName = portfolios.walletModel[0].name;
         this.fullPrice = portfolios.walletModel[0].fullPrice;
 
@@ -110,6 +109,7 @@ export class PortfolioComponent implements OnInit {
   }
 
   addCoin(): void {
+    console.log(this.selectedWallet);
     const modal = this.modal.create({
       nzTitle: null,
       nzContent: AddTransactionComponent,
@@ -117,6 +117,9 @@ export class PortfolioComponent implements OnInit {
         idWallet: this.selectedWallet.id,
       },
       nzFooter: null,
+    });
+    modal.afterClose.subscribe((result) => {
+      this.getAllPortfolios();
     });
   }
 

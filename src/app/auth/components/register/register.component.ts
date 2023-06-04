@@ -10,6 +10,7 @@ import {
   validationErrorsSelector,
 } from 'src/app/auth/store/selectors';
 import { IRegisterRequest } from 'src/app/auth/types/registerRequest.interface';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 import { IBackendErrors } from 'src/app/shared/types/backendErrors.interface';
 
 @Component({
@@ -18,18 +19,21 @@ import { IBackendErrors } from 'src/app/shared/types/backendErrors.interface';
   styleUrls: ['../login/login.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  @Input() logIn: boolean;
+  @Output() logInChange = new EventEmitter<boolean>();
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
   backendErrors$: Observable<IBackendErrors | null>;
-  @Input() logIn: boolean;
-  @Output() logInChange = new EventEmitter<boolean>();
+  darkMode: boolean;
+  currency: string;
 
   passwordVisible: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +44,14 @@ export class RegisterComponent implements OnInit {
   initioalizeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
-    console.log(this.isSubmitting$);
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+      console.log(this.darkMode);
+    });
+
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+    });
   }
   initionalizeForm(): void {
     this.form = this.fb.group({

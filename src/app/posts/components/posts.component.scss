@@ -1,0 +1,46 @@
+.clip {
+  height: 42px;
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  padding: 5px; /* Поля вокруг текста */
+  text-overflow: ellipsis;
+}
+.posts {
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  cursor: pointer;
+  .post {
+    width: 420px;
+    margin-left: 35px;
+
+    .img {
+      width: 400px;
+      height: 144px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .title {
+      font-size: 18px;
+      line-height: 25px;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+  }
+}
+.fullpost {
+  width: 100%;
+  .img {
+    width: 400px;
+    height: 144px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 20px auto;
+  }
+  .title {
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+}

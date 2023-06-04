@@ -1,44 +1,19 @@
-<!-- <div class="feed-toggle">
-  <ul class="nav nav-pills outline-active">
-    <li class="nav-item" *ngIf="isLoggedIn$ | async">
-      <a [routerLink]="['/feed']" class="nav-link" routerLinkActive="active"
-        >Your feed</a
-      >
-    </li>
-
-    <li class="nav-item">
-      <a
-        [routerLink]="['/']"
-        class="nav-link"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}"
-        >Global feed</a
-      >
-    </li>
-
-    <li class="nav-item" *ngIf="tagNameProps">
-      <a
-        [routerLink]="['/tags', tagNameProps]"
-        class="nav-link"
-        routerLinkActive="active"
-      >
-        <i class="ion-pound"></i>
-        {{ tagNameProps }}
-      </a>
-    </li>
-  </ul>
-</div> -->
-<div class="toggler dsc">
+<div class="toggler dsc" [ngClass]="{ darkModeColor: darkMode }">
   <div class="dc">
     <div class="links df">
       <a
         [routerLink]="(isLoggedIn$ | async) ? ['/watchlist'] : ['/']"
         class="dec watch-port btn"
+        [ngClass]="{ backgroundDark: darkMode, darkModeColor: darkMode }"
       >
         <img src="../../../../../assets/star.svg" alt="" />
         {{ "watchlist" | translate }}
       </a>
-      <a [routerLink]="['/portfolio']" class="dec watch-port btn">
+      <a
+        [routerLink]="['/portfolio']"
+        class="dec watch-port btn"
+        [ngClass]="{ backgroundDark: darkMode, darkModeColor: darkMode }"
+      >
         <img src="../../../../../assets/portfolio.svg" alt="" />
         {{ "portfolio" | translate }}
       </a>
@@ -49,10 +24,17 @@
         class="dec btn btn2"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        [ngClass]="{ backgroundDark: darkMode, darkModeColor: darkMode }"
       >
         {{ "сryptocurrencies" | translate }}
       </a>
-      <a [routerLink]="['/']" class="dec btn coins">
+      <a
+        [routerLink]="['/kazakh-coins']"
+        routerLinkActive="active"
+        class="dec btn coins"
+        [ngClass]="{ darkModeColor: darkMode }"
+      >
+        <img src="../../../../../assets/fire.png" style="width: 15px" alt="" />
         {{ "kz_coins" | translate }}
       </a>
     </div>
@@ -60,19 +42,27 @@
 
   <div class="dc right">
     <div class="rows">
-      <span>{{ "show_rows" | translate }}</span>
+      <!-- <span>{{ "show_rows" | translate }}</span>
       <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
-      </nz-select>
+      </nz-select> -->
     </div>
 
     <div class="dc">
-      <p class="dc tenge"><span>₸</span>Tenge</p>
-      <button class="btn-togg">
+      <p
+        class="dc tenge"
+        [ngClass]="{ backgroundDark: darkMode, darkModeColor: darkMode }"
+      >
+        <span>₸</span>Tenge
+      </p>
+      <button
+        class="btn-togg"
+        [ngClass]="{ backgroundDark: darkMode, darkModeColor: darkMode }"
+      >
         <span
           nz-icon
           nzType="bars"
           nzTheme="outline"
-          style="background-color: #ffffff"
+          [ngStyle]="{ 'background-color': darkMode ? '#58667e' : '#ffffff' }"
         ></span
         ><span nz-icon nzType="appstore" nzTheme="outline"></span>
       </button>

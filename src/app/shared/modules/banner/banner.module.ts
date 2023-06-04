@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SearchOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { BannerComponent } from './components/banner.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { TranslateModule } from '@ngx-translate/core';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 const icons: IconDefinition[] = [SearchOutline];
 
@@ -21,5 +22,6 @@ const icons: IconDefinition[] = [SearchOutline];
   ],
   declarations: [BannerComponent],
   exports: [BannerComponent],
+  providers: [LocalStorageService],
 })
 export class BannerModule {}

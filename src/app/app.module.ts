@@ -17,7 +17,7 @@ import {
   TranslateLoader,
   TranslateService,
 } from '@ngx-translate/core';
-import { from } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import localeEn from '@angular/common/locales/en';
 import localeRu from '@angular/common/locales/ru';
@@ -38,13 +38,15 @@ import { FooterModule } from './shared/modules/footer/footer.module';
 import { ArticleModule } from './article/article.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
 import { LocalStorageService } from './shared/services/localStorageChanged.service';
+import { PostsModule } from './posts/posts.module';
+import { KazakhCoinsModule } from './kazakhCoins/kazakhCoins.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 export function appInitializerFactory(translate: TranslateService) {
   return () => {
-    return from(translate.use('kz')).toPromise();
+    return firstValueFrom(translate.use('kz'));
   };
 }
 
@@ -82,6 +84,8 @@ registerLocaleData(localeKz);
     PortfolioModule,
     ArticleModule,
     HttpClientModule,
+  PostsModule,
+    KazakhCoinsModule
   ],
   exports: [TranslateModule],
   providers: [

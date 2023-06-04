@@ -12,6 +12,10 @@ import { ISelect } from '../types/select.interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from 'src/app/auth/components/login/login.component';
 import { Router } from '@angular/router';
+import { UserUpdateService } from '../services/userUpdate.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
+import { IGetMarketResponse } from '../types/market.interface';
 
 @Component({
   selector: 'mc-navBar',
@@ -24,7 +28,7 @@ export class NavBarComponent implements OnInit {
   currentUser$: Observable<ICurrentUser | null>;
   selectedCurrency: string = 'USD';
   selectedLanguage: string = 'kz';
-  languageOptions: ISelect[] = [
+  languageOptions: any[] = [
     {
       value: 'kz',
       label: 'Қазақ',
@@ -38,7 +42,7 @@ export class NavBarComponent implements OnInit {
       label: 'English',
     },
   ];
-  currencyOptions: ISelect[] = [
+  currencyOptions: any[] = [
     {
       value: 'USD',
       label: 'USD',
@@ -56,19 +60,35 @@ export class NavBarComponent implements OnInit {
     { img: 'solana', title: 'Solana', symbol: 'SOL', number: 5 },
     { img: 'cardano', title: 'Cardano', symbol: 'ADA', number: 6 },
   ];
-  darkMode: boolean = false;
   isActiveRoute(): boolean {
     return this.router.isActive('/watchlist', true);
   }
+  isActiveRoutePortfolio(): boolean {
+    return this.router.isActive('/portfolio', true);
+  }
+  editProfileName: boolean = false;
+  username: string;
+  email: string;
+  password: string;
+  darkMode: boolean;
+  currency: string;
+  market: IGetMarketResponse;
 
   constructor(
     private store: Store,
     private modal: NzModalService,
     public translate: TranslateService,
     private router: Router,
+    private userUpdateService: UserUpdateService,
+    private message: NzMessageService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    this.initializeValue();
+  }
+
+  initializeValue(): void {
     this.selectedLanguage = localStorage.getItem('lang') || 'kz';
     this.selectedCurrency = localStorage.getItem('currency') || 'USD';
 
@@ -79,6 +99,26 @@ export class NavBarComponent implements OnInit {
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
     localStorage.setItem('currency', this.selectedCurrency);
+
+    this.currentUser$.subscribe((user) => {
+      if (user) {
+        this.username = user.username;
+        this.email = user.email;
+        // this.password = user.password;
+      }
+    });
+    this.userUpdateService
+      .getMarketCap()
+      .subscribe((data: IGetMarketResponse) => {
+        this.market = data;
+      });
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+    });
+
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+    });
   }
 
   signIn(sign: string): void {
@@ -106,6 +146,22 @@ export class NavBarComponent implements OnInit {
     this.darkMode = !this.darkMode;
     localStorage.setItem('darkMode', this.darkMode.toString());
     this.changedTheme.emit(this.darkMode);
+  }
+
+  editProfile(): void {
+    this.editProfileName = !this.editProfileName;
+  }
+
+  updateUser(): void {
+    const data = {
+      username: this.username,
+      email: this.email,
+      password: this.password,
+    };
+
+    this.userUpdateService.userUpdate(data).subscribe((res) => {
+      this.message.success('Успешно обновлено');
+    });
   }
 
   signout(): void {

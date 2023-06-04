@@ -84,19 +84,21 @@
     (input)="seacrchCoin()"
   />
   <div class="coins">
-    <div class="dsc coin" *ngFor="let coin of coins" (click)="selectCoin(coin)">
-      <div class="dc">
-        <img
-          class="coin-icon"
-          [src]="'../../../../../../assets/' + coin.logo + '.png'"
-          alt=""
-        />
-        <span>&nbsp; {{ coin.name }}&nbsp;&nbsp;</span>
-        <span class="coin-symbol">
-          {{ coin.symbol }}
-        </span>
+    <nz-spin style="min-height: 400px" [nzSpinning]="!coins">
+      <div
+        class="dsc coin"
+        *ngFor="let coin of coins"
+        (click)="selectCoin(coin)"
+      >
+        <div class="dc">
+          <img class="coin-icon" [src]="coin.logoUrl" alt="" />
+          <span>&nbsp; {{ coin.fullName }}&nbsp;&nbsp;</span>
+          <span class="coin-symbol">
+            {{ coin.symbol }}
+          </span>
+        </div>
+        <span nz-icon nzType="right" nzTheme="outline"></span>
       </div>
-      <span nz-icon nzType="right" nzTheme="outline"></span>
-    </div>
+    </nz-spin>
   </div>
 </ng-template>

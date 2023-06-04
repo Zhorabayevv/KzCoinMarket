@@ -1,0 +1,45 @@
+<div class="container page">
+  <div class="row">
+    <div class="col-md-9">
+      <mc-feed-toggler></mc-feed-toggler>
+      <!-- <mc-feed [apiUrl]="apiUrl"></mc-feed> -->
+      <ng-container *ngIf="fullPost; else elseTemplate">
+        <div style="padding: 10px" class="cp" (click)="back()">
+          <span nz-icon nzType="left" nzTheme="outline"></span>
+          {{ "back" | translate }}
+        </div>
+        <div class="dc posts">
+          <div class="fullpost">
+            <div class="dcc img">
+              <img [src]="post.pictureUrl" alt="" />
+            </div>
+            <p class="title">{{ post.title }}</p>
+            <p class="">
+              {{ post.longDescription }}
+            </p>
+            <div></div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="dc posts">
+          <div
+            class="post"
+            *ngFor="let post of postDto"
+            (click)="selectPost(post)"
+          >
+            <div class="dcc img">
+              <img [src]="post.pictureUrl" alt="" />
+            </div>
+            <p class="title">{{ post.title }}</p>
+            <p class="clip">
+              {{ post.longDescription }}
+            </p>
+            <div></div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

@@ -19,6 +19,7 @@ import { ArticleService } from 'src/app/article/services/article.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalStorageService } from '../shared/services/localStorageChanged.service';
 
 const routes: Routes = [
   {
@@ -43,6 +44,6 @@ const icons: IconDefinition[] = [SearchOutline];
     TranslateModule,
   ],
   declarations: [ArticleComponent],
-  providers: [ArticleService, SharedArticleService],
+  providers: [ArticleService, SharedArticleService, LocalStorageService],
 })
 export class ArticleModule {}

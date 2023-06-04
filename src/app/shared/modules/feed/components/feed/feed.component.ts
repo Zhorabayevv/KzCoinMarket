@@ -16,6 +16,8 @@ import {
 } from 'src/app/shared/modules/feed/store/selectors';
 import { TranslateService } from '@ngx-translate/core';
 import { isLoggedInSelector } from 'src/app/auth/store/selectors';
+import { FeedService } from '../../services/feed.service';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 @Component({
   selector: 'mc-feed',
@@ -30,17 +32,21 @@ export class FeedComponent implements OnInit, OnDestroy {
   error$: Observable<string | null>;
   feed$: Observable<IGetFeedResponse | null>;
   isLoggedIn$: Observable<boolean>;
-  limitArticles: number = 10;
+  limitArticles: number = 15;
   baseUrl: string;
   queryParamsSubscription: Subscription;
   currentPage: number;
   spinning: boolean = false;
+  darkMode: boolean;
+  currency: string;
 
   constructor(
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private feedService: FeedService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit() {
@@ -57,6 +63,14 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.feed$ = this.store.pipe(select(feedSelector));
     this.isLoggedIn$ = this.store.pipe(select(isLoggedInSelector));
     this.baseUrl = this.router.url.split('?')[0];
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+      console.log(this.darkMode);
+    });
+
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+    });
   }
 
   initializeListeners(): void {
@@ -80,7 +94,16 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
   }
 
-  addFavorite(id: string, isFavorited: boolean): void {
-    this.store.dispatch(addToFavoritesAction({ id, isFavorited }));
+  addFavorite(coinId): void {
+    this.feedService.addToFavorites(coinId).subscribe((data) => {
+      console.log(data);
+      this.fetchFeeds();
+    });
+    // this.store.dispatch(addToFavoritesAction({ id }));
+  }
+
+  receiveMessage(limitArticles: number) {
+    this.limitArticles = limitArticles;
+    this.fetchFeeds();
   }
 }

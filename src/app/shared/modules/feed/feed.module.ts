@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { SearchOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { TagListModule } from 'src/app/shared/modules/tagList/tagList.module';
 import { FeedComponent } from 'src/app/shared/modules/feed/components/feed/feed.component';
@@ -16,8 +18,7 @@ import { ErrorMessageModule } from 'src/app/shared/modules/errorMessage/errorMes
 import { LoadingModule } from 'src/app/shared/modules/loading/loading.module';
 import { PaginationModule } from 'src/app/shared/modules/pagination/pagination.module';
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
-import { HttpClientModule } from '@angular/common/http';
-import { TranslateModule } from '@ngx-translate/core';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 const icons: IconDefinition[] = [SearchOutline];
 @NgModule({
@@ -33,10 +34,10 @@ const icons: IconDefinition[] = [SearchOutline];
     NgAntModule,
     NzIconModule.forRoot(icons),
     HttpClientModule,
-    TranslateModule
+    TranslateModule,
   ],
   declarations: [FeedComponent],
   exports: [FeedComponent],
-  providers: [FeedService],
+  providers: [FeedService, LocalStorageService],
 })
 export class FeedModule {}

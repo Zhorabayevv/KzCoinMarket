@@ -113,6 +113,11 @@ button {
 .br8 {
   border-radius: 8px;
 }
+
+.mauto{
+  margin: 0 auto;
+}
+
 .dayh {
   background-color: #eff2f5;
   border-radius: 4px;
@@ -288,7 +293,16 @@ button {
 .darkMode{
   background-color: #222531;
 }
-.notDatkMode{
-  color: #ffffff;
+
+.darkModeColor{
+  color: #ffffff !important;
 }
 
+.backgroundDark{
+  background-color: rgb(88, 102, 126) !important;
+}
+
+.container {
+  width: 1370px;
+  margin: 0 auto;
+}

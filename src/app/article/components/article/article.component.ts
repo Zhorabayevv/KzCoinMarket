@@ -11,6 +11,7 @@ import {
 } from 'src/app/article/store/selectors';
 import { deleteArticleAction } from 'src/app/article/store/actions/deleteArticle.action';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 @Component({
   selector: 'mc-article',
@@ -26,7 +27,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
   error$: Observable<string | null>;
   isAuthor$: Observable<boolean>;
   private unscbscribe$ = new Subject<void>();
-
 
   quantity: number = 1;
   tenge: number = 10835847.6;
@@ -58,14 +58,16 @@ export class ArticleComponent implements OnInit, OnDestroy {
       link: 'https://www.blockchain.com/explorer',
     },
   ];
-
+  darkMode: boolean;
+  currency: string;
   actRoute: string;
 
   constructor(
     private store: Store,
     private route: ActivatedRoute,
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -85,25 +87,18 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorSelector));
     this.article$ = this.store.pipe(select(articleSelector));
-    this.article$.subscribe(
-      (data) => {
-        // this.article = data;
-        console.log(this.article);
-      }
-    )
+    this.article$.subscribe((data) => {
+      // this.article = data;
+      console.log(this.article);
+    });
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+      console.log(this.darkMode);
+    });
 
-
-    // this.isAuthor$ = combineLatest([
-    //   this.store.pipe(select(articleSelector)),
-    //   this.store.pipe(select(currentUserSelector)),
-    // ]).pipe(
-      // map(
-        // ([article, currentUser]) =>!!article &&!!currentUser &&
-          // currentUser.username === article.author.username
-      // )
-    // );
-
-
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+    });
   }
 
   initializeListeners(): void {
@@ -114,7 +109,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.article = article;
       });
   }
-
 
   quantityInput(): void {
     this.tenge = this.quantity * this.article.priceUsdNumber;

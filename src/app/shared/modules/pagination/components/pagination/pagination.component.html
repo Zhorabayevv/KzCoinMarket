@@ -7,7 +7,11 @@
   ></nz-pagination>
   <div class="rows">
     <span>{{ "show_rows" | translate }}</span>
-    <nz-select [(ngModel)]="selectedRows" [nzOptions]="rowsOptions">
+    <nz-select
+      [(ngModel)]="selectedRows"
+      (ngModelChange)="sendMessage()"
+      [nzOptions]="rowsOptions"
+    >
     </nz-select>
   </div>
 </div>

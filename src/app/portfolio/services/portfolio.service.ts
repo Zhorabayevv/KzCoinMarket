@@ -62,4 +62,13 @@ export class PortFolioService {
       })
     );
   }
+
+  getSelect(): Observable<Response> {
+    const fullUrl = `https://springboot-postgresql-kzcoin.herokuapp.com/v1/api/coin/select`;
+    return this.http.get<Response>(fullUrl).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }

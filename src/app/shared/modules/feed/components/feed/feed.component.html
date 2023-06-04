@@ -3,7 +3,7 @@
   <mc-error-message *ngIf="error$ | async"></mc-error-message>
   <!-- [nzSpinning]="(isLoading$ | async) || !(feed$ | async)" -->
   <nz-spin style="min-height: 400px" [nzSpinning]="isLoading$ | async">
-    <div *ngIf="feed$ | async">
+    <div *ngIf="feed$ | async" [ngClass]="{'darkModeColor' : darkMode}">
       <thead>
         <tr class="head">
           <th class="first"></th>
@@ -58,13 +58,13 @@
               [nzTheme]="'twotone'"
               nz-tooltip
               [nzTooltipTitle]="
-                (isLoggedIn$ | async) ? 'Жүйеге кірген жоқсыз' : ''
+                (isLoggedIn$ | async) ? '' : 'Жүйеге кірген жоқсыз'
               "
               [nzTwotoneColor]="
                 coin.isLiked || watchListProps ? '#F6B87E' : '#808a9d'
               "
-              style="font-size: 16px"
-              (click)="addFavorite(coin.id, coin.isLiked)"
+              style="font-size: 16px; cursor: pointer;"
+              (click)="addFavorite(coin.id)"
             ></span>
           </td>
           <td class="id">
@@ -145,10 +145,11 @@
       </tbody>
       <!-- <ng-container *ngIf="(feed$ | async)"> -->
       <mc-pagination
-        [totalCount]="(feed$ | async)?.count"
+        [totalCount]="(feed$ | async).count"
         [limitArticles]="limitArticles"
         [currentPage]="currentPage"
         [url]="baseUrl"
+        (messageEvent)="receiveMessage($event)"
       ></mc-pagination>
       <!-- </ng-container> -->
     </div>

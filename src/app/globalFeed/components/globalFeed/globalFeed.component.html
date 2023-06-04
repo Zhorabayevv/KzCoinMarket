@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" [ngClass]="{'darkModeColor' : darkMode}">
   <div class="todays">
     <div class="dsc">
-      <h1>{{ "today_cap" | translate }}</h1>
+      <h1 [ngClass]="{'darkModeColor' : darkMode}">{{ "today_cap" | translate }}</h1>
       <div class="highlights">
-        <span>{{ "highlights" | translate }}</span>
+        <span [ngClass]="{'darkModeColor' : darkMode}">{{ "highlights" | translate }}</span>
         <nz-switch
           [(ngModel)]="switchValue"
           [nzControl]="true"
@@ -12,7 +12,7 @@
         ></nz-switch>
       </div>
     </div>
-    <p>
+    <p [ngClass]="{'darkModeColor' : darkMode}">
       {{ "global_cap" | translate }}
       <span class="t"> $1.28T </span>
       , {{ "a" | translate }}

@@ -14,6 +14,7 @@ import { loginAction } from 'src/app/auth/store/actions/login.action';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 @Component({
   selector: 'mc-login',
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit {
   @Input() sign: string;
 
   form: FormGroup;
+  darkMode: boolean;
+  currency: string;
   isSubmitting$: Observable<boolean>;
   isLogged$: Observable<boolean>;
   backendErrors$: Observable<IBackendErrors | null>;
@@ -36,22 +39,31 @@ export class LoginComponent implements OnInit {
     private store: Store,
     private modal: NzModalRef,
     public translate: TranslateService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
     this.initionalizeForm();
     this.initionalizeValues();
-    if (this.sign === 'up') {
-      this.logIn = false;
-    }
-    console.log(this.sign);
   }
 
   initionalizeValues(): void {
+    if (this.sign === 'up') {
+      this.logIn = false;
+    }
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
     this.isLogged$ = this.store.pipe(select(isLoggedInSelector));
+
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+      console.log(this.darkMode);
+    });
+
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+    });
   }
   initionalizeForm(): void {
     this.form = this.fb.group({

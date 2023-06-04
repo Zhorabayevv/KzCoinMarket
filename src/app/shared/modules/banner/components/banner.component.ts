@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IBanners } from 'src/app/shared/modules/banner//types/banners.interface';
 import { IBannerCarousel } from 'src/app/shared/modules/banner//types/bannerCarousel.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 @Component({
   selector: 'mc-banner',
@@ -111,12 +112,23 @@ export class BannerComponent implements OnInit {
   ];
   lang: string = 'en';
   currency: string = 'USD';
+  darkMode: boolean;
 
-  constructor(private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private localStorageService: LocalStorageService
+  ) {
     this.lang = localStorage.getItem('lang') || 'kz';
     this.currency = localStorage.getItem('currency') || 'KZT';
   }
   ngOnInit(): void {
-    console.log(this.lang, this.currency);
+    this.localStorageService.getDarkMode().subscribe((value: boolean) => {
+      this.darkMode = value;
+      console.log(this.darkMode);
+    });
+
+    this.localStorageService.getCurrency().subscribe((value: string) => {
+      this.currency = value;
+    });
   }
 }

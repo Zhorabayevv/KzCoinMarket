@@ -9,6 +9,7 @@ import { FeedTogglerComponent } from 'src/app/shared/modules/feedToggler/compone
 import { NgAntModule } from 'src/app/ng-zorro-antd.module';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 const icons: IconDefinition[] = [SearchOutline];
 
@@ -23,5 +24,6 @@ const icons: IconDefinition[] = [SearchOutline];
   ],
   declarations: [FeedTogglerComponent],
   exports: [FeedTogglerComponent],
+  providers: [LocalStorageService],
 })
 export class FeedTogglerModule {}

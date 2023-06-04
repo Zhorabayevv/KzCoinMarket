@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PortFolioService } from 'src/app/portfolio/services/portfolio.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { LocalStorageService } from 'src/app/shared/services/localStorageChanged.service';
 
 @Component({
   selector: 'add-transaction',
@@ -13,18 +14,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class AddTransactionComponent implements OnInit {
   @Input() idWallet: number;
-  coins: ISelectCoin[] = [
-    {
-      logo: 'btc',
-      name: 'Bitcoin',
-      symbol: 'BTC',
-    },
-    {
-      logo: 'eth',
-      name: 'Ethereum',
-      symbol: 'ETH',
-    },
-  ];
+  coins;
   coinsSelect = [
     {
       value: 'BTC',
@@ -35,6 +25,11 @@ export class AddTransactionComponent implements OnInit {
       value: 'ETH',
       label: 'Ethereum',
       price: 2000,
+    },
+    {
+      value: 'XRP',
+      label: 'XRP',
+      price: 2,
     },
   ];
   selectedOS: string;
@@ -47,6 +42,8 @@ export class AddTransactionComponent implements OnInit {
     amount: [null, [Validators.required, Validators.min(1)]],
     coin: [null, [Validators.required]],
   });
+  darkMode: boolean;
+  currency: string;
 
   addTransActive: boolean = false;
   constructor(
@@ -54,10 +51,15 @@ export class AddTransactionComponent implements OnInit {
     private fb: FormBuilder,
     private message: NzMessageService,
     private portfolioService: PortFolioService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    this.portfolioService.getSelect().subscribe((data) => {
+      this.coins = data;
+      this.coins = this.coins.slice(0, 10)
+    });
     this.calculateTotalSpent();
     this.seacrchCoin();
   }

@@ -1,5 +1,5 @@
 <div class="dc">
-  <div class="banner" *ngFor="let banner of banners">
+  <div class="banner" *ngFor="let banner of banners" [ngStyle]="{'background-color': darkMode ? '#58667e': '#ffffff' }" [ngClass]="{'darkModeColor' : darkMode}">
     <div class="dsc">
       <div class="dc">
         <img [src]="banner.image" class="fire" alt="" />
@@ -47,7 +47,7 @@
               <div class="title">
                 <div class="dc">
                   <img [src]="item.logo" alt="" />
-                  <p>{{ item.title }}</p>
+                  <p [ngClass]="{'darkModeColor' : darkMode}">{{ item.title }}</p>
                 </div>
                 <p class="des">
                   {{ item.desc }}

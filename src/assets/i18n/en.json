@@ -82,6 +82,10 @@
   "profit_loss": "Profit/Loss",
   "actions": "Actions",
   "number_of_all_cryptocurrencies": "The number of all cryptocurrencies",
-  "add": "Добавить",
-  "undo": "Отменить"
+  "add": "Add",
+  "undo": "Cancel",
+  "hi": "Hi",
+  "sign_out": "Exit",
+  "posts": "Posts",
+  "back": "Back"
 }

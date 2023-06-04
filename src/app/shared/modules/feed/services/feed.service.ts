@@ -10,7 +10,13 @@ export class FeedService {
 
   getFeed(url: string): Observable<IGetFeedResponse> {
     console.log('url: ', url);
-    const fullUrl = 'https://springboot-postgresql-kzcoin.herokuapp.com/v1/api' + url;
+    const fullUrl =
+      'https://springboot-postgresql-kzcoin.herokuapp.com/v1/api' + url;
     return this.http.get<IGetFeedResponse>(fullUrl);
+  }
+
+  addToFavorites(coinId): Observable<IGetFeedResponse> {
+    const fullUrl = `https://springboot-postgresql-kzcoin.herokuapp.com/v1/api/user/watchlist/like?coinId=${coinId}`;
+    return this.http.post<IGetFeedResponse>(fullUrl, { coinId });
   }
 }

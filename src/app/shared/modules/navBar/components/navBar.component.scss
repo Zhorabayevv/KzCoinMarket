@@ -271,3 +271,17 @@
   @include rem(border-radius, 8px);
   @include rem(padding, 7px 16px 8px 17px);
 }
+.profile{
+  font-weight: 700;
+  color: #3861fb;
+  cursor: pointer;
+  // border-radius: 8px;
+  border: 1px solid #3861fb;
+  background-color: #ffffff;
+  // padding: 7px 16px 8px 17px;
+
+  @include rem(font-size, 12px);
+  @include rem(line-height, 18px);
+  @include rem(border-radius, 8px);
+  @include rem(padding, 7px 16px 8px 17px);
+}
