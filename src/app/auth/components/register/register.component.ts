@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
     this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
     this.localStorageService.getDarkMode().subscribe((value: boolean) => {
       this.darkMode = value;
-      console.log(this.darkMode);
     });
 
     this.localStorageService.getCurrency().subscribe((value: string) => {
@@ -61,10 +60,11 @@ export class RegisterComponent implements OnInit {
     });
   }
   onSubmit(): void {
-    console.log(this.form.value);
     const request: IRegisterRequest = this.form.value;
     this.store.dispatch(registerAction({ request }));
-    this.message.success('You are logged in');
+    if (this.logIn) {
+      this.message.info('Your account has been created!');
+    }
     this.logIn = true;
     this.logInChange.emit(this.logIn);
   }

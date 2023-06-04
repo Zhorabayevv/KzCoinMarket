@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { SearchOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { NgAntModule } from '../ng-zorro-antd.module';
 
 const routes: Routes = [
   {
@@ -19,7 +20,14 @@ const routes: Routes = [
 const icons: IconDefinition[] = [SearchOutline];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), FeedTogglerModule, TranslateModule,  NzIconModule.forRoot(icons),],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FeedTogglerModule,
+    TranslateModule,
+    NzIconModule.forRoot(icons),
+    NgAntModule,
+  ],
   exports: [],
   declarations: [PostsComponent],
   providers: [PostsService, LocalStorageService],

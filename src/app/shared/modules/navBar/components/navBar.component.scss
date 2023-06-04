@@ -68,12 +68,10 @@
         border: 2px solid #3861fb;
       }
       .anonymous {
-        width: 203px;
+        min-width: 203px;
         height: 34px;
         justify-content: right;
 
-        @include rem(width, 203px);
-        @include rem(height, 34px);
         .sign-in {
           // font-size: 12px;
           // line-height: 18px;

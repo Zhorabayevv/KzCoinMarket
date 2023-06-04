@@ -1,8 +1,8 @@
 <div class="container page">
+  <nz-spin style="min-height: 400px" [nzSpinning]="!postDto">
   <div class="row">
     <div class="col-md-9">
       <mc-feed-toggler></mc-feed-toggler>
-      <!-- <mc-feed [apiUrl]="apiUrl"></mc-feed> -->
       <ng-container *ngIf="fullPost; else elseTemplate">
         <div style="padding: 10px" class="cp" (click)="back()">
           <span nz-icon nzType="left" nzTheme="outline"></span>
@@ -42,4 +42,5 @@
     </div>
     <div class="col-md-3"></div>
   </div>
+</nz-spin>
 </div>

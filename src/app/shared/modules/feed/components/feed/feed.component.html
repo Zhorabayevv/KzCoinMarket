@@ -3,7 +3,7 @@
   <mc-error-message *ngIf="error$ | async"></mc-error-message>
   <!-- [nzSpinning]="(isLoading$ | async) || !(feed$ | async)" -->
   <nz-spin style="min-height: 400px" [nzSpinning]="isLoading$ | async">
-    <div *ngIf="feed$ | async" [ngClass]="{'darkModeColor' : darkMode}">
+    <div *ngIf="feed$ | async" [ngClass]="{ darkModeColor: darkMode }">
       <thead>
         <tr class="head">
           <th class="first"></th>
@@ -63,7 +63,7 @@
               [nzTwotoneColor]="
                 coin.isLiked || watchListProps ? '#F6B87E' : '#808a9d'
               "
-              style="font-size: 16px; cursor: pointer;"
+              style="font-size: 16px; cursor: pointer"
               (click)="addFavorite(coin.id)"
             ></span>
           </td>
@@ -88,7 +88,11 @@
                 'color-green': coin.hrate > 1
               }"
             >
-              <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+              <span
+                nz-icon
+                [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'"
+                nzTheme="outline"
+              ></span>
               <p>{{ coin.hrate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
@@ -100,7 +104,7 @@
                 'color-green': coin.drate > 1
               }"
             >
-              <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+              <span nz-icon [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'" nzTheme="outline"></span>
               <p>{{ coin.drate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
@@ -112,7 +116,7 @@
                 'color-green': coin.wrate > 1
               }"
             >
-              <span nz-icon nzType="caret-up" nzTheme="outline"></span>
+              <span nz-icon [nzType]="coin.hrate < 1 ? 'caret-down' : 'caret-up'" nzTheme="outline"></span>
               <p>{{ coin.wrate.toString().slice(0, 4) }}%</p>
             </div>
           </td>
